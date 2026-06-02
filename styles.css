@@ -4,24 +4,26 @@
    ================================================ */
 
 :root {
-  /* Surface */
-  --color-bg: #0a0e1a;
-  --color-bg-elevated: #0f1424;
-  --color-bg-card: #141a2e;
-  --color-bg-card-hover: #1a2138;
-  --color-border: #1f2742;
-  --color-border-hover: #2d375a;
+  /* Surface — deck-matched navy */
+  --color-bg: #0a1628;
+  --color-bg-elevated: #0f1b3d;
+  --color-bg-card: #1a1f2e;
+  --color-bg-card-hover: #21283c;
+  --color-border: #1f2a48;
+  --color-border-hover: #2d3a5e;
 
   /* Type */
   --color-text: #ecedf2;
-  --color-text-secondary: #9aa3bd;
-  --color-text-muted: #5d6685;
+  --color-text-secondary: #a8b1c9;
+  --color-text-muted: #6b7491;
 
-  /* Accent — warm gold for premium / regulated-industry tone */
-  --color-accent: #c9a96e;
-  --color-accent-hover: #dcbf86;
-  --color-accent-soft: rgba(201, 169, 110, 0.12);
-  --color-accent-ring: rgba(201, 169, 110, 0.28);
+  /* Accent — deck-matched gold + cream */
+  --color-accent: #c9a961;
+  --color-accent-hover: #dcbf76;
+  --color-accent-dark: #a8894b;
+  --color-accent-soft: rgba(201, 169, 97, 0.12);
+  --color-accent-ring: rgba(201, 169, 97, 0.28);
+  --color-cream: #f4ede0;
 
   /* Functional */
   --color-success: #6ec99c;
@@ -462,6 +464,98 @@ body {
   line-height: 1.65;
 }
 
+/* ---- LoOp brand inline (hero) ---- */
+
+.loop-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: normal;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.loop-rings {
+  display: inline-flex;
+  width: 38px;
+  height: 22px;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.loop-rings svg { width: 100%; height: 100%; display: block; }
+
+/* ---- LoOp product reveal ---- */
+
+.section-product {
+  position: relative;
+  padding-top: 130px;
+}
+
+.section-product::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse at top, var(--color-accent-soft) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.loop-reveal {
+  text-align: center;
+  margin: 0 auto 80px;
+  max-width: 720px;
+  position: relative;
+  z-index: 1;
+}
+
+.loop-rings-lg {
+  width: 140px;
+  margin: 0 auto 28px;
+  filter: drop-shadow(0 6px 30px rgba(201, 169, 97, 0.25));
+}
+
+.loop-rings-lg svg { width: 100%; height: auto; display: block; }
+
+.loop-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 8vw, 5.4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+.loop-wordmark::first-letter {
+  /* leave default — wordmark stays monolithic */
+}
+
+.loop-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent);
+  margin-bottom: 24px;
+  letter-spacing: -0.005em;
+}
+
+.loop-desc {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
 /* ---- Solution features ---- */
 
 .features-grid {
@@ -469,6 +563,8 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 36px;
   margin-top: 56px;
+  position: relative;
+  z-index: 1;
 }
 
 .feature-icon {
