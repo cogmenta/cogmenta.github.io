@@ -1,8 +1,7 @@
-// Fade-in on scroll
+// Fade-in on scroll — any element with [data-animate] gets the treatment.
+// Add data-animate to new elements in HTML; no JS changes needed.
 document.addEventListener('DOMContentLoaded', () => {
-  const targets = document.querySelectorAll(
-    '.card, .feature, .arch-step, .industry, .stat, .section-label, .section-title, .section-desc, .stealth-badge, .hero-title, .hero-subtitle, .hero-actions, .cta-title, .cta-text, .cta-actions, .vision-equation, .vision-tagline, .vision-desc, .phase-card, .outcome-hero, .outcome-big-stat, .outcome-context, .team-member, .team-hiring, .team-hero-title, .team-hero-subtitle'
-  );
+  const targets = document.querySelectorAll('[data-animate]');
 
   targets.forEach(el => el.classList.add('fade-in'));
 
