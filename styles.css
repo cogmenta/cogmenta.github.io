@@ -440,8 +440,12 @@ a.paper:hover { border-color: var(--cg-teal); background: rgba(31,168,154,0.06);
 .sc-ax-k { flex: 0 0 auto; padding-top: 7px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cg-slate); }
 .sc-ax-x { flex: 0 0 auto; padding-top: 6px; color: var(--cg-line); font-size: 14px; }
 .sc-ax-items { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.sc-ax-n { margin-left: auto; padding-top: 7px; flex: 0 0 auto; font-family: var(--font-mono); font-size: 11.5px; color: var(--cg-slate); white-space: nowrap; }
+.sc-ax-n { margin-left: auto; padding-top: 2px; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 11.5px; color: var(--cg-slate); white-space: nowrap; }
 .sc-ax-n b { font-weight: 500; color: var(--cg-navy); font-variant-numeric: tabular-nums; }
+/* the data icon swells as the traces pile up */
+.sc-ax-db { display: block; width: 34px; height: 34px; color: var(--cg-line); transform-origin: 50% 100%; transition: color .4s; }
+.sc-ax-db svg { width: 100%; height: 100%; }
+.sc-ax-db.is-full { color: var(--cg-teal); }
 .sc-chip {
   width: 28px; height: 28px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 8px;
   border: 1px dashed var(--cg-line); color: var(--cg-line); background: #fff;
@@ -506,9 +510,27 @@ a.paper:hover { border-color: var(--cg-teal); background: rgba(31,168,154,0.06);
     radial-gradient(circle at 50% 100%, var(--cg-line) 0 17px, transparent 18px),
     var(--cg-ice);
 }
+/* a card that stands for several people gets overlapping silhouettes */
+.stealth-avatars { display: flex; align-self: flex-start; }
+.stealth-avatars .stealth-avatar { flex: 0 0 auto; position: relative; box-shadow: 0 0 0 3px #fff; }
+.stealth-avatars .stealth-avatar + .stealth-avatar { margin-left: -21px; }
+.stealth-avatars .stealth-avatar:nth-child(1) { z-index: 3; }
+.stealth-avatars .stealth-avatar:nth-child(2) { z-index: 2; }
 .stealth-card h3 { font-size: 1rem; }
 .stealth-card p { font-size: 13.5px; color: var(--cg-slate); margin-top: 4px; }
 .stealth-tag { position: absolute; top: 18px; right: 16px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cg-slate); padding: 3px 8px; border-radius: 100px; background: var(--cg-ice); }
+
+/* ---- TEAM: open role ---- */
+.hiring {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px 40px;
+  margin-top: 28px; padding: 26px 28px; border: 1px solid var(--cg-line); border-radius: var(--r-lg);
+  background: var(--cg-ice);
+}
+.hiring-k { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cg-teal-600); }
+.hiring h3 { font-size: 1.3rem; margin: 8px 0; }
+.hiring > div > p { font-size: 15px; color: var(--cg-graphite); max-width: 60em; }
+.hiring-meta { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 14px; }
+.hiring-meta li { font-size: 13px; color: var(--cg-slate); padding: 5px 12px; border-radius: 100px; background: #fff; border: 1px solid var(--cg-line); }
 
 /* ---- CTA ---- */
 .cta { position: relative; text-align: center; padding: 120px 0; background: var(--cg-navy); color: var(--on-navy-2); overflow: hidden; }
@@ -625,6 +647,8 @@ a.paper:hover { border-color: var(--cg-teal); background: rgba(31,168,154,0.06);
   .section-head { margin-bottom: 36px; }
   .hero-actions .btn { width: 100%; justify-content: center; }
   .compare, .steps, .papers, .people, .stealth { grid-template-columns: 1fr; }
+  .hiring { grid-template-columns: 1fr; }
+  .hiring .btn { justify-content: center; }
   .phases { grid-template-columns: 1fr; }
   .phase { border-right: none; border-bottom: 1px solid var(--cg-line); }
   .phase:last-child { border-bottom: none; }

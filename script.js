@@ -198,10 +198,15 @@
     var axis = document.querySelector('.sc-axis');
     var marks = axis ? Array.prototype.slice.call(axis.querySelectorAll('[data-at]')) : [];
     var counter = axis ? axis.querySelector('[data-count]') : null;
+    var db = axis ? axis.querySelector('[data-grow]') : null;   // the data icon grows with the count
     function axisAt(p) {
       if (!axis) return;
       marks.forEach(function (m) { m.classList.toggle('on', p >= +m.getAttribute('data-at')); });
       if (counter) counter.textContent = Math.round(f(p) * TRACES).toLocaleString('en-US');
+      if (db) {
+        db.style.transform = 'scale(' + (0.5 + 0.75 * f(p)).toFixed(3) + ')';
+        db.classList.toggle('is-full', p >= 0.64);
+      }
     }
 
     /* ---- geometry ---- */
