@@ -2,7 +2,7 @@
 
 Cogmenta marketing site — built as a static HTML/CSS/JS site and deployed to GitHub Pages.
 
-Live: https://cogmenta.github.io/
+Live: https://cogmenta.tech/
 
 ## Local development
 
