@@ -1,4 +1,4 @@
-// Cogmenta — reveal-on-scroll (rAF + scroll fallback; robust where IntersectionObserver stalls) + nav drawer
+// Cogmenta — reveal-on-scroll (rAF + scroll fallback; robust where IntersectionObserver stalls) + nav drawer + video motion guard
 (function () {
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
@@ -40,6 +40,13 @@
     setTimeout(reveal, 120);
     setTimeout(reveal, 500);
     window.addEventListener('load', reveal);
+
+    /* ---------- Looping demo video: no autoplay under reduced motion ---------- */
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('video[autoplay]').forEach(function (v) {
+        v.removeAttribute('autoplay'); v.pause();
+      });
+    }
 
     /* ---------- Mobile nav drawer ---------- */
     var toggle = document.querySelector('.nav-toggle');
@@ -84,8 +91,9 @@
       }
       for (var id in links) links[id].classList.toggle('nav-link-active', id === current);
     }
+    var spyTicking = false;
     window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(function () { spy(); ticking = false; }); }
+      if (!spyTicking) { spyTicking = true; requestAnimationFrame(function () { spy(); spyTicking = false; }); }
     }, { passive: true });
     spy();
   });
