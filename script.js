@@ -133,6 +133,26 @@
     var replay = plot.querySelector('.sc-replay');
     var NS = 'http://www.w3.org/2000/svg';
 
+    /* x-axis: channels, people and time fill in as context accumulates */
+    var axis = document.querySelector('.sc-axis');
+    var marks = axis ? Array.prototype.slice.call(axis.querySelectorAll('[data-at]')) : [];
+    var counters = axis ? Array.prototype.slice.call(axis.querySelectorAll('.sc-ax-n[data-count]')) : [];
+    function axisAt(p) {
+      if (!axis) return;
+      marks.forEach(function (m) { m.classList.toggle('on', p >= +m.getAttribute('data-at')); });
+      counters.forEach(function (c) {
+        var row = c.parentNode;
+        c.textContent = row.querySelectorAll('.sc-chip.on').length;
+      });
+      axis.classList.toggle('is-emergent', p >= 0.88);
+    }
+
+    /* the three stages light up as the curve passes their milestone */
+    var cols = Array.prototype.slice.call(document.querySelectorAll('.sug-col'));
+    function stagesAt(p) {
+      cols.forEach(function (c) { c.classList.toggle('is-on', p >= +c.getAttribute('data-at')); });
+    }
+
     var K = 3.4, E = Math.exp(K) - 1;          // curve shape: f(0)=0, f(1)=1
     var BASE = 0.06;                            // general model, no context
     var Y0 = 0.1, HEAD = 1.12;                  // initial view height, headroom over the tip
@@ -161,6 +181,8 @@
     function render(p) {
       placed = [];
       current = p;
+      axisAt(p);
+      stagesAt(p);
       var W = plot.clientWidth, H = plot.clientHeight;
       if (!W || !H) return;
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
@@ -248,5 +270,39 @@
     replay.addEventListener('click', function () { started = true; play(); });
     check();
     setTimeout(check, 300);
+
+    /* ---------- Suggestion cards: one real example per stage, cycling ---------- */
+    cols.forEach(function (col, ci) {
+      var cards = Array.prototype.slice.call(col.querySelectorAll('.sug-card'));
+      var dots = Array.prototype.slice.call(col.querySelectorAll('.sug-dot'));
+      if (cards.length < 2) return;
+      var i = 0, timer = null, held = false;
+
+      function show(n) {
+        i = (n + cards.length) % cards.length;
+        cards.forEach(function (c, k) {
+          c.classList.toggle('is-on', k === i);
+          c.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+        });
+        dots.forEach(function (d, k) {
+          d.classList.toggle('is-on', k === i);
+          if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+        });
+      }
+
+      function start() {
+        if (reduce || timer || held) return;
+        timer = setInterval(function () { show(i + 1); }, 6000 + ci * 700);
+      }
+      function stop() { clearInterval(timer); timer = null; }
+
+      dots.forEach(function (d, k) {
+        d.addEventListener('click', function () { show(k); stop(); held = true; });
+      });
+      col.addEventListener('mouseenter', stop);
+      col.addEventListener('mouseleave', start);
+      col.addEventListener('focusin', stop);
+      setTimeout(start, 2600 + ci * 700);
+    });
   });
 })();
