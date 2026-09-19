@@ -54,7 +54,7 @@
       mqBtn.addEventListener('click', function () {
         var paused = mq.classList.toggle('is-paused');
         mqBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
-        mqBtn.textContent = paused ? 'Play' : 'Pause';
+        mqBtn.textContent = paused ? mqBtn.getAttribute('data-play') : mqBtn.getAttribute('data-pause');
       });
     }
 
@@ -66,13 +66,13 @@
     function isOpen() { return toggle.getAttribute('aria-expanded') === 'true'; }
     function open() {
       toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Close menu');
+      toggle.setAttribute('aria-label', toggle.getAttribute('data-close'));
       navLinks.classList.add('nav-open');
       document.body.style.overflow = 'hidden';
     }
     function close() {
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open menu');
+      toggle.setAttribute('aria-label', toggle.getAttribute('data-open'));
       navLinks.classList.remove('nav-open');
       document.body.style.overflow = '';
     }
@@ -109,8 +109,9 @@
   });
 })();
 
-// On-prem scaling-law chart: exponential curve that re-scales (zooms out) as it grows;
-// milestones pop in with a leader line and a callout that glides into place.
+// On-prem scaling-law chart: an exponential curve that re-scales (zooms out) as it grows.
+// The x-axis fills in with channels, people and process data; each milestone brings up one
+// real suggestion for the domain the visitor picked.
 (function () {
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
@@ -126,43 +127,25 @@
     var area = svg.querySelector('.sc-area');
     var line = svg.querySelector('.sc-line');
     var tip = svg.querySelector('.sc-tip');
-    var leaders = svg.querySelectorAll('.sc-leaders line');
+    var leader = svg.querySelector('.sc-leader');
     var pts = svg.querySelectorAll('.sc-pts circle');
-    var boxes = plot.querySelectorAll('.sc-callout');
+    var pins = plot.querySelectorAll('.sc-pin');
     var baseLab = plot.querySelector('.sc-baselab');
     var replay = plot.querySelector('.sc-replay');
+    var emerge = plot.querySelector('.sc-emerge');
+    var stageBox = plot.parentNode;
+    var card = stageBox.querySelector('.sc-card');
+    var names = card.querySelectorAll('.sc-c-name');
+    var bodies = card.querySelectorAll('.sc-body');
     var NS = 'http://www.w3.org/2000/svg';
-
-    /* x-axis: channels, people and time fill in as context accumulates */
-    var axis = document.querySelector('.sc-axis');
-    var marks = axis ? Array.prototype.slice.call(axis.querySelectorAll('[data-at]')) : [];
-    var counters = axis ? Array.prototype.slice.call(axis.querySelectorAll('.sc-ax-n[data-count]')) : [];
-    function axisAt(p) {
-      if (!axis) return;
-      marks.forEach(function (m) { m.classList.toggle('on', p >= +m.getAttribute('data-at')); });
-      counters.forEach(function (c) {
-        var row = c.parentNode;
-        c.textContent = row.querySelectorAll('.sc-chip.on').length;
-      });
-      axis.classList.toggle('is-emergent', p >= 0.88);
-    }
-
-    /* the three stages light up as the curve passes their milestone */
-    var cols = Array.prototype.slice.call(document.querySelectorAll('.sug-col'));
-    function stagesAt(p) {
-      cols.forEach(function (c) { c.classList.toggle('is-on', p >= +c.getAttribute('data-at')); });
-    }
 
     var K = 3.4, E = Math.exp(K) - 1;          // curve shape: f(0)=0, f(1)=1
     var BASE = 0.06;                            // general model, no context
     var Y0 = 0.1, HEAD = 1.12;                  // initial view height, headroom over the tip
-    var DURATION = 6000;
+    var DURATION = 7000;
     var GRID = [0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8];
-    var MS = [
-      { x: 0.36, off: 46, align: 'center' },     // Optimize
-      { x: 0.64, off: 58, align: 'center' },     // Discover
-      { x: 0.88, off: 46, align: 'right' }       // Coach
-    ];
+    var MS = [0.36, 0.64, 0.88];                // Discover, Optimize, Coach
+    var TRACES = 18400;                         // process-data counter target
 
     function f(x) { return (Math.exp(K * x) - 1) / E; }
     function view(p) { return Math.max(Y0, f(p) * HEAD); }
@@ -175,20 +158,73 @@
       return l;
     });
 
-    var current = 0;
+    /* ---- the card: one stage x one domain at a time ---- */
+    var stage = null, domain = document.querySelector('.dom-btn.is-on').getAttribute('data-domain');
+    var pinned = false;                         // true once the visitor picks a stage themselves
 
-    var placed = [];
+    function paint() {
+      names.forEach(function (n) { n.hidden = n.getAttribute('data-stage') !== stage; });
+      bodies.forEach(function (b) {
+        b.hidden = !(b.getAttribute('data-stage') === stage && b.getAttribute('data-domain') === domain);
+      });
+      pins.forEach(function (pn) { pn.classList.toggle('is-live', pn.getAttribute('data-stage') === stage); });
+      card.classList.toggle('on', !!stage);
+      leader.classList.toggle('on', !!stage);
+    }
+    function setStage(s, byUser) {
+      if (byUser) pinned = true;
+      if (s === stage) return;
+      stage = s;
+      paint();
+    }
+    pins.forEach(function (pn) {
+      pn.addEventListener('click', function () { setStage(pn.getAttribute('data-stage'), true); place(); });
+    });
+    document.querySelectorAll('.dom-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.dom-btn').forEach(function (o) {
+          o.classList.toggle('is-on', o === b);
+          o.setAttribute('aria-selected', o === b ? 'true' : 'false');
+          o.setAttribute('tabindex', o === b ? '0' : '-1');
+        });
+        domain = b.getAttribute('data-domain');
+        if (!stage) stage = 'discover';
+        paint();
+        place();
+      });
+    });
+
+    /* ---- the x-axis ---- */
+    var axis = document.querySelector('.sc-axis');
+    var marks = axis ? Array.prototype.slice.call(axis.querySelectorAll('[data-at]')) : [];
+    var counter = axis ? axis.querySelector('[data-count]') : null;
+    function axisAt(p) {
+      if (!axis) return;
+      marks.forEach(function (m) { m.classList.toggle('on', p >= +m.getAttribute('data-at')); });
+      if (counter) counter.textContent = Math.round(f(p) * TRACES).toLocaleString('en-US');
+    }
+
+    /* ---- geometry ---- */
+    var current = 0, W = 0, H = 0, yv = 1;
+    function X(x) { return x * W; }
+    function Y(y) { return H - (y / yv) * H; }
+
+    function place() {
+      if (!stage || !W) { return; }
+      var k = ['discover', 'optimize', 'coach'].indexOf(stage);
+      var px = X(MS[k]), py = Y(f(MS[k]));
+      var bx = card.offsetLeft, by = card.offsetTop, bw = card.offsetWidth, bh = card.offsetHeight;
+      leader.setAttribute('x1', px); leader.setAttribute('y1', py);
+      leader.setAttribute('x2', clamp(px, bx + 16, bx + bw - 16)); leader.setAttribute('y2', by + bh);
+    }
+
     function render(p) {
-      placed = [];
       current = p;
       axisAt(p);
-      stagesAt(p);
-      var W = plot.clientWidth, H = plot.clientHeight;
+      W = plot.clientWidth; H = plot.clientHeight;
       if (!W || !H) return;
       svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      var yv = view(p);
-      function X(x) { return x * W; }
-      function Y(y) { return H - (y / yv) * H; }
+      yv = view(p);
 
       GRID.forEach(function (g, i) {
         var y = Y(g), l = gridLines[i];
@@ -211,36 +247,28 @@
       area.setAttribute('d', d + ' L' + X(p).toFixed(1) + ' ' + H + ' L0 ' + H + ' Z');
       tip.setAttribute('cx', X(p)); tip.setAttribute('cy', Y(f(p)));
 
-      MS.forEach(function (m, k) {
-        var box = boxes[k], pt = pts[k], ld = leaders[k];
-        var on = p >= m.x;
-        box.classList.toggle('on', on); pt.classList.toggle('on', on); ld.classList.toggle('on', on);
-        if (!on) return;
-        var px = X(m.x), py = Y(f(m.x)), bw = box.offsetWidth, bh = box.offsetHeight;
-        // glide from "left of point" (while the point sits near the top) to "above point" (settled)
-        var hs = f(m.x) / view(m.x), hf = f(m.x) / view(1), h = f(m.x) / yv;
-        var s = smooth(hs === hf ? 1 : clamp((hs - h) / (hs - hf), 0, 1));
-        var lx = px - 16 - bw, ly = py - bh / 2;
-        var ax = m.align === 'right' ? px + 24 - bw : px - bw / 2, ay = py - m.off - bh;
-        var bx = clamp(lx + (ax - lx) * s, 0, W - bw - 10);
-        var by = clamp(ly + (ay - ly) * s, -6, H - bh);
-        // keep clear of callouts already placed (lift this one above any it would overlap)
-        placed.forEach(function (q) {
-          if (bx < q.x + q.w + 6 && bx + bw + 6 > q.x && by < q.y + q.h + 6 && by + bh + 6 > q.y) by = Math.max(-6, q.y - bh - 8);
-        });
-        placed.push({ x: bx, y: by, w: bw, h: bh });
-        box.style.transform = 'translate(' + bx.toFixed(1) + 'px,' + by.toFixed(1) + 'px)';
-        var tx = (bx + bw) + (clamp(px, bx + 14, bx + bw - 14) - (bx + bw)) * s;
-        var ty = (by + bh / 2) + ((by + bh) - (by + bh / 2)) * s;
-        pt.setAttribute('cx', px); pt.setAttribute('cy', py);
-        ld.setAttribute('x1', px); ld.setAttribute('y1', py);
-        ld.setAttribute('x2', tx); ld.setAttribute('y2', ty);
+      // "emergent behavior" sits as high inside the filled wedge as its own width allows,
+      // so it always reads as part of the green under the peak
+      var exl = Math.max(0, (W - emerge.offsetWidth - 10) / W);
+      emerge.style.top = clamp(Y(f(Math.min(exl, p))) + 7, 0, H - 26) + 'px';
+      emerge.classList.toggle('on', p >= 0.9);
+
+      MS.forEach(function (mx, k) {
+        var on = p >= mx, px = X(mx), py = Y(f(mx));
+        pts[k].classList.toggle('on', on);
+        pts[k].setAttribute('cx', px); pts[k].setAttribute('cy', py);
+        pins[k].classList.toggle('on', on);
+        pins[k].style.left = px + 'px';
+        pins[k].style.top = py + 'px';
+        if (on && !pinned) setStage(pins[k].getAttribute('data-stage'));
       });
+      place();
     }
 
     var raf = null;
     function play() {
       if (raf) cancelAnimationFrame(raf);
+      pinned = false;
       var t0 = null;
       function step(now) {
         if (t0 === null) t0 = now;
@@ -260,7 +288,7 @@
       if (r.top < vh * 0.8 && r.bottom > 0) {
         started = true;
         window.removeEventListener('scroll', check);
-        if (reduce) render(1); else play();
+        if (reduce) { render(1); setStage('coach'); place(); } else play();
       }
     }
 
@@ -270,39 +298,5 @@
     replay.addEventListener('click', function () { started = true; play(); });
     check();
     setTimeout(check, 300);
-
-    /* ---------- Suggestion cards: one real example per stage, cycling ---------- */
-    cols.forEach(function (col, ci) {
-      var cards = Array.prototype.slice.call(col.querySelectorAll('.sug-card'));
-      var dots = Array.prototype.slice.call(col.querySelectorAll('.sug-dot'));
-      if (cards.length < 2) return;
-      var i = 0, timer = null, held = false;
-
-      function show(n) {
-        i = (n + cards.length) % cards.length;
-        cards.forEach(function (c, k) {
-          c.classList.toggle('is-on', k === i);
-          c.setAttribute('aria-hidden', k === i ? 'false' : 'true');
-        });
-        dots.forEach(function (d, k) {
-          d.classList.toggle('is-on', k === i);
-          if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-        });
-      }
-
-      function start() {
-        if (reduce || timer || held) return;
-        timer = setInterval(function () { show(i + 1); }, 6000 + ci * 700);
-      }
-      function stop() { clearInterval(timer); timer = null; }
-
-      dots.forEach(function (d, k) {
-        d.addEventListener('click', function () { show(k); stop(); held = true; });
-      });
-      col.addEventListener('mouseenter', stop);
-      col.addEventListener('mouseleave', start);
-      col.addEventListener('focusin', stop);
-      setTimeout(start, 2600 + ci * 700);
-    });
   });
 })();

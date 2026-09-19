@@ -9,6 +9,9 @@
 
 <!-- Canonical -->
 <link rel="canonical" href="https://cogmenta.tech/">
+<link rel="alternate" hreflang="en" href="https://cogmenta.tech/">
+<link rel="alternate" hreflang="ko" href="https://cogmenta.tech/ko/">
+<link rel="alternate" hreflang="x-default" href="https://cogmenta.tech/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -66,7 +69,7 @@
         <text x="226" y="204" font-family="Sora, sans-serif" font-weight="600" font-size="134" letter-spacing="-4" fill="currentColor">gmenta</text>
       </svg>
     </a>
-    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+    <button class="nav-toggle" aria-label="Open menu" data-open="Open menu" data-close="Close menu" aria-expanded="false" aria-controls="nav-links">
       <span class="nav-toggle-icon"></span>
     </button>
     <div class="nav-links" id="nav-links">
@@ -76,6 +79,7 @@
       <a href="#scaling" class="nav-link">Scaling law</a>
       <a href="#pilot" class="nav-link">Pilot</a>
       <a href="#team" class="nav-link">Team</a>
+      <a class="nav-lang" href="ko/" hreflang="ko" lang="ko">한국어</a>
       <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="nav-cta">Book a pilot</a>
     </div>
   </div>
@@ -274,10 +278,35 @@
   <!-- ================= TECHNOLOGY ================= -->
   <section class="section section--navy" id="technology">
     <div class="wrap">
-      <div class="section-head">
-        <p data-animate class="eyebrow eyebrow--on-dark">03 · Technology</p>
-        <h2 data-animate class="section-title">Recursive self-improvement, <span class="hl">on-prem.</span></h2>
-        <p data-animate class="section-desc">Labs evolve models outside the customer; integrators deploy models that never change. We evolve a <strong>small local model inside the firm</strong> — in work no benchmark can grade.</p>
+      <div class="tech-top">
+        <div class="section-head">
+          <p data-animate class="eyebrow eyebrow--on-dark">03 · Technology</p>
+          <h2 data-animate class="section-title">Recursive self-improvement, <span class="hl-expert">with your experts</span>, <span class="hl">on-prem.</span></h2>
+          <p data-animate class="section-desc">Labs evolve models outside the customer; integrators deploy models that never change. We evolve a <strong>small local model inside the firm</strong> — in work no benchmark can grade.</p>
+        </div>
+
+        <figure data-animate class="loop-fig" aria-label="The Cogmenta mark as a dual loop: an outer loop in which experts correct the output, around an inner loop that retrains on every trace.">
+          <svg class="loop-mark" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="techInner" d="M 315.3 308.0 m -66.0 0 a 66.0 66.0 0 1 0 132.0 0 a 66.0 66.0 0 1 0 -132.0 0"/>
+              <path id="techOuter" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1"/>
+            </defs>
+            <circle cx="220" cy="220" r="214" fill="none" stroke="#24405F" stroke-width="1" stroke-dasharray="2 6"/>
+            <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="#FFFFFF" stroke-width="25.7" pathLength="100"/>
+            <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="#FFFFFF"/>
+            <circle class="signal" r="6" fill="#0B1F3A" stroke="#FFFFFF" stroke-width="3">
+              <animateMotion dur="6.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#techOuter"/></animateMotion>
+            </circle>
+            <circle cx="315.3" cy="308.0" r="66.0" fill="none" stroke="#1FA89A" stroke-width="25.7"/>
+            <circle class="signal" r="6" fill="#0B1F3A" stroke="#1FA89A" stroke-width="3">
+              <animateMotion dur="3.2s" begin="2.1s" repeatCount="indefinite"><mpath href="#techInner"/></animateMotion>
+            </circle>
+          </svg>
+          <figcaption class="loop-legend">
+            <span><i class="dot dot-white"></i><b>Outer loop</b> — your experts correct what comes out. Those corrections become the target, and a human signs off.</span>
+            <span><i class="dot dot-teal"></i><b>Inner loop</b> — between corrections the local model keeps improving itself on your traces.</span>
+          </figcaption>
+        </figure>
       </div>
 
       <div class="papers-head">
@@ -330,162 +359,65 @@
     <div class="wrap">
       <div class="section-head">
         <p data-animate class="eyebrow">04 · On-prem scaling law</p>
-        <h2 data-animate class="section-title">The bigger problem isn't intelligence. <span class="hl nl">It's missing context.</span></h2>
-        <p data-animate class="section-desc">Your context is scattered across channels, people, and years — and locked inside the firm. Deployment connects the dots; connected dots reveal the workflow.</p>
+        <h2 data-animate class="section-title">The bigger problem isn’t intelligence. <span class="hl nl">It’s missing context.</span></h2>
+        <p data-animate class="section-desc">Your context is scattered across channels, people, and the work itself — and locked inside the firm. Deployment connects the dots; connected dots reveal the workflow.</p>
       </div>
 
-      <figure class="scale-chart" aria-label="Illustrative chart: capability on the firm's own work grows exponentially as context accumulates on-prem, passing Optimize, Discover, and Coach, while a general model without context stays flat.">
-        <div class="sc-plot">
-          <svg class="sc-svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="scFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1FA89A" stop-opacity="0.22"/>
-                <stop offset="100%" stop-color="#1FA89A" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <g class="sc-grid"></g>
-            <path class="sc-base"/>
-            <path class="sc-area" fill="url(#scFill)"/>
-            <path class="sc-line"/>
-            <g class="sc-leaders"><line/><line/><line/></g>
-            <g class="sc-pts"><circle r="7"/><circle r="7"/><circle r="9"/></g>
-            <circle class="sc-tip" r="5"/>
-          </svg>
-          <span class="sc-ylab" aria-hidden="true">Capability on your own work →</span>
-          <span class="sc-baselab">General model<span class="sc-bl-x">, no context</span></span>
-          <div class="sc-callout"><b>Optimize</b><span>Company-wide workflows</span></div>
-          <div class="sc-callout"><b>Discover</b><span>Workflows nobody wrote down</span></div>
-          <div class="sc-callout"><b>Coach</b><span>Changes how experts work</span></div>
-          <button class="sc-replay" type="button" aria-label="Replay the chart animation">↻ Replay</button>
+      <div class="scale-grid">
+        <div data-animate class="dom-panel">
+          <p class="dom-k">Your domain</p>
+          <div class="dom-list" role="tablist" aria-label="Your domain"><button type="button" class="dom-btn is-on" role="tab" data-domain="ip" aria-selected="true" tabindex="0"><span class="dom-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span>Patent &amp; IP</span></button><button type="button" class="dom-btn" role="tab" data-domain="ma" aria-selected="false" tabindex="-1"><span class="dom-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span>Sell-side M&amp;A</span></button><button type="button" class="dom-btn" role="tab" data-domain="med" aria-selected="false" tabindex="-1"><span class="dom-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span>MedTech regulatory</span></button></div>
+          <p class="dom-hint">The card on the chart follows your pick.</p>
         </div>
-        <div class="sc-axis" aria-hidden="true">
-          <p class="sc-xlab">Context inside the firm <span class="sc-emerge">→ emergent behavior</span></p>
-          <div class="sc-ax-row">
-            <span class="sc-ax-k">Channels</span>
-            <div class="sc-ax-items"><span class="sc-chip" data-at="0.03" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span><span class="sc-chip" data-at="0.145" title="Documents"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h4"/></svg></span><span class="sc-chip" data-at="0.26" title="Spreadsheets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14.5h18M9 4v16M15 4v16"/></svg></span><span class="sc-chip" data-at="0.375" title="Chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/><path d="M8.5 11.5h7M8.5 8.5h4"/></svg></span><span class="sc-chip" data-at="0.49" title="Calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg></span><span class="sc-chip" data-at="0.605" title="Calls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6.5 3z"/></svg></span><span class="sc-chip" data-at="0.72" title="Screens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M9 20h6M12 16.5V20"/></svg></span><span class="sc-chip" data-at="0.835" title="Scans and PDFs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M3.5 12h17"/></svg></span><span class="sc-chip" data-at="0.95" title="Records"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17.5 8 12l3.5 3.5L15 9.5l6 8"/><path d="M3 20.5h18"/><circle cx="7.5" cy="6.5" r="2.5"/></svg></span></div>
-            <span class="sc-ax-n" data-count="channels">0</span>
-          </div>
-          <div class="sc-ax-row">
-            <span class="sc-ax-k">People</span>
-            <div class="sc-ax-items"><span class="sc-chip sc-chip--p" data-at="0.06"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.228"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.396"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.564"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.732"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span></div>
-            <span class="sc-ax-n" data-count="people">0</span>
-          </div>
-          <div class="sc-ax-row sc-ax-row--time">
-            <span class="sc-ax-k">Time</span>
-            <div class="sc-ax-items"><span class="sc-tick" data-at="0.04"><i></i>Day 1</span><span class="sc-tick" data-at="0.36"><i></i>Month 1</span><span class="sc-tick" data-at="0.64"><i></i>Month 3</span><span class="sc-tick" data-at="0.88"><i></i>Year 1</span></div>
-            <span class="sc-ax-n"></span>
-          </div>
-        </div>
-        <p class="sc-nojs">Optimize → Discover → Coach: capability on your own work compounds as context accumulates on-prem.</p>
-        <figcaption>Illustrative. Capability on your own work compounds as context accumulates on-prem.</figcaption>
-      </figure>
 
-      <div data-animate class="sug" id="sug">
-        <div class="sug-top">
-          <p class="panel-k panel-k--ink">What it actually says to you</p>
-          <p class="sug-sub">The same deployment, at three depths of context. Each card is a suggestion the system raises on its own &mdash; you approve, edit or reject it.</p>
-        </div>
-      <div class="sug-col" data-stage="optimize" data-at="0.36">
-        <div class="sug-head">
-          <span class="sug-k">Optimize</span>
-          <p class="sug-lead">a workflow you already run, improved by every correction</p>
-        </div>
-        <div class="sug-stack">
-          <article class="sug-card is-on" aria-hidden="false">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span>Sell-side M&amp;A advisory</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>Partner redlines land on the same CIM sections every deal &mdash; 23 on the last one.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Make &ldquo;lead each highlight with a quantified proof point&rdquo; a house rule. Replayed on 7 past deals: rubric 0.76 &rarr; 0.81, nothing else regressed.</p>
-            <p class="sug-foot">every deal &middot; the partner approves before it applies</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span>Patent &amp; IP consulting</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>Your valid/noise criteria changed at last week&rsquo;s meeting; earlier batches were screened under the old ones.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Re-score the screened population against criteria v3 &mdash; 81% decide automatically, and only the low-confidence 19% comes back to a consultant.</p>
-            <p class="sug-foot">each regular meeting &middot; a consultant confirms</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span>Dental clinic</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>5 of this week&rsquo;s 42 claims match the patterns behind last quarter&rsquo;s denials.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Fix the missing procedure code and the attachment before submission. Every dismissal is logged, so the flags get quieter.</p>
-            <p class="sug-foot">weekly &middot; staff decide</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>MedTech regulatory</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>Reviewers send back claims that lack matching evidence in every draft cycle.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Add one check before sign-off: the predicate table must address every technological characteristic.</p>
-            <p class="sug-foot">every draft cycle &middot; the regulatory lead signs off</p>
-          </article>
-        </div>
-        <div class="sug-dots"><button type="button" class="sug-dot is-on" aria-label="Optimize example 1 of 4" aria-current="true"></button><button type="button" class="sug-dot" aria-label="Optimize example 2 of 4"></button><button type="button" class="sug-dot" aria-label="Optimize example 3 of 4"></button><button type="button" class="sug-dot" aria-label="Optimize example 4 of 4"></button></div>
+        <figure data-animate class="scale-chart" aria-label="Illustrative chart: capability on the firm’s own work grows exponentially as context accumulates on-prem, passing Discover, Optimize and Coach, while a general model without context stays flat.">
+          <div class="sc-stage">
+          <div class="sc-plot">
+            <svg class="sc-svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="scFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1FA89A" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#1FA89A" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g class="sc-grid"></g>
+              <path class="sc-base"/>
+              <path class="sc-area" fill="url(#scFill)"/>
+              <path class="sc-line"/>
+              <line class="sc-leader"/>
+              <g class="sc-pts"><circle r="7"/><circle r="7"/><circle r="9"/></g>
+              <circle class="sc-tip" r="5"/>
+            </svg>
+            <span class="sc-ylab" aria-hidden="true">Capability on your own work →</span>
+            <span class="sc-baselab">General model<span class="sc-bl-x">, no context</span></span>
+            <button type="button" class="sc-pin" data-stage="discover" aria-label="Discover">Discover</button><button type="button" class="sc-pin" data-stage="optimize" aria-label="Optimize">Optimize</button><button type="button" class="sc-pin" data-stage="coach" aria-label="Coach">Coach</button>
+            <span class="sc-emerge">Emergent behavior</span>
+            <button class="sc-replay" type="button" aria-label="Replay the chart animation">↻ Replay</button>
+          </div>
+          <div class="sc-card" role="status">
+            <p class="sc-c-k"><span class="sc-c-name" data-stage="discover" hidden>Discover</span><span class="sc-c-name" data-stage="optimize" hidden>Optimize</span><span class="sc-c-name" data-stage="coach" hidden>Coach</span></p>
+            <div class="sc-body" data-stage="discover" data-domain="ip" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Most of the search population is noise — yet every document is still read by hand at title, abstract and claim level.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Screen the population against your own written criteria first, and hand over only what they cannot decide.</p><p class="sc-b-foot">~400 documents a day · automate</p></div><div class="sc-body" data-stage="discover" data-domain="ma" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>The standard core of the information-request list is re-assembled by hand for each deal; only the industry-specific part really changes.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Build the list from your standard core — 148 items, 26 industry-specific, 4 pulled from the kick-off transcript.</p><p class="sc-b-foot">every deal · automate</p></div><div class="sc-body" data-stage="discover" data-domain="med" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Predicate comparison tables and equivalence arguments are rebuilt from scratch for each new product, even when the predicate recurs.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Reuse the predicate’s own comparison rows and raise only the characteristics that actually changed.</p><p class="sc-b-foot">each new 510(k) · automate</p></div><div class="sc-body" data-stage="optimize" data-domain="ip" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Your valid/noise criteria are rewritten at every client meeting, and the batches already screened keep the old ones.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Re-score the screened population against criteria v3 — 81% decide automatically, and only the low-confidence 19% comes back to a consultant.</p><p class="sc-b-foot">each meeting · a consultant confirms</p></div><div class="sc-body" data-stage="optimize" data-domain="ma" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Partner redlines land on the same CIM sections every deal — 23 on the last one.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Make “lead each highlight with a quantified proof point” a house rule. Replayed on 7 past deals: rubric 0.76 → 0.81, nothing else regressed.</p><p class="sc-b-foot">every deal · the partner approves first</p></div><div class="sc-body" data-stage="optimize" data-domain="med" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Reviewers send back claims that lack matching evidence, and the same gaps recur across sections before sign-off.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Add one check before the sign-off gate: the predicate table must address every technological characteristic.</p><p class="sc-b-foot">every draft cycle · the regulatory lead signs off</p></div><div class="sc-body" data-stage="coach" data-domain="ip" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Junior and senior consultants reach different valid/noise decisions on similar documents, and the difference is never written down.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Show the senior’s reasoning on exactly the documents where the junior diverges, at the moment of the call.</p><p class="sc-b-foot">~3 a day · the difference becomes a criterion</p></div><div class="sc-body" data-stage="coach" data-domain="ma" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>Buyers approached on past deals are searched for again from scratch; what happened last time does not carry over.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>At the buyer-list step, surface who passed, who never returned the NDA, and the reason recorded then.</p><p class="sc-b-foot">every deal · at the buyer-list phase</p></div><div class="sc-body" data-stage="coach" data-domain="med" hidden><p class="sc-b-obs"><span class="sc-b-t">Observed</span>A senior engineer’s decisive step in a bench test lives in their hands; the SOP records it as one line.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">Suggests</span>Recover that step from the recording and put it into the SOP before the hand-over, not after it.</p><p class="sc-b-foot">per procedure · surfaces at hand-over</p></div>
+          </div>
+          </div>
+          <div class="sc-axis" aria-hidden="true">
+            <div class="sc-ax-row">
+              <span class="sc-ax-k">Channels</span>
+              <div class="sc-ax-items"><span class="sc-chip" data-at="0.03"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span><span class="sc-chip" data-at="0.099"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h4"/></svg></span><span class="sc-chip" data-at="0.168"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14.5h18M9 4v16M15 4v16"/></svg></span><span class="sc-chip" data-at="0.236"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/><path d="M8.5 11.5h7M8.5 8.5h4"/></svg></span><span class="sc-chip" data-at="0.305"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg></span><span class="sc-chip" data-at="0.374"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6.5 3z"/></svg></span><span class="sc-chip" data-at="0.443"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M9 20h6M12 16.5V20"/></svg></span><span class="sc-chip" data-at="0.511"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M3.5 12h17"/></svg></span><span class="sc-chip" data-at="0.58"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17.5 8 12l3.5 3.5L15 9.5l6 8"/><path d="M3 20.5h18"/><circle cx="7.5" cy="6.5" r="2.5"/></svg></span></div>
+              <span class="sc-ax-x">×</span>
+              <span class="sc-ax-k">People</span>
+              <div class="sc-ax-items"><span class="sc-chip sc-chip--p" data-at="0.08"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.224"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.368"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.512"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.656"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span></div>
+            </div>
+            <div class="sc-ax-row sc-ax-row--pd">
+              <span class="sc-ax-k">Process data</span>
+              <div class="sc-ax-items sc-pd-items"><span class="sc-pd" data-at="0.04"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></i>Client meeting</span><span class="sc-pd" data-at="0.14"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/><path d="M7 12l3-3 2.5 2.5L17 7"/></svg></i>Slide build</span><span class="sc-pd" data-at="0.24"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3.5l1.8-4 3 8 2-5 1.5 3H21"/><path d="M5 19h14"/></svg></i>Procedure recording</span><span class="sc-pd" data-at="0.34"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="11" rx="1.5"/><path d="M6 20h12"/><path d="M6.5 9h2M11 9h2M15.5 9h2M6.5 12.5h11"/></svg></i>Desk work</span><span class="sc-pd" data-at="0.44"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4z"/><path d="M4 21h9"/></svg></i>Document redline</span><span class="sc-pd" data-at="0.54"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/><path d="M8 10.5h5"/></svg></i>Search and screening</span><span class="sc-pd" data-at="0.64"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8.5 12 2.5 2.5L16 9.5"/></svg></i>Chart sign-off</span><span class="sc-pd" data-at="0.74"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.6L14.4 21l-2.4-1.6L9.6 21l-2.3-1.6L5 21z"/><path d="M9 8h6M9 12h6"/></svg></i>Claim entry</span><span class="sc-pd" data-at="0.84"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10l-2.5-2.5M17 13H7l2.5 2.5"/><path d="M3.5 20.5h17"/></svg></i>Hand-over</span><span class="sc-pd" data-at="0.94"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h2l1.5-4 3 9 2.5-7 1.5 4H20"/><path d="M6.5 3.5 5 5M17.5 3.5 19 5"/></svg></i>Call transcript</span></div>
+              <span class="sc-ax-n"><b data-count>0</b> task traces</span>
+            </div>
+          </div>
+          <p class="sc-nojs">Discover → Optimize → Coach: capability on your own work compounds as context accumulates on-prem.</p>
+          <figcaption>Illustrative. Capability on your own work compounds as context accumulates on-prem.</figcaption>
+        </figure>
       </div>
-      <div class="sug-col" data-stage="discover" data-at="0.64">
-        <div class="sug-head">
-          <span class="sug-k">Discover</span>
-          <p class="sug-lead">work that repeats but nobody wrote down</p>
-        </div>
-        <div class="sug-stack">
-          <article class="sug-card is-on" aria-hidden="false">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span>Patent &amp; IP consulting</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>About 400 documents a day are read by hand at title, abstract and claim level &mdash; and most are discarded as noise.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Screen the population against your own written criteria first, and hand over only what those criteria cannot decide.</p>
-            <p class="sug-foot">~400 documents/day &middot; automate</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span>Sell-side M&amp;A advisory</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>The standard core of the information-request list is re-assembled by hand for each deal; only the industry-specific part really changes.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Build the list from your standard core &mdash; 148 items, 26 industry-specific, 4 pulled from the kick-off transcript.</p>
-            <p class="sug-foot">every deal &middot; automate</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span>Dental clinic</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>The same patient&rsquo;s insurance-eligibility screen is opened at intake, and opened again at claim time.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Carry the intake check through to the claim and surface only what changed since.</p>
-            <p class="sug-foot">per new patient &middot; automate</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span>Accounting &amp; wealth</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>Reviewers leave the same notes on returns and packets, but the notes never become a checklist.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Turn the recurring notes into a pre-review checklist that runs before the return reaches the reviewer.</p>
-            <p class="sug-foot">~5 per week &middot; assist</p>
-          </article>
-        </div>
-        <div class="sug-dots"><button type="button" class="sug-dot is-on" aria-label="Discover example 1 of 4" aria-current="true"></button><button type="button" class="sug-dot" aria-label="Discover example 2 of 4"></button><button type="button" class="sug-dot" aria-label="Discover example 3 of 4"></button><button type="button" class="sug-dot" aria-label="Discover example 4 of 4"></button></div>
-      </div>
-      <div class="sug-col" data-stage="coach" data-at="0.88">
-        <div class="sug-head">
-          <span class="sug-k">Coach</span>
-          <p class="sug-lead">it changes how your experts work</p>
-        </div>
-        <div class="sug-stack">
-          <article class="sug-card is-on" aria-hidden="false">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span>Patent &amp; IP consulting</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>Junior and senior consultants reach different valid/noise decisions on similar documents &mdash; and the difference is never written down.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Show the senior&rsquo;s reasoning on exactly the documents where the junior diverges, at the moment of the call.</p>
-            <p class="sug-foot">~3 per day &middot; the difference becomes a criterion</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span>MedTech regulatory</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>A senior engineer&rsquo;s decisive step in a bench test lives in their hands; the SOP records it as one line.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Recover that step from the recording and put it into the SOP before the hand-over, not after it.</p>
-            <p class="sug-foot">per procedure &middot; surfaces at hand-over</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span>Sell-side M&amp;A advisory</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>Buyers approached on past deals are searched for again from scratch; what happened last time does not carry over.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>At the buyer-list step, surface who passed, who never returned the NDA, and the reason recorded then.</p>
-            <p class="sug-foot">every deal &middot; at the buyer-list phase</p>
-          </article>
-          <article class="sug-card" aria-hidden="true">
-            <p class="sug-vert"><span class="sug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span>Dental clinic</p>
-            <p class="sug-obs"><span class="sug-t">Observed</span>The treatment plan is explained at the chair, then explained again at the front desk.</p>
-            <p class="sug-act"><span class="sug-t sug-t--act">Suggests</span>Hand the patient a plain-language summary in the director&rsquo;s own way of explaining &mdash; healing period before cost.</p>
-            <p class="sug-foot">per consult &middot; the director&rsquo;s rubric, v2</p>
-          </article>
-        </div>
-        <div class="sug-dots"><button type="button" class="sug-dot is-on" aria-label="Coach example 1 of 4" aria-current="true"></button><button type="button" class="sug-dot" aria-label="Coach example 2 of 4"></button><button type="button" class="sug-dot" aria-label="Coach example 3 of 4"></button><button type="button" class="sug-dot" aria-label="Coach example 4 of 4"></button></div>
-      </div>
-      </div>
-      <p class="sug-note">Drawn from the workflow patterns and services we catalog across verticals. Firms anonymized; figures illustrative.</p>
+      <p data-animate class="sug-note">Every card is a suggestion the system raises on its own — you approve, edit or reject it. Drawn from the workflow patterns we catalog across verticals; firms anonymized, figures illustrative.</p>
     </div>
   </section>
 
@@ -527,7 +459,7 @@
         <div class="field-head">
           <p class="field-k">In the field</p>
           <p class="field-sub">Design partner, pilots, and firms in conversation</p>
-          <button class="marquee-toggle" type="button" aria-pressed="false">Pause</button>
+          <button class="marquee-toggle" type="button" aria-pressed="false" data-pause="Pause" data-play="Play">Pause</button>
         </div>
         <div class="marquee" role="region" aria-label="Firms we work with and talk to, by sector, size, and country">
           <div class="marquee-track">

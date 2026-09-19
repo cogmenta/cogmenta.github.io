@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cogmenta — 회사의 유산을 진화시키다</title>
+<meta name="description" content="코그멘타는 회사의 세컨드 브레인을 만듭니다. 사내에서 돌아가는 전용 AI가 전문가가 실제로 일하는 방식을 배우고, 교정할 때마다 계속 진화합니다. 온프레미스, 어떤 데이터도 건물 밖으로 나가지 않습니다.">
+<meta name="theme-color" content="#0B1F3A">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://cogmenta.tech/ko/">
+<link rel="alternate" hreflang="en" href="https://cogmenta.tech/">
+<link rel="alternate" hreflang="ko" href="https://cogmenta.tech/ko/">
+<link rel="alternate" hreflang="x-default" href="https://cogmenta.tech/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cogmenta.tech/ko/">
+<meta property="og:title" content="Cogmenta — 회사의 유산을 진화시키다">
+<meta property="og:description" content="회사를 위한 세컨드 브레인. 사내 전용 온프레미스 AI가 전문가의 일하는 방식을 배우고, 그 판단력이 문 밖으로 걸어 나가는 대신 계속 진화하게 합니다.">
+<meta property="og:site_name" content="Cogmenta">
+<meta property="og:image" content="https://cogmenta.tech/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cogmenta — 회사의 유산을 진화시키다">
+<meta name="twitter:description" content="회사를 위한 세컨드 브레인. 사내 전용 온프레미스 AI가 전문가의 일하는 방식을 배우고, 그 판단력이 문 밖으로 걸어 나가는 대신 계속 진화하게 합니다.">
+<meta name="twitter:image" content="https://cogmenta.tech/og-image.png">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Cogmenta",
+  "url": "https://cogmenta.tech/ko/",
+  "logo": "https://cogmenta.tech/assets/brand/apple-touch-icon.png",
+  "description": "코그멘타는 회사의 세컨드 브레인을 만듭니다. 사내 전용 온프레미스 AI가 전문가의 일하는 방식을 배우고 교정할 때마다 진화합니다.",
+  "address": { "@type": "PostalAddress", "addressLocality": "Minneapolis", "addressRegion": "MN", "addressCountry": "US" },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "admin@cogmenta.biz",
+    "contactType": "sales"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.remove('no-js');</script>
+<link rel="stylesheet" href="../styles.css">
+<noscript><style>[data-animate],[data-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" type="image/svg+xml" href="../assets/brand/cogmenta-icon.svg">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+</head>
+<body>
+<a href="#main" class="skip-link">본문으로 건너뛰기</a>
+
+<!-- Nav -->
+<nav class="nav" aria-label="주요 내비게이션">
+  <div class="nav-inner">
+    <a href="#" class="brand" aria-label="코그멘타 홈">
+      <svg class="wordmark" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="currentColor" stroke-width="14"/>
+        <polygon points="206,45.2 184.6,63.2 209.5,71" fill="currentColor"/>
+        <circle cx="172" cy="168" r="36" fill="none" stroke="#1FA89A" stroke-width="14"/>
+        <text x="226" y="204" font-family="Sora, sans-serif" font-weight="600" font-size="134" letter-spacing="-4" fill="currentColor">gmenta</text>
+      </svg>
+    </a>
+    <button class="nav-toggle" aria-label="메뉴 열기" data-open="메뉴 열기" data-close="메뉴 닫기" aria-expanded="false" aria-controls="nav-links">
+      <span class="nav-toggle-icon"></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="#why" class="nav-link">왜 지금</a>
+      <a href="#deploy" class="nav-link">배치</a>
+      <a href="#technology" class="nav-link">기술</a>
+      <a href="#scaling" class="nav-link">스케일링 법칙</a>
+      <a href="#pilot" class="nav-link">파일럿</a>
+      <a href="#team" class="nav-link">팀</a>
+      <a class="nav-lang" href="../" hreflang="en" lang="en">EN</a>
+      <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="nav-cta">파일럿 신청</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p data-animate class="eyebrow">기업 AI · 온프레미스 · 자기진화</p>
+        <h1 data-animate class="hero-title">회사의 유산을 <span class="hl">진화시키다.</span></h1>
+        <p data-animate class="hero-sub">
+          회사의 <strong>세컨드 브레인</strong>. 사내에서 돌아가는 전용 AI가 전문가의 일하는 방식을 배우고, 그 판단력을 계속 진화시킵니다.
+        </p>
+        <div data-animate class="hero-actions">
+          <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="btn btn-primary">무상 파일럿 신청</a>
+          <a href="#deploy" class="btn btn-ghost">배치 방식 보기 <span class="arw" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <figure data-animate class="hero-visual" aria-label="이중 루프로 표현한 코그멘타 마크. 전문가의 교정이 목표를 정하는 아우터 루프가, 모든 작업 기록에서 스스로 개선하는 이너 루프를 감싸고 있습니다.">
+        <svg viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <path id="innerPath" d="M 315.3 308.0 m -66.0 0 a 66.0 66.0 0 1 0 132.0 0 a 66.0 66.0 0 1 0 -132.0 0"/>
+            <path id="outerPath" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1"/>
+          </defs>
+          <circle cx="220" cy="220" r="214" fill="none" stroke="#DADCD8" stroke-width="1" stroke-dasharray="2 6"/>
+          <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="#0B1F3A" stroke-width="25.7" pathLength="100"/>
+          <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="#0B1F3A"/>
+          <circle class="signal" r="6" fill="#FFFFFF" stroke="#0B1F3A" stroke-width="3">
+            <animateMotion dur="6.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#outerPath"/></animateMotion>
+          </circle>
+          <circle cx="315.3" cy="308.0" r="66.0" fill="none" stroke="#1FA89A" stroke-width="25.7"/>
+          <circle class="signal" r="6" fill="#FFFFFF" stroke="#1FA89A" stroke-width="3">
+            <animateMotion dur="3.2s" begin="2.1s" repeatCount="indefinite"><mpath href="#innerPath"/></animateMotion>
+          </circle>
+          <text x="198" y="172" text-anchor="middle" class="svg-mono" fill="#5B6B7C">사내에서</text>
+          <text x="198" y="212" text-anchor="middle" class="svg-display" fill="#0B1F3A">기업 AI</text>
+        </svg>
+        <figcaption class="hero-legend">
+          <span><i class="dot dot-navy"></i><b>아우터 루프</b> — 전문가의 교정이 목표를 정합니다</span>
+          <span><i class="dot dot-teal"></i><b>이너 루프</b> — 모든 작업 기록에서 스스로 개선합니다</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Three hooks -->
+    <div class="wrap">
+      <div data-animate data-stagger class="hooks">
+        <article class="hook">
+          <span class="hook-no">01</span>
+          <h2>회사의 세컨드 브레인</h2>
+          <p>회사 전체가 일하는 방식에 대한 하나의 기억. 모든 채널과 전문가, 모든 시간이 담깁니다.</p>
+        </article>
+        <article class="hook">
+          <span class="hook-no">02</span>
+          <h2>사내 온프레미스</h2>
+          <p>자체 하드웨어에서 돌아갑니다. 고객과 환자 데이터는 건물 밖으로 나가지 않습니다.</p>
+        </article>
+        <article class="hook">
+          <span class="hook-no">03</span>
+          <h2>진화하는 유산</h2>
+          <p>시니어의 판단이 회사의 자산이 되고, 교정할 때마다 나아집니다.</p>
+        </article>
+      </div>
+      <div data-animate class="readout">
+        <div class="readout-cell"><div class="readout-val">100<span>%</span></div><div class="readout-key">온프레미스 · 전용</div></div>
+        <div class="readout-cell"><div class="readout-val">1–2<span>개월</span></div><div class="readout-key">무상 파일럿, 워크플로우 1개</div></div>
+        <div class="readout-cell"><div class="readout-val">2.1<span>×</span></div><div class="readout-key">생산성 · 내부 파일럿</div></div>
+        <div class="readout-cell" title="다음 의도 예측, weighted F1: 파인튜닝한 약 1억 파라미터 모델 0.64 대 GPT-5 제로샷 0.41 (ScholaWrite, ACL 2026)"><div class="readout-val">+56<span>%</span></div><div class="readout-key">소형 모델이 프런티어를 앞섬 · ACL 2026</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ================= -->
+  <section class="section section--ice" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p data-animate class="eyebrow">01 · 왜 지금인가</p>
+        <h2 data-animate class="section-title">지금의 AI는 개인 도구일 뿐, <span class="hl">회사의 자산이 아닙니다.</span></h2>
+        <p data-animate class="section-desc">노하우가 프롬프트로 들어가고 답이 나오면, 내일 다시 처음부터 시작합니다. 회사는 아무것도 배우지 못하고, 노하우는 여전히 문 밖으로 걸어 나갑니다.</p>
+      </div>
+
+      <div data-animate data-stagger class="flow">
+        <div class="flow-step"><span class="flow-k">노하우</span><span class="flow-d">한 사람의 머릿속에</span></div>
+        <span class="flow-arrow" aria-hidden="true"><i></i></span>
+        <div class="flow-step"><span class="flow-k">프롬프트</span><span class="flow-d">매번 다시 입력</span></div>
+        <span class="flow-arrow" aria-hidden="true"><i></i></span>
+        <div class="flow-step flow-step--dark"><span class="flow-k">블랙박스</span><span class="flow-d">보이지 않는 추론</span></div>
+        <span class="flow-arrow" aria-hidden="true"><i></i></span>
+        <div class="flow-step"><span class="flow-k">결과물</span><span class="flow-d">쓰거나 버리거나</span></div>
+        <div class="flow-return"><span>내일 또 반복</span></div>
+      </div>
+
+      <div data-animate data-stagger class="pains">
+        <div class="pain"><h3>기억 없음</h3><p>모든 세션이 0에서 시작합니다.</p></div>
+        <div class="pain"><h3>과정 기록 없음</h3><p>왜 그런 결과가 나왔는지 남지 않습니다.</p></div>
+        <div class="pain"><h3>회사 차원의 이득 없음</h3><p>개인만 쓰고, 회사의 워크플로우는 그대로입니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DEPLOY / LAWFLOW ================= -->
+  <section class="section" id="deploy">
+    <div class="wrap">
+      <div class="section-head">
+        <p data-animate class="eyebrow">02 · 배치가 먼저</p>
+        <h2 data-animate class="section-title">우리는 먼저 작은 법률사무소를 만들었습니다. <span class="hl nl">이제 실제 회사 안으로 들어갑니다.</span></h2>
+        <p data-animate class="section-desc"><a href="https://arxiv.org/abs/2504.18942" target="_blank" rel="noopener">LawFlow</a>(COLM 2025)에서 훈련받은 로스쿨생들이 모의 소형 로펌에서 법인 설립 업무를 수행했고, 우리는 그 의사결정의 모든 단계를 기록했습니다.</p>
+      </div>
+
+      <div class="lawflow">
+        <figure data-animate class="media-window">
+          <div class="media-bar" aria-hidden="true"><i></i><i></i><i></i><span>LawFlow · 작업 녹화</span></div>
+          <div class="media-body">
+            <video class="lawflow-video" autoplay muted loop playsinline controls preload="metadata" poster="../assets/lawflow/lawflow-recording-poster.jpg" aria-label="LawFlow 도구에서 참가자가 LLC 운영계약서를 조사하고 작성하며 각 단계를 전문가 과업 다이어그램에 대응시키는 화면 녹화">
+              <source src="../assets/lawflow/lawflow-recording.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>LLC 운영계약서 작성. 모든 단계를 기록해 워크플로우 그래프에 대응시켰습니다.</figcaption>
+        </figure>
+
+        <figure data-animate class="media-window setup-fig">
+          <div class="media-bar" aria-hidden="true"><i></i><i></i><i></i><span>LawFlow · 모의 로펌</span></div>
+          <div class="media-body">
+            <img src="../assets/lawflow/lawflow-setup.png" width="1022" height="541" loading="lazy" alt="LawFlow 실험 구성: 소상공인 법인 설립 시나리오의 로스쿨생과 의뢰인. 쟁점 파악, 노트 작성, 템플릿 선택, 조사, 초안 작성, 의뢰인 상담 등의 법률 처리 과업이 동료 검토를 거친 운영계약서 초안으로 이어집니다.">
+          </div>
+          <figcaption>모의 로펌: 의뢰인, 변호인 역할의 로스쿨생, 동료 검토.</figcaption>
+        </figure>
+      </div>
+
+      <div data-animate class="finding finding--wide">
+        <div class="finding-main">
+          <p class="finding-k">우리가 발견한 것</p>
+          <p class="finding-big">전문가는 <span class="mk mk-human">선별적</span>입니다. AI는 <span class="mk mk-ai">전수적</span>입니다.</p>
+        </div>
+        <div class="finding-body">
+          <p>사람은 <span class="mk mk-human">층을 나눠 계획하고</span>, <span class="mk mk-human">중요한 가지만 따라가며</span>, 상황이 바뀌면 <span class="mk mk-human">되돌아옵니다</span>. LLM 에이전트는 <span class="mk mk-ai">평평하게 계획하고</span> <span class="mk mk-ai">끝까지 직진합니다</span>. 전문가의 가치는 <em>하지 않는</em> 일에 있습니다.</p>
+          <p class="finding-cue">아래 두 지도는 같은 업무입니다. 하나는 사람이, 하나는 LLM 에이전트가 수행했습니다.</p>
+        </div>
+      </div>
+
+      <div data-animate class="compare">
+        <figure>
+          <div class="compare-frame"><img src="../assets/lawflow/human-lawyer-workflow.png" width="726" height="383" loading="lazy" alt="사람의 워크플로우: 관련 있는 가지만 따라가고 필요하면 되돌아오는 선별적·깊이 우선 경로."></div>
+          <figcaption><i class="key key-human"></i><b>사람</b> — 선별적이고, 되돌아옵니다</figcaption>
+        </figure>
+        <figure>
+          <div class="compare-frame"><img src="../assets/lawflow/ai-lawyer-workflow.png" width="843" height="445" loading="lazy" alt="LLM 에이전트의 워크플로우: 과업 전체를 훑는 넓고 전수적인 너비 우선 경로."></div>
+          <figcaption><i class="key key-ai"></i><b>LLM 에이전트</b> — 전수적이고, 너비 우선</figcaption>
+        </figure>
+      </div>
+
+      <!-- From simulation to deployment -->
+      <div data-animate class="bridge">
+        <div class="bridge-from">
+          <span class="bridge-tag">그때 · 연구</span>
+          <h3>모의 로펌</h3>
+          <p>판단은 과정에 있고, 그 과정은 회사 안에 있습니다.</p>
+        </div>
+        <div class="bridge-arrow"><span>그래서 이번엔</span></div>
+        <div class="bridge-to">
+          <span class="bridge-tag bridge-tag--live">지금 · 배치</span>
+          <h3>우리가 회사로 갑니다.</h3>
+          <p>엔지니어가 현장에 상주하고, 가벼운 기록기를 직원 PC에 설치하며, 모델은 회사 안에서 자랍니다.</p>
+        </div>
+      </div>
+
+      <ol data-animate data-stagger class="steps">
+        <li class="step">
+          <span class="step-no">01 · 기록</span>
+          <h3>업무 자체를 담습니다</h3>
+          <p>화면, 키 입력, 작업 기록을 동의 하에 수집합니다. 일하는 방식은 그대로입니다.</p>
+        </li>
+        <li class="step">
+          <span class="step-no">02 · 구조화</span>
+          <h3>회사가 일하는 방식을 지도로</h3>
+          <p>첫 주에 작업 기록이 실제 워크플로우 지도가 됩니다.</p>
+        </li>
+        <li class="step">
+          <span class="step-no">03 · 최적화</span>
+          <h3>모든 작업 기록에서 개선</h3>
+          <p>전문가의 교정이 목표를 정합니다. 최종 승인은 언제나 사람이 합니다.</p>
+        </li>
+        <li class="step">
+          <span class="step-no">04 · 진화</span>
+          <h3>우리 모델을 키웁니다</h3>
+          <p>우리 하드웨어 위의 우리 모델. 매달 나아집니다.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= TECHNOLOGY ================= -->
+  <section class="section section--navy" id="technology">
+    <div class="wrap">
+      <div class="tech-top">
+        <div class="section-head">
+          <p data-animate class="eyebrow eyebrow--on-dark">03 · 기술</p>
+          <h2 data-animate class="section-title"><span class="hl-expert">전문가와 함께하는</span> 재귀적 자기개선, <span class="hl">사내에서.</span></h2>
+          <p data-animate class="section-desc">프런티어 연구소는 고객 밖에서 모델을 진화시키고, 통합 업체는 바뀌지 않는 모델을 납품합니다. 우리는 <strong>회사 안의 작은 로컬 모델</strong>을, 어떤 벤치마크로도 채점할 수 없는 업무에서 진화시킵니다.</p>
+        </div>
+
+        <figure data-animate class="loop-fig" aria-label="이중 루프로 표현한 코그멘타 마크. 전문가가 결과물을 교정하는 아우터 루프가, 모든 작업 기록으로 재학습하는 이너 루프를 감싸고 있습니다.">
+          <svg class="loop-mark" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="techInner" d="M 315.3 308.0 m -66.0 0 a 66.0 66.0 0 1 0 132.0 0 a 66.0 66.0 0 1 0 -132.0 0"/>
+              <path id="techOuter" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1"/>
+            </defs>
+            <circle cx="220" cy="220" r="214" fill="none" stroke="#24405F" stroke-width="1" stroke-dasharray="2 6"/>
+            <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="#FFFFFF" stroke-width="25.7" pathLength="100"/>
+            <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="#FFFFFF"/>
+            <circle class="signal" r="6" fill="#0B1F3A" stroke="#FFFFFF" stroke-width="3">
+              <animateMotion dur="6.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#techOuter"/></animateMotion>
+            </circle>
+            <circle cx="315.3" cy="308.0" r="66.0" fill="none" stroke="#1FA89A" stroke-width="25.7"/>
+            <circle class="signal" r="6" fill="#0B1F3A" stroke="#1FA89A" stroke-width="3">
+              <animateMotion dur="3.2s" begin="2.1s" repeatCount="indefinite"><mpath href="#techInner"/></animateMotion>
+            </circle>
+          </svg>
+          <figcaption class="loop-legend">
+            <span><i class="dot dot-white"></i><b>아우터 루프</b> — 전문가가 결과물을 교정합니다. 그 교정이 목표가 되고, 최종 승인은 사람이 합니다.</span>
+            <span><i class="dot dot-teal"></i><b>이너 루프</b> — 교정과 교정 사이에 로컬 모델이 작업 기록으로 스스로 개선합니다.</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="papers-head">
+        <p data-animate class="panel-k">뒷받침하는 연구</p>
+        <p data-animate class="papers-sub">창업팀 연구실의 논문과 오픈소스 작업입니다.</p>
+      </div>
+      <div data-animate data-stagger class="papers">
+        <a class="paper" href="https://arxiv.org/abs/2504.18942" target="_blank" rel="noopener">
+          <span class="paper-venue">COLM 2025</span>
+          <h3>LawFlow</h3>
+          <p>훈련받은 로스쿨생이 법인 설립 업무를 처음부터 끝까지 수행한 기록을 LLM 에이전트와 비교했습니다. 사람은 모듈 단위로 계획하고 상황에 맞춰 바꾸지만, LLM은 순차적이고 전수적인 계획을 그대로 실행합니다.</p>
+          <span class="paper-link">arXiv ↗</span>
+        </a>
+        <a class="paper" href="https://aclanthology.org/2026.acl-long.1606/" target="_blank" rel="noopener">
+          <span class="paper-venue">ACL 2026</span>
+          <h3>ScholaWrite</h3>
+          <p>연구자가 논문을 쓰는 동안의 키 입력 단위 편집 약 6.2만 건에, 각 편집의 의도를 라벨링했습니다. 이 데이터로 학습한 약 1억 파라미터 모델이 다음 의도 예측에서 GPT-5를 앞섭니다(F1 0.64 대 0.41).</p>
+          <span class="paper-link">ACL Anthology ↗</span>
+        </a>
+        <a class="paper" href="https://arxiv.org/abs/2607.29181" target="_blank" rel="noopener">
+          <span class="paper-venue">COLM 2026</span>
+          <h3>SERUM</h3>
+          <p>사람이 일하는 원본 영상을 행동·의도 상태 모델로 바꿉니다. 라벨 정규화로 어휘를 46% 줄이면서 다음 상태 top-1 정확도를 18.2%p 높였습니다.</p>
+          <span class="paper-link">arXiv ↗</span>
+        </a>
+        <a class="paper" href="https://arxiv.org/abs/2606.29082" target="_blank" rel="noopener">
+          <span class="paper-venue">CAIS 2026 워크숍 · 구두 발표</span>
+          <h3>Evolution Fine-Tuning (EFT)</h3>
+          <p>371개 최적화 과제에서 나온 진화 탐색 궤적 15.6만 건을 학습 데이터로 바꿔, 20억~90억 파라미터 공개 모델이 발견하는 법을 배우게 합니다.</p>
+          <span class="paper-link">arXiv ↗</span>
+        </a>
+        <a class="paper" href="https://arxiv.org/abs/2608.24735" target="_blank" rel="noopener">
+          <span class="paper-venue">프리프린트 · 2026</span>
+          <h3>Meta<sup>n</sup></h3>
+          <p>창발적 깊이를 통한 재귀적 자기개선. 하나의 메타 연산을 자기 자신의 기록과 코드에 적용해, 개선이 멈출 때까지 계층을 쌓아 올립니다.</p>
+          <span class="paper-link">arXiv ↗</span>
+        </a>
+        <a class="paper" href="https://open-galapagos.com/" target="_blank" rel="noopener">
+          <span class="paper-venue">오픈소스 · Apache-2.0</span>
+          <h3>Open Galapagos</h3>
+          <p>LLM 기반 진화 탐색을 위한 오픈 플랫폼. 개체군, 선택, 프롬프트, 제안자, 평가자, 메모리를 조합해 자신만의 구조를 만들 수 있습니다.</p>
+          <span class="paper-link">open-galapagos.com ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCALING LAW ================= -->
+  <section class="section" id="scaling">
+    <div class="wrap">
+      <div class="section-head">
+        <p data-animate class="eyebrow">04 · 온프레미스 스케일링 법칙</p>
+        <h2 data-animate class="section-title">더 큰 문제는 지능이 아닙니다. <span class="hl nl">빠져 있는 것은 맥락입니다.</span></h2>
+        <p data-animate class="section-desc">회사의 맥락은 채널과 사람, 그리고 업무 그 자체에 흩어진 채 회사 안에 갇혀 있습니다. 배치가 점들을 잇고, 이어진 점이 워크플로우를 드러냅니다.</p>
+      </div>
+
+      <div class="scale-grid">
+        <div data-animate class="dom-panel">
+          <p class="dom-k">도메인 선택</p>
+          <div class="dom-list" role="tablist" aria-label="도메인 선택"><button type="button" class="dom-btn is-on" role="tab" data-domain="ip" aria-selected="true" tabindex="0"><span class="dom-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span>특허 · IP</span></button><button type="button" class="dom-btn" role="tab" data-domain="ma" aria-selected="false" tabindex="-1"><span class="dom-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span>매각 자문 M&amp;A</span></button><button type="button" class="dom-btn" role="tab" data-domain="med" aria-selected="false" tabindex="-1"><span class="dom-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span>의료기기 인허가</span></button></div>
+          <p class="dom-hint">선택에 따라 그래프 위 카드가 바뀝니다.</p>
+        </div>
+
+        <figure data-animate class="scale-chart" aria-label="예시 그래프: 맥락이 사내에 쌓일수록 우리 업무에서의 성능이 발견·최적화·코칭을 지나며 기하급수적으로 늘어나는 반면, 맥락이 없는 범용 모델은 평평하게 유지됩니다.">
+          <div class="sc-stage">
+          <div class="sc-plot">
+            <svg class="sc-svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="scFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1FA89A" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#1FA89A" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g class="sc-grid"></g>
+              <path class="sc-base"/>
+              <path class="sc-area" fill="url(#scFill)"/>
+              <path class="sc-line"/>
+              <line class="sc-leader"/>
+              <g class="sc-pts"><circle r="7"/><circle r="7"/><circle r="9"/></g>
+              <circle class="sc-tip" r="5"/>
+            </svg>
+            <span class="sc-ylab" aria-hidden="true">우리 업무에서의 성능 →</span>
+            <span class="sc-baselab">범용 모델<span class="sc-bl-x">, 맥락 없음</span></span>
+            <button type="button" class="sc-pin" data-stage="discover" aria-label="발견">발견</button><button type="button" class="sc-pin" data-stage="optimize" aria-label="최적화">최적화</button><button type="button" class="sc-pin" data-stage="coach" aria-label="코칭">코칭</button>
+            <span class="sc-emerge">창발적 능력</span>
+            <button class="sc-replay" type="button" aria-label="그래프 애니메이션 다시 보기">↻ 다시 보기</button>
+          </div>
+          <div class="sc-card" role="status">
+            <p class="sc-c-k"><span class="sc-c-name" data-stage="discover" hidden>발견</span><span class="sc-c-name" data-stage="optimize" hidden>최적화</span><span class="sc-c-name" data-stage="coach" hidden>코칭</span></p>
+            <div class="sc-body" data-stage="discover" data-domain="ip" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>원시 검색 모집단 대부분이 노이즈로 버려지는데도, 모든 문헌을 제목·요약·청구항 수준에서 사람이 직접 읽습니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>먼저 귀사가 문서로 정해 둔 유효/노이즈 기준으로 모집단을 선별하고, 기준으로 판정할 수 없는 건만 사람에게 넘깁니다.</p><p class="sc-b-foot">하루 약 400건 · 자동화</p></div><div class="sc-body" data-stage="discover" data-domain="ma" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>정보요청 목록의 표준 항목을 딜마다 손으로 다시 조립합니다. 실제로 바뀌는 것은 업종별 일부 항목뿐입니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>표준 항목에서 목록을 생성합니다. 148개 항목 중 26개가 업종별 항목이고, 4개는 킥오프 녹취록에서 가져옵니다.</p><p class="sc-b-foot">딜마다 · 자동화</p></div><div class="sc-body" data-stage="discover" data-domain="med" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>비교 대상 기기가 같아도 새 제품마다 비교표와 동등성 논증을 처음부터 다시 만듭니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>같은 비교 대상 기기의 비교 항목을 그대로 재사용하고, 실제로 달라진 특성만 따로 올립니다.</p><p class="sc-b-foot">새 510(k)마다 · 자동화</p></div><div class="sc-body" data-stage="optimize" data-domain="ip" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>유효/노이즈 기준이 고객 미팅마다 새로 쓰이는데, 이미 선별한 배치에는 예전 기준이 그대로 남습니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>선별을 마친 모집단을 기준 v3으로 다시 채점합니다. 81%는 자동 판정되고, 신뢰도가 낮은 19%만 컨설턴트에게 돌아옵니다.</p><p class="sc-b-foot">미팅마다 · 컨설턴트가 확인</p></div><div class="sc-body" data-stage="optimize" data-domain="ma" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>파트너 수정이 딜마다 CIM의 같은 섹션에 몰립니다. 직전 딜에서는 23건이었습니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>‘하이라이트마다 수치로 된 근거를 앞세운다’를 회사 규칙으로 만듭니다. 과거 딜 7건으로 재실행: 루브릭 0.76 → 0.81, 다른 섹션 하락 없음.</p><p class="sc-b-foot">딜마다 · 파트너 승인 후 적용</p></div><div class="sc-body" data-stage="optimize" data-domain="med" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>검토자가 근거 없는 주장을 돌려보내고, 승인 전까지 같은 유형의 빈틈이 여러 섹션에서 반복됩니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>서명 게이트 앞에 점검 항목을 하나 추가합니다. 비교표는 모든 기술적 특성을 빠짐없이 다뤄야 합니다.</p><p class="sc-b-foot">초안 주기마다 · 인허가 책임자가 승인</p></div><div class="sc-body" data-stage="coach" data-domain="ip" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>비슷한 문헌에 대해 주니어와 시니어 컨설턴트의 유효/노이즈 판정이 다르고, 그 차이가 어디에도 기록되지 않습니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>주니어의 판단이 갈리는 바로 그 문헌에서, 판정하는 그 순간에 시니어의 판단 근거를 보여 줍니다.</p><p class="sc-b-foot">하루 약 3건 · 그 차이가 기준이 됩니다</p></div><div class="sc-body" data-stage="coach" data-domain="ma" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>과거 딜에서 접촉했던 인수자를 처음부터 다시 찾고, 그때의 결과는 이어지지 않습니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>인수자 목록 단계에서 누가 인수를 포기했고 누가 NDA를 회신하지 않았는지, 그때 기록된 사유와 함께 보여 줍니다.</p><p class="sc-b-foot">딜마다 · 인수자 목록 단계</p></div><div class="sc-body" data-stage="coach" data-domain="med" hidden><p class="sc-b-obs"><span class="sc-b-t">관찰</span>시니어 엔지니어가 실험에서 결정적으로 판단하는 단계가 몸에만 익어 있고, SOP에는 한 줄로만 남아 있습니다.</p><p class="sc-b-act"><span class="sc-b-t sc-b-t--act">제안</span>녹화에서 그 단계를 복원해 인수인계 이후가 아니라 이전에 SOP에 넣습니다.</p><p class="sc-b-foot">절차마다 · 인수인계 때 드러남</p></div>
+          </div>
+          </div>
+          <div class="sc-axis" aria-hidden="true">
+            <div class="sc-ax-row">
+              <span class="sc-ax-k">채널</span>
+              <div class="sc-ax-items"><span class="sc-chip" data-at="0.03"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span><span class="sc-chip" data-at="0.099"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h4"/></svg></span><span class="sc-chip" data-at="0.168"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14.5h18M9 4v16M15 4v16"/></svg></span><span class="sc-chip" data-at="0.236"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/><path d="M8.5 11.5h7M8.5 8.5h4"/></svg></span><span class="sc-chip" data-at="0.305"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></svg></span><span class="sc-chip" data-at="0.374"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6 6l1.5-2L21 14.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6.5 3z"/></svg></span><span class="sc-chip" data-at="0.443"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M9 20h6M12 16.5V20"/></svg></span><span class="sc-chip" data-at="0.511"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M3.5 12h17"/></svg></span><span class="sc-chip" data-at="0.58"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17.5 8 12l3.5 3.5L15 9.5l6 8"/><path d="M3 20.5h18"/><circle cx="7.5" cy="6.5" r="2.5"/></svg></span></div>
+              <span class="sc-ax-x">×</span>
+              <span class="sc-ax-k">사람</span>
+              <div class="sc-ax-items"><span class="sc-chip sc-chip--p" data-at="0.08"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.224"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.368"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.512"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.656"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span><span class="sc-chip sc-chip--p" data-at="0.8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.4"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg></span></div>
+            </div>
+            <div class="sc-ax-row sc-ax-row--pd">
+              <span class="sc-ax-k">프로세스 데이터</span>
+              <div class="sc-ax-items sc-pd-items"><span class="sc-pd" data-at="0.04"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></i>고객 미팅</span><span class="sc-pd" data-at="0.14"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/><path d="M7 12l3-3 2.5 2.5L17 7"/></svg></i>슬라이드 작성</span><span class="sc-pd" data-at="0.24"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3.5l1.8-4 3 8 2-5 1.5 3H21"/><path d="M5 19h14"/></svg></i>시술·수술 기록</span><span class="sc-pd" data-at="0.34"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="11" rx="1.5"/><path d="M6 20h12"/><path d="M6.5 9h2M11 9h2M15.5 9h2M6.5 12.5h11"/></svg></i>일상 업무</span><span class="sc-pd" data-at="0.44"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4z"/><path d="M4 21h9"/></svg></i>문서 교정</span><span class="sc-pd" data-at="0.54"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/><path d="M8 10.5h5"/></svg></i>검색·선별 실행</span><span class="sc-pd" data-at="0.64"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8.5 12 2.5 2.5L16 9.5"/></svg></i>차트 서명</span><span class="sc-pd" data-at="0.74"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14v18l-2.3-1.6L14.4 21l-2.4-1.6L9.6 21l-2.3-1.6L5 21z"/><path d="M9 8h6M9 12h6"/></svg></i>청구 입력</span><span class="sc-pd" data-at="0.84"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10l-2.5-2.5M17 13H7l2.5 2.5"/><path d="M3.5 20.5h17"/></svg></i>인수인계</span><span class="sc-pd" data-at="0.94"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h2l1.5-4 3 9 2.5-7 1.5 4H20"/><path d="M6.5 3.5 5 5M17.5 3.5 19 5"/></svg></i>통화 녹취</span></div>
+              <span class="sc-ax-n"><b data-count>0</b> 건의 작업 기록</span>
+            </div>
+          </div>
+          <p class="sc-nojs">발견 → 최적화 → 코칭: 맥락이 사내에 쌓일수록 우리 업무에서의 성능이 복리로 늘어납니다.</p>
+          <figcaption>예시 그래프입니다. 맥락이 사내에 쌓일수록 우리 업무에서의 성능이 복리로 늘어납니다.</figcaption>
+        </figure>
+      </div>
+      <p data-animate class="sug-note">모든 카드는 시스템이 스스로 올리는 제안입니다. 승인·수정·기각은 사람이 합니다. 여러 버티컬에서 정리한 실제 업무 패턴에서 가져왔고, 고객사는 비식별 처리했으며 수치는 예시입니다.</p>
+    </div>
+  </section>
+
+  <!-- ================= PILOT ================= -->
+  <section class="section section--ice" id="pilot">
+    <div class="wrap">
+      <div class="section-head">
+        <p data-animate class="eyebrow">05 · 시작 방법</p>
+        <h2 data-animate class="section-title">워크플로우 하나, 사람 한 명. <span class="hl">1~2개월 무상.</span></h2>
+        <p data-animate class="section-desc">엔지니어가 현장에 상주하고, 가벼운 기록기를 설치하며, 승인 게이트를 둡니다. 결과물이 나가기 전에 사람이 승인합니다.</p>
+      </div>
+      <div data-animate data-stagger class="phases">
+        <div class="phase">
+          <div class="phase-no">1~2주차</div>
+          <h3>현장 디스커버리</h3>
+          <p>대상 워크플로우를 정하고, 동의 하에 기록기를 설치합니다.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-no">1~2개월차</div>
+          <h3>무상 파일럿</h3>
+          <p>워크플로우 1개, 담당자 1명. 귀사의 기준으로 측정합니다.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-no">60~90일차</div>
+          <h3>운영 적용</h3>
+          <p>귀사 하드웨어에서, 귀사의 기준선과 비교해 검증합니다.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-no">이후</div>
+          <h3>복리로 축적</h3>
+          <p>매달 나아집니다. 12개월차는 1개월차와 다릅니다.</p>
+        </div>
+      </div>
+      <div data-animate class="sectors">
+        <span>금융 · M&amp;A</span><span>법률 · 특허</span><span>병원 · 의원</span><span>보험</span><span>회계 · 세무</span><span>자산관리</span>
+      </div>
+
+      <div data-animate class="field field--bleed">
+        <div class="field-head">
+          <p class="field-k">현장에서</p>
+          <p class="field-sub">디자인 파트너, 파일럿, 논의 중인 회사들</p>
+          <button class="marquee-toggle" type="button" aria-pressed="false" data-pause="일시정지" data-play="재생">일시정지</button>
+        </div>
+        <div class="marquee" role="region" aria-label="업종, 규모, 국가별로 본 협업 중이거나 논의 중인 회사들">
+          <div class="marquee-track">
+            <ul class="firms"><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span class="firm-text"><b>M&amp;A 자문</b><span>5인 부티크 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span class="firm-text"><b>특허 · IP 컨설팅</b><span>약 100명 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span><span class="firm-text"><b>치과</b><span>치과의사 3인 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>특허법인</b><span>다수 파트너 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="firm-text"><b>안과</b><span>개원의 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span class="firm-text"><b>의료기기</b><span>글로벌 대기업 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>IP 로펌</b><span>전국 규모 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="firm-text"><b>정보 서비스</b><span>글로벌 대기업</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span><span class="firm-text"><b>로펌</b><span>대형 · 한국</span></span></li></ul>
+            <ul class="firms" aria-hidden="true"><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span class="firm-text"><b>M&amp;A 자문</b><span>5인 부티크 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span class="firm-text"><b>특허 · IP 컨설팅</b><span>약 100명 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span><span class="firm-text"><b>치과</b><span>치과의사 3인 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>특허법인</b><span>다수 파트너 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="firm-text"><b>안과</b><span>개원의 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span class="firm-text"><b>의료기기</b><span>글로벌 대기업 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>IP 로펌</b><span>전국 규모 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="firm-text"><b>정보 서비스</b><span>글로벌 대기업</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span><span class="firm-text"><b>로펌</b><span>대형 · 한국</span></span></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section class="section" id="team" aria-labelledby="team-title">
+    <div class="wrap">
+      <div class="section-head section-head--tight">
+        <p data-animate class="eyebrow">06 · 팀</p>
+        <h2 id="team-title" class="visually-hidden">팀</h2>
+      </div>
+
+      <div data-animate data-stagger class="people">
+        <article class="person person--lead">
+          <div class="person-head"><img class="person-photo" src="../assets/team/dongyeop-kang.jpg" width="400" height="400" loading="lazy" alt="Dongyeop Kang"><div><h3>Dongyeop Kang</h3><p class="person-role">창업자 · CEO</p></div></div>
+          <div class="person-body">
+            <ul class="person-cv">
+              <li>미네소타대학교 컴퓨터과학과 교수</li>
+              <li>미네소타 NLP 그룹 디렉터 · 논문 75편 이상</li>
+              <li>카네기멜런대 박사 · UC 버클리 박사후연구원</li>
+              <li>Facebook AI, AI2, Microsoft 연구 경력</li>
+            </ul>
+            <div class="person-links"><a class="icon-link" href="https://dykang.github.io/" target="_blank" rel="noopener" aria-label="Dongyeop Kang — homepage" title="Homepage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></a><a class="icon-link" href="https://www.linkedin.com/in/dongyeop-kang-30ba0611/" target="_blank" rel="noopener" aria-label="Dongyeop Kang on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a><a class="icon-link" href="mailto:dk@cogmenta.biz" aria-label="Email Dongyeop Kang (dk@cogmenta.biz)" title="dk@cogmenta.biz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a></div>
+          </div>
+        </article>
+        <article class="person">
+          <div class="person-head"><img class="person-photo" src="../assets/team/james-mooney.jpg" width="400" height="400" loading="lazy" alt="James Mooney"><div><h3>James Mooney</h3><p class="person-role">FDE 리드</p></div></div>
+          <div class="person-body">
+            <ul class="person-cv">
+              <li>미네소타대학교 컴퓨터과학 박사과정</li>
+              <li>전 Grammarly · 현장 배치 총괄</li>
+            </ul>
+            <div class="person-links"><a class="icon-link" href="https://jimtmooney.github.io/" target="_blank" rel="noopener" aria-label="James Mooney — homepage" title="Homepage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></a><a class="icon-link" href="https://www.linkedin.com/in/james-mooney-45b420105/" target="_blank" rel="noopener" aria-label="James Mooney on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a><a class="icon-link" href="mailto:james.mooney@cogmenta.biz" aria-label="Email James Mooney (james.mooney@cogmenta.biz)" title="james.mooney@cogmenta.biz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a></div>
+          </div>
+        </article>
+        <article class="person">
+          <div class="person-head"><img class="person-photo" src="../assets/team/shady-ahmed.jpg" width="400" height="400" loading="lazy" alt="Shady Ahmed"><div><h3>Shady Ahmed</h3><p class="person-role">ML 엔지니어</p></div></div>
+          <div class="person-body">
+            <ul class="person-cv">
+              <li>미네소타대학교 학사</li>
+              <li>현장 배치형 ML 엔지니어링</li>
+            </ul>
+            <div class="person-links"><a class="icon-link" href="https://www.linkedin.com/in/shady-ali" target="_blank" rel="noopener" aria-label="Shady Ahmed on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a><a class="icon-link" href="mailto:shady@cogmenta.biz" aria-label="Email Shady Ahmed (shady@cogmenta.biz)" title="shady@cogmenta.biz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a></div>
+          </div>
+        </article>
+      </div>
+
+      <div data-animate data-stagger class="stealth">
+        <div class="stealth-card">
+          <span class="stealth-avatar" aria-hidden="true"></span>
+          <div><h3>테크 리드</h3><p>통계학 박사 · 빅테크 및 금융</p></div>
+          <span class="stealth-tag">스텔스</span>
+        </div>
+        <div class="stealth-card">
+          <span class="stealth-avatar" aria-hidden="true"></span>
+          <div><h3>AI 개발 리드</h3><p>컴퓨터과학 박사 · 빅테크 ML</p></div>
+          <span class="stealth-tag">스텔스</span>
+        </div>
+        <div class="stealth-card">
+          <span class="stealth-avatar" aria-hidden="true"></span>
+          <div><h3>AI 연구 리드</h3><p>컴퓨터과학 박사 · 응용 연구원</p></div>
+          <span class="stealth-tag">스텔스</span>
+        </div>
+        <div class="stealth-card">
+          <span class="stealth-avatar" aria-hidden="true"></span>
+          <div><h3>AI 연구원</h3><p>파트타임</p></div>
+          <span class="stealth-tag">스텔스</span>
+        </div>
+        <div class="stealth-card">
+          <span class="stealth-avatar" aria-hidden="true"></span>
+          <div><h3>자문단</h3><p>법률 · 특허 · 인프라 · AI 스타트업</p></div>
+          <span class="stealth-tag">스텔스</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <svg class="cta-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="#FFFFFF" stroke-width="14"/>
+        <polygon points="206,45.2 184.6,63.2 209.5,71" fill="#FFFFFF"/>
+        <circle cx="172" cy="168" r="36" fill="none" stroke="#1FA89A" stroke-width="14"/>
+      </svg>
+      <h2 data-animate class="cta-title">회사의 세컨드 브레인을 만드세요.</h2>
+      <p data-animate class="cta-text">
+        1~2개월 무상 파일럿. 엔지니어가 직접 찾아갑니다. 어떤 데이터도 건물 밖으로 나가지 않습니다.
+      </p>
+      <div data-animate class="cta-actions">
+        <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="btn btn-teal btn-lg">30분 미팅 예약</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <svg class="wordmark wordmark--footer" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cogmenta">
+      <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="currentColor" stroke-width="14"/>
+      <polygon points="206,45.2 184.6,63.2 209.5,71" fill="currentColor"/>
+      <circle cx="172" cy="168" r="36" fill="none" stroke="#1FA89A" stroke-width="14"/>
+      <text x="226" y="204" font-family="Sora, sans-serif" font-weight="600" font-size="134" letter-spacing="-4" fill="currentColor">gmenta</text>
+    </svg>
+    <div class="footer-meta">
+      <a href="mailto:admin@cogmenta.biz">admin@cogmenta.biz</a>
+      <span>Minneapolis, MN</span>
+      <span>© 2026 Cogmenta, Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
