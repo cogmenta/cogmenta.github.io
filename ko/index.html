@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" class="no-js">
+<html lang="ko" class="no-js" data-product="cogmenta" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,10 +48,12 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.remove('no-js');</script>
+<link rel="stylesheet" href="../assets/cogmenta/cogmenta-products.css">
+<link rel="stylesheet" href="../assets/cogmenta/cogmenta-components.css">
 <link rel="stylesheet" href="../styles.css">
 <noscript><style>[data-animate],[data-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="icon" type="image/png" sizes="256x256" href="../assets/brand/cogmenta-icon-256.png">
 <link rel="icon" type="image/svg+xml" href="../assets/brand/cogmenta-icon.svg">
 <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
 </head>
@@ -65,7 +67,7 @@
       <svg class="wordmark" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="currentColor" stroke-width="14"/>
         <polygon points="206,45.2 184.6,63.2 209.5,71" fill="currentColor"/>
-        <circle cx="172" cy="168" r="36" fill="none" stroke="#1FA89A" stroke-width="14"/>
+        <circle class="mark-inner" cx="172" cy="168" r="36" fill="none" stroke-width="14"/>
         <text x="226" y="204" font-family="Sora, sans-serif" font-weight="600" font-size="134" letter-spacing="-4" fill="currentColor">gmenta</text>
       </svg>
     </a>
@@ -79,8 +81,8 @@
       <a href="#scaling" class="nav-link">스케일링 법칙</a>
       <a href="#pilot" class="nav-link">파일럿</a>
       <a href="#team" class="nav-link">팀</a>
-      <a class="nav-lang" href="../" hreflang="en" lang="en">EN</a>
-      <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="nav-cta">파일럿 신청</a>
+      <a class="nav-lang cg-btn cg-btn--ghost" href="../" hreflang="en" lang="en">EN</a>
+      <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="nav-cta cg-btn cg-btn--outline">파일럿 신청</a>
     </div>
   </div>
 </nav>
@@ -97,8 +99,8 @@
           회사의 <strong>세컨드 브레인</strong>. 사내에서 돌아가는 전용 AI가 전문가의 일하는 방식을 배우고, 그 판단력을 계속 진화시킵니다.
         </p>
         <div data-animate class="hero-actions">
-          <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="btn btn-primary">무상 파일럿 신청</a>
-          <a href="#deploy" class="btn btn-ghost">배치 방식 보기 <span class="arw" aria-hidden="true">→</span></a>
+          <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="cg-btn">무상 파일럿 신청</a>
+          <a href="#deploy" class="cg-btn cg-btn--outline">배치 방식 보기 <span class="arw" aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -108,18 +110,18 @@
             <path id="innerPath" d="M 315.3 308.0 m -66.0 0 a 66.0 66.0 0 1 0 132.0 0 a 66.0 66.0 0 1 0 -132.0 0"/>
             <path id="outerPath" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1"/>
           </defs>
-          <circle cx="220" cy="220" r="214" fill="none" stroke="#DADCD8" stroke-width="1" stroke-dasharray="2 6"/>
-          <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="#0B1F3A" stroke-width="25.7" pathLength="100"/>
-          <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="#0B1F3A"/>
-          <circle class="signal" r="6" fill="#FFFFFF" stroke="#0B1F3A" stroke-width="3">
-            <animateMotion dur="6.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#outerPath"/></animateMotion>
+          <circle class="mark-guide" cx="220" cy="220" r="214" fill="none" stroke-width="1" stroke-dasharray="2 6"/>
+          <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="currentColor" stroke-width="25.7" pathLength="100"/>
+          <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="currentColor"/>
+          <circle class="signal" r="6" stroke="currentColor" stroke-width="3">
+            <animateMotion dur="4.8s" begin="2.1s" repeatCount="indefinite"><mpath href="#outerPath"/></animateMotion>
           </circle>
-          <circle cx="315.3" cy="308.0" r="66.0" fill="none" stroke="#1FA89A" stroke-width="25.7"/>
-          <circle class="signal" r="6" fill="#FFFFFF" stroke="#1FA89A" stroke-width="3">
-            <animateMotion dur="3.2s" begin="2.1s" repeatCount="indefinite"><mpath href="#innerPath"/></animateMotion>
+          <circle class="mark-inner" cx="315.3" cy="308.0" r="66.0" fill="none" stroke-width="25.7"/>
+          <circle class="signal mark-inner" r="6" stroke-width="3">
+            <animateMotion dur="2.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#innerPath"/></animateMotion>
           </circle>
-          <text x="198" y="172" text-anchor="middle" class="svg-mono" fill="#5B6B7C">사내에서</text>
-          <text x="198" y="212" text-anchor="middle" class="svg-display" fill="#0B1F3A">기업 AI</text>
+          <text x="198" y="172" text-anchor="middle" class="svg-mono">사내에서</text>
+          <text x="198" y="212" text-anchor="middle" class="svg-display" fill="currentColor">기업 AI</text>
         </svg>
         <figcaption class="hero-legend">
           <span><i class="dot dot-navy"></i><b>아우터 루프</b> — 전문가의 교정이 목표를 정합니다</span>
@@ -167,11 +169,11 @@
 
       <div data-animate data-stagger class="flow">
         <div class="flow-step"><span class="flow-k">노하우</span><span class="flow-d">한 사람의 머릿속에</span></div>
-        <span class="flow-arrow" aria-hidden="true"><i></i></span>
+        <span class="flow-arrow" aria-hidden="true"></span>
         <div class="flow-step"><span class="flow-k">프롬프트</span><span class="flow-d">매번 다시 입력</span></div>
-        <span class="flow-arrow" aria-hidden="true"><i></i></span>
-        <div class="flow-step flow-step--dark"><span class="flow-k">블랙박스</span><span class="flow-d">보이지 않는 추론</span></div>
-        <span class="flow-arrow" aria-hidden="true"><i></i></span>
+        <span class="flow-arrow" aria-hidden="true"></span>
+        <div class="flow-step flow-step--dark" data-product="cogmenta" data-theme="dark"><span class="flow-k">블랙박스</span><span class="flow-d">보이지 않는 추론</span></div>
+        <span class="flow-arrow" aria-hidden="true"></span>
         <div class="flow-step"><span class="flow-k">결과물</span><span class="flow-d">쓰거나 버리거나</span></div>
         <div class="flow-return"><span>내일 또 반복</span></div>
       </div>
@@ -213,7 +215,7 @@
         </figure>
       </div>
 
-      <div data-animate class="finding finding--wide">
+      <div data-animate class="finding finding--wide" data-product="cogmenta" data-theme="dark">
         <div class="finding-main">
           <p class="finding-k">우리가 발견한 것</p>
           <p class="finding-big">전문가는 <span class="mk mk-human">선별적</span>입니다. AI는 <span class="mk mk-ai">전수적</span>입니다.</p>
@@ -276,31 +278,21 @@
   </section>
 
   <!-- ================= TECHNOLOGY ================= -->
-  <section class="section section--navy" id="technology">
+  <section class="section section--navy" id="technology" data-product="cogmenta" data-theme="dark">
     <div class="wrap">
       <div class="tech-top">
         <div class="section-head">
-          <p data-animate class="eyebrow eyebrow--on-dark">03 · 기술</p>
+          <p data-animate class="eyebrow">03 · 기술</p>
           <h2 data-animate class="section-title"><span class="hl-expert">전문가와 함께하는</span> 재귀적 자기개선, <span class="hl">사내에서.</span></h2>
           <p data-animate class="section-desc">프런티어 연구소는 고객 밖에서 모델을 진화시키고, 통합 업체는 바뀌지 않는 모델을 납품합니다. 우리는 <strong>회사 안의 작은 로컬 모델</strong>을, 어떤 벤치마크로도 채점할 수 없는 업무에서 진화시킵니다.</p>
         </div>
 
         <figure data-animate class="loop-fig" aria-label="이중 루프로 표현한 코그멘타 마크. 전문가가 결과물을 교정하는 아우터 루프가, 모든 작업 기록으로 재학습하는 이너 루프를 감싸고 있습니다.">
           <svg class="loop-mark" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <path id="techInner" d="M 315.3 308.0 m -66.0 0 a 66.0 66.0 0 1 0 132.0 0 a 66.0 66.0 0 1 0 -132.0 0"/>
-              <path id="techOuter" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1"/>
-            </defs>
-            <circle cx="220" cy="220" r="214" fill="none" stroke="#24405F" stroke-width="1" stroke-dasharray="2 6"/>
-            <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="#FFFFFF" stroke-width="25.7" pathLength="100"/>
-            <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="#FFFFFF"/>
-            <circle class="signal" r="6" fill="#0B1F3A" stroke="#FFFFFF" stroke-width="3">
-              <animateMotion dur="6.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#techOuter"/></animateMotion>
-            </circle>
-            <circle cx="315.3" cy="308.0" r="66.0" fill="none" stroke="#1FA89A" stroke-width="25.7"/>
-            <circle class="signal" r="6" fill="#0B1F3A" stroke="#1FA89A" stroke-width="3">
-              <animateMotion dur="3.2s" begin="2.1s" repeatCount="indefinite"><mpath href="#techInner"/></animateMotion>
-            </circle>
+            <circle class="mark-guide" cx="220" cy="220" r="214" fill="none" stroke-width="1" stroke-dasharray="2 6"/>
+            <path d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="currentColor" stroke-width="25.7"/>
+            <polygon points="377.7,82.9 338.4,115.9 384.1,130.2" fill="currentColor"/>
+            <circle class="mark-inner" cx="315.3" cy="308.0" r="66.0" fill="none" stroke-width="25.7"/>
           </svg>
           <figcaption class="loop-legend">
             <span><i class="dot dot-white"></i><b>아우터 루프</b> — 전문가가 결과물을 교정합니다. 그 교정이 목표가 되고, 최종 승인은 사람이 합니다.</span>
@@ -376,8 +368,8 @@
             <svg class="sc-svg" aria-hidden="true">
               <defs>
                 <linearGradient id="scFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#1FA89A" stop-opacity="0.22"/>
-                  <stop offset="100%" stop-color="#1FA89A" stop-opacity="0"/>
+                  <stop offset="0%" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-opacity="0"/>
                 </linearGradient>
               </defs>
               <g class="sc-grid"></g>
@@ -452,20 +444,16 @@
         </div>
       </div>
       <div data-animate class="sectors">
-        <span>금융 · M&amp;A</span><span>법률 · 특허</span><span>병원 · 의원</span><span>보험</span><span>회계 · 세무</span><span>자산관리</span>
+        <span class="cg-chip">금융 · M&amp;A</span><span class="cg-chip">법률 · 특허</span><span class="cg-chip">병원 · 의원</span><span class="cg-chip">보험</span><span class="cg-chip">회계 · 세무</span><span class="cg-chip">자산관리</span>
       </div>
 
-      <div data-animate class="field field--bleed">
+      <div data-animate class="field">
         <div class="field-head">
           <p class="field-k">현장에서</p>
           <p class="field-sub">디자인 파트너, 파일럿, 논의 중인 회사들</p>
-          <button class="marquee-toggle" type="button" aria-pressed="false" data-pause="일시정지" data-play="재생">일시정지</button>
         </div>
-        <div class="marquee" role="region" aria-label="업종, 규모, 국가별로 본 협업 중이거나 논의 중인 회사들">
-          <div class="marquee-track">
-            <ul class="firms"><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span class="firm-text"><b>M&amp;A 자문</b><span>5인 부티크 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span class="firm-text"><b>특허 · IP 컨설팅</b><span>약 100명 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span><span class="firm-text"><b>치과</b><span>치과의사 3인 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>특허법인</b><span>다수 파트너 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="firm-text"><b>안과</b><span>개원의 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span class="firm-text"><b>의료기기</b><span>글로벌 대기업 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>IP 로펌</b><span>전국 규모 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="firm-text"><b>정보 서비스</b><span>글로벌 대기업</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span><span class="firm-text"><b>로펌</b><span>대형 · 한국</span></span></li></ul>
-            <ul class="firms" aria-hidden="true"><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span class="firm-text"><b>M&amp;A 자문</b><span>5인 부티크 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span class="firm-text"><b>특허 · IP 컨설팅</b><span>약 100명 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span><span class="firm-text"><b>치과</b><span>치과의사 3인 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>특허법인</b><span>다수 파트너 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="firm-text"><b>안과</b><span>개원의 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span class="firm-text"><b>의료기기</b><span>글로벌 대기업 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>IP 로펌</b><span>전국 규모 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="firm-text"><b>정보 서비스</b><span>글로벌 대기업</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span><span class="firm-text"><b>로펌</b><span>대형 · 한국</span></span></li></ul>
-          </div>
+        <div role="region" aria-label="업종, 규모, 국가별로 본 협업 중이거나 논의 중인 회사들">
+          <ul class="firms"><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/></svg></span><span class="firm-text"><b>M&amp;A 자문</b><span>5인 부티크 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/></svg></span><span class="firm-text"><b>특허 · IP 컨설팅</b><span>약 100명 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2 1 3.4 1.5 5.4.6 2.4.8 8.2 2.8 8.2 1.7 0 1.6-3.9 2.2-5.4.4-.9 1.6-.9 2 0 .6 1.5.5 5.4 2.2 5.4 2 0 2.2-5.8 2.8-8.2.5-2 1.5-3.4 1.5-5.4C18.5 5 17 3 14.5 3c-1.4 0-2 .8-2.5.8S9 3 7.5 3z"/></svg></span><span class="firm-text"><b>치과</b><span>치과의사 3인 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>특허법인</b><span>다수 파트너 · 한국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="firm-text"><b>안과</b><span>개원의 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg></span><span class="firm-text"><b>의료기기</b><span>글로벌 대기업 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0z"/><path d="M19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="firm-text"><b>IP 로펌</b><span>전국 규모 · 미국</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span class="firm-text"><b>정보 서비스</b><span>글로벌 대기업</span></span></li><li class="firm"><span class="firm-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span><span class="firm-text"><b>로펌</b><span>대형 · 한국</span></span></li></ul>
         </div>
       </div>
     </div>
@@ -548,30 +536,30 @@
           <h3>Product Owner / Senior Product Manager</h3>
           <p>실제 배치 현장에 나가는 제품을 책임집니다. 엔지니어가 한 회사 안에서 본 것을, 다음 회사가 그대로 쓸 수 있는 제품으로 만듭니다. 디자인 파트너 현장에서, 루프 가까이에서 일합니다.</p>
           <ul class="hiring-meta">
-            <li>정규직 &middot; 미니애폴리스 또는 파트너사 현장</li>
-            <li>B2B · 엔터프라이즈 소프트웨어 5년 이상</li>
-            <li>법률 · 의료 · 금융 등 규제 업무에 익숙한 분</li>
+            <li class="cg-chip">정규직 &middot; 미니애폴리스 또는 파트너사 현장</li>
+            <li class="cg-chip">B2B · 엔터프라이즈 소프트웨어 5년 이상</li>
+            <li class="cg-chip">법률 · 의료 · 금융 등 규제 업무에 익숙한 분</li>
           </ul>
         </div>
-        <a class="btn btn-primary" href="mailto:admin@cogmenta.biz?subject=%5Brecruit%5D">지원하기 &mdash; admin@cogmenta.biz</a>
+        <a class="cg-btn" href="mailto:admin@cogmenta.biz?subject=%5Brecruit%5D">지원하기 &mdash; admin@cogmenta.biz</a>
       </div>
     </div>
   </section>
 
   <!-- ================= CTA ================= -->
-  <section class="cta">
+  <section class="cta" data-product="cogmenta" data-theme="dark">
     <div class="wrap cta-inner">
       <svg class="cta-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="#FFFFFF" stroke-width="14"/>
-        <polygon points="206,45.2 184.6,63.2 209.5,71" fill="#FFFFFF"/>
-        <circle cx="172" cy="168" r="36" fill="none" stroke="#1FA89A" stroke-width="14"/>
+        <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="currentColor" stroke-width="14"/>
+        <polygon points="206,45.2 184.6,63.2 209.5,71" fill="currentColor"/>
+        <circle class="mark-inner" cx="172" cy="168" r="36" fill="none" stroke-width="14"/>
       </svg>
       <h2 data-animate class="cta-title">회사의 세컨드 브레인을 만드세요.</h2>
       <p data-animate class="cta-text">
         1~2개월 무상 파일럿. 엔지니어가 직접 찾아갑니다. 어떤 데이터도 건물 밖으로 나가지 않습니다.
       </p>
       <div data-animate class="cta-actions">
-        <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="btn btn-teal btn-lg">30분 미팅 예약</a>
+        <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="cg-btn">30분 미팅 예약</a>
       </div>
     </div>
   </section>
@@ -579,12 +567,12 @@
 </main>
 
 
-<footer class="footer">
+<footer class="footer" data-product="cogmenta" data-theme="dark">
   <div class="wrap footer-inner">
     <svg class="wordmark wordmark--footer" viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cogmenta">
       <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="currentColor" stroke-width="14"/>
       <polygon points="206,45.2 184.6,63.2 209.5,71" fill="currentColor"/>
-      <circle cx="172" cy="168" r="36" fill="none" stroke="#1FA89A" stroke-width="14"/>
+      <circle class="mark-inner" cx="172" cy="168" r="36" fill="none" stroke-width="14"/>
       <text x="226" y="204" font-family="Sora, sans-serif" font-weight="600" font-size="134" letter-spacing="-4" fill="currentColor">gmenta</text>
     </svg>
     <div class="footer-meta">

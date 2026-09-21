@@ -48,16 +48,6 @@
       });
     }
 
-    /* ---------- Marquee pause (WCAG 2.2.2) ---------- */
-    var mq = document.querySelector('.marquee'), mqBtn = document.querySelector('.marquee-toggle');
-    if (mq && mqBtn) {
-      mqBtn.addEventListener('click', function () {
-        var paused = mq.classList.toggle('is-paused');
-        mqBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
-        mqBtn.textContent = paused ? mqBtn.getAttribute('data-play') : mqBtn.getAttribute('data-pause');
-      });
-    }
-
     /* ---------- Mobile nav drawer ---------- */
     var toggle = document.querySelector('.nav-toggle');
     var navLinks = document.getElementById('nav-links');
