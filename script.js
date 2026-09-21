@@ -180,9 +180,10 @@
     pins.forEach(function (pn) {
       pn.addEventListener('click', function () { setStage(pn.getAttribute('data-stage'), true); place(); });
     });
-    document.querySelectorAll('.dom-btn').forEach(function (b) {
+    var tabs = document.querySelectorAll('.dom-btn');
+    tabs.forEach(function (b, i) {
       b.addEventListener('click', function () {
-        document.querySelectorAll('.dom-btn').forEach(function (o) {
+        tabs.forEach(function (o) {
           o.classList.toggle('is-on', o === b);
           o.setAttribute('aria-selected', o === b ? 'true' : 'false');
           o.setAttribute('tabindex', o === b ? '0' : '-1');
@@ -191,6 +192,22 @@
         if (!stage) stage = 'discover';
         paint();
         place();
+      });
+      // WAI-ARIA tabs: arrows select the previous/next tab and move focus to it, wrapping
+      // (Up/Down as well, since the list is vertical on desktop); Home/End go to the first/last
+      b.addEventListener('keydown', function (e) {
+        if (e.altKey || e.ctrlKey || e.metaKey) return;
+        var n = tabs.length, j;
+        switch (e.key) {
+          case 'ArrowLeft': case 'ArrowUp': j = (i + n - 1) % n; break;
+          case 'ArrowRight': case 'ArrowDown': j = (i + 1) % n; break;
+          case 'Home': j = 0; break;
+          case 'End': j = n - 1; break;
+          default: return;
+        }
+        e.preventDefault();
+        tabs[j].click();
+        tabs[j].focus();
       });
     });
 
