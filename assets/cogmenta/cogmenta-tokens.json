@@ -1,0 +1,148 @@
+{
+  "name": "Cogmenta — Meridian",
+  "color": {
+    "navy": "#0B1F3A",
+    "navy-700": "#132D52",
+    "navy-900": "#071527",
+    "teal": "#1FA89A",
+    "teal-600": "#178F83",
+    "teal-100": "#D7F0EC",
+    "slate": "#5B6B7C",
+    "graphite": "#374151",
+    "ink": "#1A1D21",
+    "ice": "#EEF4F6",
+    "line": "#DADCD8",
+    "paper": "#EDEDEA",
+    "white": "#FFFFFF"
+  },
+  "semantic": {
+    "background": "navy→white",
+    "primary": "navy",
+    "primaryForeground": "white",
+    "accent": "teal",
+    "text": "ink",
+    "textMuted": "slate",
+    "border": "line",
+    "link": "navy",
+    "linkHover": "teal-600"
+  },
+  "font": {
+    "display": {
+      "family": "Sora",
+      "weights": [
+        500,
+        600,
+        700
+      ],
+      "fallback": "Noto Sans KR, sans-serif",
+      "google": "Sora:wght@400;500;600;700"
+    },
+    "body": {
+      "family": "IBM Plex Sans",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "fallback": "Noto Sans KR, sans-serif",
+      "google": "IBM+Plex+Sans:wght@400;500;600"
+    },
+    "korean": {
+      "family": "Noto Sans KR",
+      "weights": [
+        400,
+        500,
+        700
+      ]
+    },
+    "mono": {
+      "family": "JetBrains Mono",
+      "weights": [
+        400,
+        500
+      ]
+    }
+  },
+  "typeScale": {
+    "xs": 12,
+    "sm": 14,
+    "md": 16,
+    "lg": 20,
+    "xl": 28,
+    "2xl": 40,
+    "3xl": 56,
+    "4xl": 80
+  },
+  "tracking": {
+    "display": "-0.02em",
+    "label": "0.12em"
+  },
+  "lineHeight": {
+    "tight": 1.1,
+    "body": 1.55
+  },
+  "radius": {
+    "sm": 3,
+    "md": 6,
+    "lg": 10
+  },
+  "space": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "logo": {
+    "iconViewBox": "0 0 240 240",
+    "wordmarkViewBox": "0 0 760 240",
+    "clearSpace": "0.5 × icon height on all sides",
+    "minIconSize": "24px",
+    "minWordmarkHeight": "28px",
+    "geometry": {
+      "outerLoop": {
+        "cx": 120,
+        "cy": 120,
+        "r": 100,
+        "strokeWidth": 14,
+        "fromDeg": 57,
+        "toDeg": 320
+      },
+      "innerLoop": {
+        "cx": 172,
+        "cy": 168,
+        "r": 36,
+        "strokeWidth": 14
+      },
+      "arrowTip": [
+        [
+          206,
+          45.2
+        ],
+        [
+          184.6,
+          63.2
+        ],
+        [
+          209.5,
+          71
+        ]
+      ]
+    },
+    "rules": [
+      "Inner loop (teal) always sits above the outer loop; the C tail terminates under it.",
+      "Arrow tip stays open — never close the loop.",
+      "Mono version: all navy, or all white on navy/photo.",
+      "Do not recolor the inner loop except white/navy in mono contexts."
+    ]
+  },
+  "slides": {
+    "background": "#0B1F3A or #FFFFFF",
+    "titleFont": "Sora 600",
+    "bodyFont": "IBM Plex Sans 400",
+    "minTextSize": 24
+  }
+}
