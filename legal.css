@@ -1,0 +1,47 @@
+/* Reading surfaces inherit Cogmenta's company tokens and wordmark. */
+.legal-nav { display: flex; gap: var(--cg-space-6); align-items: center; font-size: var(--cg-text-sm); }
+.legal-nav a { color: var(--cg-fg-muted); text-underline-offset: .25em; }
+.legal-nav a[aria-current="page"] { color: var(--cg-accent-text); text-decoration-thickness: 2px; }
+.legal-header { padding: 72px 0 40px; border-bottom: 1px solid var(--cg-border); }
+.legal-header h1 { font-size: clamp(2.25rem, 6vw, 4rem); line-height: 1.15; letter-spacing: -.03em; margin-bottom: 20px; }
+.legal-intro { max-width: 65ch; font-size: 1.2rem; line-height: 1.65; }
+.legal-date { margin-top: 20px; color: var(--cg-fg-muted); font-size: var(--cg-text-sm); }
+.legal-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 64px; padding-top: 48px; padding-bottom: 88px; align-items: start; }
+.legal-toc { position: sticky; top: 96px; }
+.legal-toc h2 { font-size: 1rem; margin-bottom: 12px; }
+.legal-toc ul { list-style: none; }
+.legal-toc a { display: block; padding: 6px 0; line-height: 1.4; font-size: .95rem; color: var(--cg-fg-muted); text-decoration: none; }
+.legal-toc a:hover { color: var(--cg-accent-text); text-decoration: underline; }
+.legal-copy { max-width: 72ch; min-width: 0; font-size: 1.0625rem; line-height: 1.75; overflow-wrap: anywhere; }
+.legal-copy section + section { margin-top: 44px; }
+.legal-copy h2 { font-size: 1.5rem; line-height: 1.35; margin-bottom: 16px; letter-spacing: -.02em; }
+.legal-copy h3 { font-size: 1.125rem; line-height: 1.5; margin: 24px 0 8px; }
+.legal-copy p + p, .legal-copy ul + p, .legal-copy p + ul { margin-top: 16px; }
+.legal-copy ul { padding-left: 24px; }
+.legal-copy li + li { margin-top: 10px; }
+.legal-copy a { color: var(--cg-accent-text); text-underline-offset: .2em; }
+.legal-summary { background: var(--cg-bg-subtle); padding: 24px; border: 1px solid var(--cg-border); margin-bottom: 40px; }
+.legal-summary h2 { font-size: 1.125rem; }
+.legal-summary ul { margin: 0; }
+.legal-contact { border-top: 1px solid var(--cg-border); padding-top: 32px; }
+@media (max-width: 800px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 32px; }
+  .legal-toc { position: static; border-bottom: 1px solid var(--cg-border); padding-bottom: 24px; }
+  .legal-toc ul { columns: 2; column-gap: 24px; }
+  .legal-toc li { break-inside: avoid; }
+  .legal-header { padding-top: 44px; }
+  .legal-nav { gap: 16px; }
+}
+@media (max-width: 420px) {
+  .legal-nav { gap: 12px; font-size: .8125rem; }
+  .legal-page .wordmark { height: 24px; }
+  .legal-toc ul { columns: 1; }
+}
+@media print {
+  .nav, .legal-toc, .footer, .skip-link { display: none; }
+  .legal-layout { display: block; padding: 24px 0; }
+  .legal-header { padding: 0 0 20px; }
+  .legal-copy { max-width: none; font-size: 11pt; }
+  .legal-copy h2 { break-after: avoid; }
+  .legal-page { background: white; color: black; }
+}

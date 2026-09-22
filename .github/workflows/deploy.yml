@@ -29,8 +29,8 @@ jobs:
       - name: Assemble site artifact
         run: |
           mkdir -p _site
-          cp index.html styles.css script.js robots.txt sitemap.xml _site/
-          cp -R assets _site/
+          cp index.html styles.css legal.css script.js robots.txt sitemap.xml _site/
+          cp -R assets ko privacy terms _site/
           test -f og-image.png && cp og-image.png _site/ || true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
