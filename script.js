@@ -17,6 +17,7 @@
         var r = el.getBoundingClientRect();
         if (r.top < vh - 40 && r.bottom > 0) {
           el.classList.add('visible');
+          el.dispatchEvent(new CustomEvent('fx:visible'));
           targets.splice(i, 1);
         }
       }
@@ -293,5 +294,293 @@
     replay.addEventListener('click', function () { started = true; play(); });
     check();
     setTimeout(check, 300);
+  });
+})();
+
+// FX — motion accents in the spirit of originkit-style demos, rebuilt natively on the kit's
+// tokens: a cursor-reactive dot grid behind the hero, a focus-reveal headline, orbit/slide/
+// magnetic buttons, spotlight cards, decoding labels, a count-up readout and light cables
+// behind Technology (the CTA aurora is CSS-only). Every hook is injected here, so the markup
+// stays clean and the page reads the same without JS. Reduced motion turns it all off.
+(function () {
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+  var reduce = mq('(prefers-reduced-motion: reduce)');
+  var fine = mq('(hover: hover) and (pointer: fine)');
+  var TAU = Math.PI * 2;
+
+  /* colours come from the kit tokens on the element, so every band and theme keeps its own */
+  function token(el, name, fallback) {
+    var v = getComputedStyle(el).getPropertyValue(name).trim();
+    return rgb(v) || rgb(fallback);
+  }
+  function rgb(c) {
+    var m;
+    if ((m = /^#([0-9a-f]{3})$/i.exec(c))) return m[1].split('').map(function (h) { return parseInt(h + h, 16); });
+    if ((m = /^#([0-9a-f]{6})/i.exec(c))) return [parseInt(m[1].slice(0, 2), 16), parseInt(m[1].slice(2, 4), 16), parseInt(m[1].slice(4, 6), 16)];
+    if ((m = /^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/i.exec(c))) return [+m[1], +m[2], +m[3]];
+    return null;
+  }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+  function mix(a, b, t) { return [Math.round(a[0] + (b[0] - a[0]) * t), Math.round(a[1] + (b[1] - a[1]) * t), Math.round(a[2] + (b[2] - a[2]) * t)]; }
+  function onVisible(el, fn) {
+    if (!el) return;
+    if (el.classList.contains('visible')) fn();
+    else el.addEventListener('fx:visible', fn, { once: true });
+  }
+  function inView(el, margin) {
+    var r = el.getBoundingClientRect(), vh = window.innerHeight || document.documentElement.clientHeight;
+    return r.bottom > -(margin || 0) && r.top < vh + (margin || 0);
+  }
+
+  /* ---------- hero: dot grid that repels and lights up around the cursor ---------- */
+  function dotGrid() {
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+    var c = document.createElement('canvas');
+    c.className = 'fx-grid'; c.setAttribute('aria-hidden', 'true');
+    hero.insertBefore(c, hero.firstChild);
+    var ctx = c.getContext('2d');
+    var GAP = 26, RADIUS = 160, PUSH = 12;
+    var base = token(hero, '--cg-loop-outer', '#0B1F3A'), acc = token(hero, '--cg-accent', '#1FA89A');
+    var W = 0, H = 0, dots = [], mx = -1e4, my = -1e4, raf = null;
+
+    function size() {
+      var dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = hero.clientWidth; H = hero.clientHeight;
+      c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      dots = [];
+      var ox = ((W % GAP) / 2) + GAP / 2, oy = ((H % GAP) / 2) + GAP / 2;
+      for (var y = oy; y < H; y += GAP) for (var x = ox; x < W; x += GAP) dots.push({ x: x, y: y, dx: 0, dy: 0, s: 0 });
+      draw();
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var settled = true;
+      for (var i = 0; i < dots.length; i++) {
+        var d = dots[i], vx = d.x - mx, vy = d.y - my, dist = Math.sqrt(vx * vx + vy * vy);
+        var t = dist < RADIUS ? 1 - dist / RADIUS : 0;
+        t = t * t * (3 - 2 * t);
+        var tx = t ? vx / dist * t * PUSH : 0, ty = t ? vy / dist * t * PUSH : 0;
+        d.dx += (tx - d.dx) * 0.16; d.dy += (ty - d.dy) * 0.16; d.s += (t - d.s) * 0.16;
+        if (Math.abs(tx - d.dx) > 0.04 || Math.abs(ty - d.dy) > 0.04 || Math.abs(t - d.s) > 0.005) settled = false;
+        ctx.fillStyle = rgba(mix(base, acc, d.s), 0.11 + d.s * 0.75);
+        ctx.beginPath(); ctx.arc(d.x + d.dx, d.y + d.dy, 1.15 + d.s * 1.7, 0, TAU); ctx.fill();
+      }
+      return settled;
+    }
+    function loop() { raf = draw() ? null : requestAnimationFrame(loop); }
+    function kick() { if (!raf) raf = requestAnimationFrame(loop); }
+
+    if (fine) {
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect();
+        mx = e.clientX - r.left; my = e.clientY - r.top; kick();
+      }, { passive: true });
+      hero.addEventListener('pointerleave', function () { mx = my = -1e4; kick(); });
+    }
+    window.addEventListener('resize', function () { requestAnimationFrame(size); });
+    size();
+  }
+
+  /* ---------- headline: split into words so each can snap into focus ---------- */
+  function focusReveal() {
+    var h = document.querySelector('.hero-title');
+    if (!h) return;
+    var i = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 1) { walk(n); return; }
+        if (n.nodeType !== 3 || !n.nodeValue.trim()) return;
+        var frag = document.createDocumentFragment();
+        n.nodeValue.split(/(\s+)/).forEach(function (p) {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+          var w = document.createElement('span');
+          w.className = 'fx-w'; w.style.setProperty('--i', i++); w.textContent = p;
+          frag.appendChild(w);
+        });
+        node.replaceChild(frag, n);
+      });
+    })(h);
+  }
+
+  /* ---------- buttons: comet ring on the primary, slide-fill on the outline, magnetic pull on both ---------- */
+  function buttons() {
+    var scope = document.querySelectorAll('.hero-actions, .cta-actions, .hiring');
+    var mags = [];
+    scope.forEach(function (box) {
+      box.querySelectorAll('.cg-btn').forEach(function (b) {
+        b.classList.add(b.classList.contains('cg-btn--outline') ? 'fx-slide' : 'fx-orbit');
+        if (fine) { b.classList.add('fx-mag'); mags.push(b); }
+      });
+    });
+    if (!mags.length) return;
+    var px = 0, py = 0, ticking = false;
+    function apply() {
+      ticking = false;
+      for (var i = 0; i < mags.length; i++) {
+        var r = mags[i].getBoundingClientRect();
+        var dx = px - (r.left + r.width / 2), dy = py - (r.top + r.height / 2);
+        var near = Math.abs(dx) < r.width / 2 + 40 && Math.abs(dy) < r.height / 2 + 40;
+        // a gentle lean, capped so neighbouring buttons never overlap
+        var lx = Math.max(-8, Math.min(8, dx * 0.12)), ly = Math.max(-6, Math.min(6, dy * 0.12));
+        mags[i].style.transform = near ? 'translate(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px)' : '';
+      }
+    }
+    document.addEventListener('pointermove', function (e) {
+      px = e.clientX; py = e.clientY;
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+  }
+
+  /* ---------- cards: a spotlight follows the cursor across the whole grid ---------- */
+  function spotlight() {
+    document.querySelectorAll('.hooks, .steps, .papers').forEach(function (host) {
+      var cards = Array.prototype.filter.call(host.children, function (el) { return el.matches('.hook, .step, .paper'); });
+      cards.forEach(function (card) {
+        card.classList.add('fx-spot');
+        var fill = document.createElement('i'), ring = document.createElement('i');
+        fill.className = 'fx-spot-fill'; ring.className = 'fx-spot-ring';
+        card.appendChild(fill); card.appendChild(ring);
+      });
+      host.addEventListener('pointermove', function (e) {
+        cards.forEach(function (card) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--fx-x', (e.clientX - r.left).toFixed(0) + 'px');
+          card.style.setProperty('--fx-y', (e.clientY - r.top).toFixed(0) + 'px');
+        });
+      }, { passive: true });
+      host.addEventListener('pointerenter', function () { host.classList.add('fx-lit'); });
+      host.addEventListener('pointerleave', function () { host.classList.remove('fx-lit'); });
+    });
+  }
+
+  /* ---------- labels: mono eyebrows decode from glyph noise as they enter ---------- */
+  function decode(el) {
+    var text = el.textContent;
+    if (!text.trim()) return;
+    var live = document.createElement('span'), sr = document.createElement('span');
+    live.className = 'fx-scr'; live.setAttribute('aria-hidden', 'true'); live.textContent = text;
+    sr.className = 'visually-hidden'; sr.textContent = text;
+    el.textContent = ''; el.appendChild(live); el.appendChild(sr);
+    var GLYPHS = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ#%&<>/_', n = text.length, t0 = null, D = 720;
+    function glyph(ch) {
+      if (/[A-Za-z0-9]/.test(ch)) return GLYPHS[Math.random() * GLYPHS.length | 0];
+      var code = ch.charCodeAt(0);
+      if (code >= 0xAC00 && code <= 0xD7A3) return String.fromCharCode(0xAC00 + (Math.random() * 11172 | 0));
+      return ch;
+    }
+    function step(now) {
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / D), k = Math.floor(p * (n + 2)), out = '';
+      for (var i = 0; i < n; i++) out += i < k ? text[i] : glyph(text[i]);
+      live.textContent = p < 1 ? out : text;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- readout: the numbers count up when the row enters ---------- */
+  function countUp(el) {
+    var node = el.firstChild;
+    if (!node || node.nodeType !== 3) return;
+    var end = node.nodeValue, re = /\d+(?:\.\d+)?/g, t0 = null, D = 1400;
+    function step(now) {
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / D), k = 1 - Math.pow(1 - p, 3);
+      node.nodeValue = p < 1 ? end.replace(re, function (m) {
+        var dec = (m.split('.')[1] || '').length;
+        return (parseFloat(m) * k).toFixed(dec);
+      }) : end;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- technology: light cables drift behind the copy, pulses travel along them ---------- */
+  function cables() {
+    var sec = document.querySelector('.section--navy');
+    if (!sec) return;
+    var c = document.createElement('canvas');
+    c.className = 'fx-cables'; c.setAttribute('aria-hidden', 'true');
+    sec.insertBefore(c, sec.firstChild);
+    var ctx = c.getContext('2d');
+    var acc = token(sec, '--cg-accent', '#35C4B5'), fg = token(sec, '--cg-fg', '#FFFFFF');
+    var N = 6, SEG = 90, TAIL = 0.11, W = 0, H = 0, lines = [], raf = null, last = 0;
+    for (var i = 0; i < N; i++) {
+      lines.push({
+        y: (i + 0.5) / N, amp: 34 + Math.random() * 52, ph: Math.random() * TAU,
+        sp: 0.00007 + Math.random() * 0.00005,
+        pulses: [{ t: Math.random() * 1.2 - 0.1, v: 0.00005 + Math.random() * 0.00004 }]
+      });
+      if (i % 2) lines[i].pulses.push({ t: Math.random() * 1.2 - 0.1, v: 0.00004 + Math.random() * 0.00003 });
+    }
+    function at(l, u, now) {
+      return [u * W, l.y * H
+        + Math.sin(u * 3.1 + l.ph + now * l.sp) * l.amp
+        + Math.sin(u * 7.3 - l.ph * 2 - now * l.sp * 1.6) * l.amp * 0.35];
+    }
+    function size() {
+      var dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = sec.clientWidth; H = sec.clientHeight;
+      c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw(performance.now(), 0);
+    }
+    function draw(now, dt) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineCap = 'round';
+      for (var i = 0; i < lines.length; i++) {
+        var l = lines[i], k, p;
+        ctx.beginPath();
+        for (k = 0; k <= SEG; k++) { p = at(l, k / SEG, now); k ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+        ctx.strokeStyle = rgba(fg, 0.075); ctx.lineWidth = 1; ctx.stroke();
+        for (var j = 0; j < l.pulses.length; j++) {
+          var pu = l.pulses[j];
+          pu.t += pu.v * dt; if (pu.t > 1 + TAIL) pu.t = -0.05;
+          var head = at(l, pu.t, now), tail = at(l, pu.t - TAIL, now);
+          var g = ctx.createLinearGradient(tail[0], tail[1], head[0], head[1]);
+          g.addColorStop(0, rgba(acc, 0)); g.addColorStop(1, rgba(acc, 0.95));
+          ctx.beginPath();
+          for (k = 0; k <= 24; k++) { p = at(l, pu.t - TAIL + TAIL * k / 24, now); k ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+          ctx.strokeStyle = g; ctx.lineWidth = 1.8; ctx.stroke();
+          var halo = ctx.createRadialGradient(head[0], head[1], 0, head[0], head[1], 18);
+          halo.addColorStop(0, rgba(acc, 0.5)); halo.addColorStop(1, rgba(acc, 0));
+          ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(head[0], head[1], 18, 0, TAU); ctx.fill();
+          ctx.fillStyle = rgba(fg, 0.95); ctx.beginPath(); ctx.arc(head[0], head[1], 1.6, 0, TAU); ctx.fill();
+        }
+      }
+    }
+    function loop(now) {
+      raf = null;
+      if (document.hidden || !inView(sec, 80)) { last = 0; return; }
+      var dt = last ? Math.min(64, now - last) : 16; last = now;
+      draw(now, dt);
+      raf = requestAnimationFrame(loop);
+    }
+    function wake() { if (!raf && !document.hidden && inView(sec, 80)) raf = requestAnimationFrame(loop); }
+    window.addEventListener('scroll', wake, { passive: true });
+    window.addEventListener('resize', function () { requestAnimationFrame(size); wake(); });
+    document.addEventListener('visibilitychange', wake);
+    size(); wake();
+  }
+
+  ready(function () {
+    if (!document.querySelector('.hero')) return;
+    focusReveal();
+    if (reduce) return;
+    dotGrid();
+    buttons();
+    if (fine) spotlight();
+    document.querySelectorAll('.eyebrow').forEach(function (el) { onVisible(el, function () { decode(el); }); });
+    onVisible(document.querySelector('.readout'), function () {
+      document.querySelectorAll('.readout-val').forEach(countUp);
+    });
+    cables();
   });
 })();
