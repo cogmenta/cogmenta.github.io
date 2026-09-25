@@ -51,6 +51,7 @@
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="stylesheet" href="assets/cogmenta/cogmenta-products.css">
 <link rel="stylesheet" href="assets/cogmenta/cogmenta-components.css">
+<link rel="stylesheet" href="assets/cogmenta/cogmenta-fx.css">
 <link rel="stylesheet" href="styles.css">
 <noscript><style>[data-animate],[data-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
 <link rel="icon" type="image/png" sizes="256x256" href="assets/brand/cogmenta-icon-256.png">
@@ -90,17 +91,17 @@
 <main id="main">
 
   <!-- ================= HERO ================= -->
-  <section class="hero">
+  <section class="hero" data-fx="grid">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p data-animate class="eyebrow">Company AI · On-prem · Self-evolving</p>
-        <h1 data-animate class="hero-title">Make your company's legacy <span class="hl">evolve.</span></h1>
+        <p data-animate data-fx="decode" class="eyebrow">Company AI · On-prem · Self-evolving</p>
+        <h1 data-animate data-fx="focus" class="hero-title">Make your company's legacy <span class="hl">evolve.</span></h1>
         <p data-animate class="hero-sub">
           Your company's <strong>second brain</strong> — a private AI that runs inside your firm, learns how your experts work, and keeps their judgment evolving.
         </p>
         <div data-animate class="hero-actions">
-          <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="cg-btn">Book a free pilot</a>
-          <a href="#deploy" class="cg-btn cg-btn--outline">See how we deploy <span class="arw" aria-hidden="true">→</span></a>
+          <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="cg-btn" data-fx="orbit magnetic">Book a free pilot</a>
+          <a href="#deploy" class="cg-btn cg-btn--outline" data-fx="fill magnetic">See how we deploy <span class="arw" aria-hidden="true">→</span></a>
         </div>
       </div>
 
@@ -132,7 +133,7 @@
 
     <!-- Three hooks -->
     <div class="wrap">
-      <div data-animate data-stagger class="hooks">
+      <div data-animate data-stagger data-fx="spotlight" class="hooks">
         <article class="hook">
           <span class="hook-no">01</span>
           <h2>Your company's second brain</h2>
@@ -150,10 +151,10 @@
         </article>
       </div>
       <div data-animate class="readout">
-        <div class="readout-cell"><div class="readout-val">100<span>%</span></div><div class="readout-key">On-prem · private</div></div>
-        <div class="readout-cell"><div class="readout-val">1–2<span> mo</span></div><div class="readout-key">Free pilot, one workflow</div></div>
-        <div class="readout-cell"><div class="readout-val">2.1<span>×</span></div><div class="readout-key">Productivity · internal pilot</div></div>
-        <div class="readout-cell" title="Next-intention prediction, weighted F1: fine-tuned ~0.1B model 0.64 vs. GPT-5 zero-shot 0.41 (ScholaWrite, ACL 2026)"><div class="readout-val">+56<span>%</span></div><div class="readout-key">Small beats frontier · ACL 2026</div></div>
+        <div class="readout-cell"><div class="readout-val" data-fx="count" data-fx-duration="1400">100<span>%</span></div><div class="readout-key">On-prem · private</div></div>
+        <div class="readout-cell"><div class="readout-val" data-fx="count" data-fx-duration="1400">1–2<span> mo</span></div><div class="readout-key">Free pilot, one workflow</div></div>
+        <div class="readout-cell"><div class="readout-val" data-fx="count" data-fx-duration="1400">2.1<span>×</span></div><div class="readout-key">Productivity · internal pilot</div></div>
+        <div class="readout-cell" title="Next-intention prediction, weighted F1: fine-tuned ~0.1B model 0.64 vs. GPT-5 zero-shot 0.41 (ScholaWrite, ACL 2026)"><div class="readout-val" data-fx="count" data-fx-duration="1400">+56<span>%</span></div><div class="readout-key">Small beats frontier · ACL 2026</div></div>
       </div>
     </div>
   </section>
@@ -162,7 +163,7 @@
   <section class="section section--ice" id="why">
     <div class="wrap">
       <div class="section-head">
-        <p data-animate class="eyebrow">01 · Why now</p>
+        <p data-animate data-fx="decode" class="eyebrow">01 · Why now</p>
         <h2 data-animate class="section-title">AI today is a personal tool, <span class="hl">not a company asset.</span></h2>
         <p data-animate class="section-desc">Know-how goes into a prompt, an answer comes out, and tomorrow it starts over. The firm learns nothing — and the know-how still walks out the door.</p>
       </div>
@@ -190,7 +191,7 @@
   <section class="section" id="deploy">
     <div class="wrap">
       <div class="section-head">
-        <p data-animate class="eyebrow">02 · Deploy first</p>
+        <p data-animate data-fx="decode" class="eyebrow">02 · Deploy first</p>
         <h2 data-animate class="section-title">We built a small law firm first. <span class="hl nl">Now we deploy inside real ones.</span></h2>
         <p data-animate class="section-desc">In <a href="https://arxiv.org/abs/2504.18942" target="_blank" rel="noopener">LawFlow</a> (COLM 2025), trained law students ran business-formation matters in a simulated small firm — and we recorded every step of their decisions.</p>
       </div>
@@ -252,7 +253,7 @@
         </div>
       </div>
 
-      <ol data-animate data-stagger class="steps">
+      <ol data-animate data-stagger data-fx="spotlight" class="steps">
         <li class="step">
           <span class="step-no">01 · Record</span>
           <h3>Capture the work itself</h3>
@@ -278,11 +279,11 @@
   </section>
 
   <!-- ================= TECHNOLOGY ================= -->
-  <section class="section section--navy" id="technology" data-product="cogmenta" data-theme="dark">
+  <section class="section section--navy" id="technology" data-product="cogmenta" data-theme="dark" data-fx="cables">
     <div class="wrap">
       <div class="tech-top">
         <div class="section-head">
-          <p data-animate class="eyebrow">03 · Technology</p>
+          <p data-animate data-fx="decode" class="eyebrow">03 · Technology</p>
           <h2 data-animate class="section-title">Recursive self-improvement, <span class="hl-expert">with your experts</span>, <span class="hl">on-prem.</span></h2>
           <p data-animate class="section-desc">Labs evolve models outside the customer; integrators deploy models that never change. We evolve a <strong>small local model inside the firm</strong> — in work no benchmark can grade.</p>
         </div>
@@ -305,7 +306,7 @@
         <p data-animate class="panel-k">Research behind it</p>
         <p data-animate class="papers-sub">Papers and open-source work from the founding team's lab.</p>
       </div>
-      <div data-animate data-stagger class="papers">
+      <div data-animate data-stagger data-fx="spotlight" class="papers">
         <a class="paper" href="https://arxiv.org/abs/2504.18942" target="_blank" rel="noopener">
           <span class="paper-venue">COLM 2025</span>
           <h3>LawFlow</h3>
@@ -350,7 +351,7 @@
   <section class="section" id="scaling">
     <div class="wrap">
       <div class="section-head">
-        <p data-animate class="eyebrow">04 · On-prem scaling law</p>
+        <p data-animate data-fx="decode" class="eyebrow">04 · On-prem scaling law</p>
         <h2 data-animate class="section-title">The bigger problem isn’t intelligence. <span class="hl nl">It’s missing context.</span></h2>
         <p data-animate class="section-desc">Your context is scattered across channels, people, and the work itself — and locked inside the firm. Deployment connects the dots; connected dots reveal the workflow.</p>
       </div>
@@ -417,7 +418,7 @@
   <section class="section section--ice" id="pilot">
     <div class="wrap">
       <div class="section-head">
-        <p data-animate class="eyebrow">05 · How we start</p>
+        <p data-animate data-fx="decode" class="eyebrow">05 · How we start</p>
         <h2 data-animate class="section-title">One workflow. One person. <span class="hl">Free for 1–2 months.</span></h2>
         <p data-animate class="section-desc">Engineers on-site, a lightweight recorder, and approval gates — a human signs off before anything goes out.</p>
       </div>
@@ -463,7 +464,7 @@
   <section class="section" id="team" aria-labelledby="team-title">
     <div class="wrap">
       <div class="section-head section-head--tight">
-        <p data-animate class="eyebrow">06 · Team</p>
+        <p data-animate data-fx="decode" class="eyebrow">06 · Team</p>
         <h2 id="team-title" class="visually-hidden">Team</h2>
       </div>
 
@@ -541,13 +542,13 @@
             <li class="cg-chip">At home in regulated work &mdash; legal, medical, finance</li>
           </ul>
         </div>
-        <a class="cg-btn" href="mailto:admin@cogmenta.biz?subject=%5Brecruit%5D">Apply &mdash; admin@cogmenta.biz</a>
+        <a class="cg-btn" data-fx="orbit magnetic" href="mailto:admin@cogmenta.biz?subject=%5Brecruit%5D">Apply &mdash; admin@cogmenta.biz</a>
       </div>
     </div>
   </section>
 
   <!-- ================= CTA ================= -->
-  <section class="cta" data-product="cogmenta" data-theme="dark">
+  <section class="cta" data-product="cogmenta" data-theme="dark" data-fx="aurora">
     <div class="wrap cta-inner">
       <svg class="cta-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M174.5 203.9 A100 100 0 1 1 196.6 55.7" fill="none" stroke="currentColor" stroke-width="14"/>
@@ -559,7 +560,7 @@
         A free 1–2 month pilot. Our engineers come to you. Nothing leaves the building.
       </p>
       <div data-animate class="cta-actions">
-        <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="cg-btn">Book 30 minutes</a>
+        <a href="mailto:admin@cogmenta.biz?subject=Cogmenta%20pilot" class="cg-btn" data-fx="orbit magnetic">Book 30 minutes</a>
       </div>
     </div>
   </section>
@@ -585,6 +586,7 @@
   </div>
 </footer>
 
+<script src="assets/cogmenta/cogmenta-fx.js" defer></script>
 <script src="script.js"></script>
 </body>
 </html>
