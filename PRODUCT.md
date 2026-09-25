@@ -14,7 +14,7 @@ Cogmenta's public company website also provides accessible privacy and service t
 
 The website is static HTML/CSS/JS, deployed through GitHub Pages. Preserve its existing brand and layout system.
 
-User-confirmed policy scope (September 22, 2026): installed apps keep connected data on-device by default; users can opt into Cogmenta-controlled hosting for personalized AI. Browser users choose hosted processing during account creation through the terms. Personalization currently uses context, retrieval, and memory, not model training. Disabling hosting triggers deletion within 30 days from active storage and 90 days from backups. Future personalized training requires updated disclosures and appropriate consent.
+User-confirmed policy scope (September 22, 2026): installed apps keep connected data on-device by default; users can opt into Cogmenta-controlled hosting for personalized AI. Browser users choose hosted processing when starting a hosted home, after creating an Identity account, through the terms and versioned Hosted Data Notice. Personalization currently uses context, retrieval, and memory, not model training. Disabling hosting triggers deletion within 30 days from active storage and 90 days from backups. Future personalized training requires updated disclosures and appropriate consent. The first Spark-02 hosted test has no independent off-host backup; the notice discloses this recovery limit.
 
 The shared Google OAuth app is currently called Loop; Cogmenta is the recommended replacement name, but console changes are outside this website change. Product names vary. The local connectors library does not own product storage.
 
