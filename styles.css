@@ -653,7 +653,7 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
   filter: blur(70px); pointer-events: none; will-change: transform;
 }
 .cta::before { top: -34%; left: -8%; background: radial-gradient(closest-side, color-mix(in srgb, var(--cg-accent) 42%, transparent), transparent); animation: fx-aurora-a 24s ease-in-out infinite alternate; }
-.cta::after { bottom: -46%; right: -10%; background: radial-gradient(closest-side, color-mix(in srgb, var(--cg-info) 34%, transparent), transparent); animation: fx-aurora-b 30s ease-in-out infinite alternate; }
+.cta::after { bottom: -46%; right: -10%; background: radial-gradient(closest-side, var(--cg-accent-soft), transparent); animation: fx-aurora-b 30s ease-in-out infinite alternate; }
 @keyframes fx-aurora-a { to { transform: translate(34vw, 22%) scale(1.18); } }
 @keyframes fx-aurora-b { to { transform: translate(-36vw, -26%) scale(.88); } }
 
