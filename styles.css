@@ -455,8 +455,8 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
 .hiring-meta { list-style: none; display: flex; flex-wrap: wrap; gap: var(--cg-space-2); margin-top: var(--cg-space-4); }
 
 /* ---- CTA ---- */
-.cta { position: relative; text-align: center; padding: var(--section-y) 0; background: var(--cg-bg); color: var(--cg-fg-muted); overflow: hidden; }
-.cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(600px 300px at 50% 0%, color-mix(in srgb, var(--cg-accent) 16%, transparent), transparent 70%); pointer-events: none; }
+.cta { position: relative; isolation: isolate; text-align: center; padding: var(--section-y) 0; background: var(--cg-bg); color: var(--cg-fg-muted); overflow: hidden; }
+/* the aurora behind the CTA lives in the FX block below (.cta::before / ::after) */
 .cta-inner { position: relative; }
 .cta-mark { width: 64px; height: 64px; margin: 0 auto var(--cg-space-8); color: var(--cg-loop-outer); }
 .cta-title { font-size: clamp(var(--cg-text-xl), 4.2vw, var(--cg-text-3xl)); max-width: 18ch; margin: 0 auto var(--cg-space-4); text-wrap: balance; }
@@ -475,8 +475,10 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
 :root[data-theme="dark"] .footer { border-top: 1px solid var(--cg-border); }
 
 /* ==========================================================================
-   MOTION — the hero loop is the page's one looping animation; everything
-   else enters once (fade + 8px rise, 30ms stagger, max 6) and stops.
+   MOTION — the hero loop is the page's one looping animation in the copy;
+   everything else enters once (fade + 8px rise, 30ms stagger, max 6) and stops.
+   The FX block at the end adds ambient motion behind the copy (cables, aurora)
+   and cursor-driven accents; all of it is off under prefers-reduced-motion.
    ========================================================================== */
 [data-animate]:not(.visible) { opacity: 0; transform: translateY(var(--cg-space-2)); }
 .fade-in { transition: opacity var(--cg-dur-base) var(--cg-ease), transform var(--cg-dur-base) var(--cg-ease); }
@@ -577,3 +579,92 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
 
 /* No-JS safety */
 .no-js [data-animate], .no-js [data-stagger] > * { opacity: 1 !important; transform: none !important; }
+
+/* ==========================================================================
+   FX — motion accents in the spirit of originkit-style demos, rebuilt natively
+   on the kit's tokens (no library, no markup): a cursor-reactive dot grid
+   behind the hero, a focus-reveal headline, orbit/slide/magnetic buttons,
+   spotlight cards, decoding labels, light cables behind Technology and an
+   aurora behind the CTA. script.js injects the hooks; without JS nothing runs,
+   and prefers-reduced-motion switches every one of them off.
+   ========================================================================== */
+
+/* ---- hero: dot grid that repels and lights up around the cursor ---- */
+.hero { isolation: isolate; }
+.hero > .wrap { position: relative; z-index: 1; }
+.fx-grid {
+  position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, #000 0, #000 60%, transparent 100%);
+}
+
+/* ---- headline: each word snaps into focus from a blur ---- */
+.fx-w { display: inline-block; }
+.hero-title.visible .fx-w { animation: fx-focus .9s var(--cg-ease) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes fx-focus {
+  from { opacity: 0; filter: blur(14px); transform: translateY(6px) scale(1.04); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+
+/* ---- buttons: a comet runs the ring of the primary on hover; the outline fills from the left; both lean toward the cursor ---- */
+@property --fx-a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.fx-orbit { --fx-comet: var(--cg-accent); position: relative; isolation: isolate; }
+[data-theme="dark"] .fx-orbit { --fx-comet: var(--cg-fg); }
+.fx-orbit::before {
+  content: ''; position: absolute; inset: -1.5px; z-index: 1; padding: 1.5px; border-radius: inherit; pointer-events: none;
+  background: conic-gradient(from var(--fx-a), transparent 0 58%, var(--fx-comet) 84%, var(--cg-white) 90%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
+  opacity: 0; transition: opacity var(--cg-dur-base) var(--cg-ease);
+}
+.fx-orbit:hover::before, .fx-orbit:focus-visible::before { opacity: 1; animation: fx-orbit 1.4s linear infinite; }
+.fx-orbit:hover { box-shadow: 0 0 0 4px color-mix(in srgb, var(--fx-comet) 18%, transparent), 0 8px 24px -8px color-mix(in srgb, var(--fx-comet) 50%, transparent); }
+@keyframes fx-orbit { to { --fx-a: 360deg; } }
+
+.fx-slide { position: relative; isolation: isolate; overflow: hidden; }
+.fx-slide::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--cg-accent-soft); transform: translateX(-101%); transition: transform var(--cg-dur-base) var(--cg-ease); }
+.fx-slide:hover::before { transform: none; }
+.cg-btn--outline.fx-slide:hover { background: transparent; border-color: var(--cg-accent-text); }
+
+.fx-mag { transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow var(--cg-dur-base) var(--cg-ease), filter var(--cg-dur-fast) var(--cg-ease), background var(--cg-dur-fast) var(--cg-ease), border-color var(--cg-dur-fast) var(--cg-ease); will-change: transform; }
+
+/* ---- cards: a spotlight follows the cursor across the grid; the ring lights up on every card it reaches ---- */
+.fx-spot { --fx-x: -999px; --fx-y: -999px; position: relative; isolation: isolate; }
+.fx-spot-fill, .fx-spot-ring { position: absolute; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity var(--cg-dur-base) var(--cg-ease); }
+.fx-spot-fill { inset: 0; z-index: -1; background: radial-gradient(320px circle at var(--fx-x) var(--fx-y), color-mix(in srgb, var(--cg-accent) 11%, transparent), transparent 62%); }
+.fx-spot-ring {
+  inset: -1px; z-index: 2; padding: 1px;
+  background: radial-gradient(240px circle at var(--fx-x) var(--fx-y), var(--cg-accent), transparent 72%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
+}
+.fx-lit .fx-spot-fill, .fx-lit .fx-spot-ring { opacity: 1; }
+
+/* ---- labels: mono eyebrows decode from glyph noise when they enter ---- */
+.fx-scr { font-variant-ligatures: none; }
+
+/* ---- technology: light cables drift behind the copy, pulses travel along them ---- */
+.section--navy { isolation: isolate; overflow: hidden; }
+.section--navy > .wrap { position: relative; z-index: 1; }
+.fx-cables { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* ---- CTA: two soft ribbons of light drift behind the closing line ---- */
+.cta::before, .cta::after {
+  content: ''; position: absolute; z-index: -1; width: min(64vw, 900px); height: min(64vw, 900px); border-radius: 50%;
+  filter: blur(70px); pointer-events: none; will-change: transform;
+}
+.cta::before { top: -34%; left: -8%; background: radial-gradient(closest-side, color-mix(in srgb, var(--cg-accent) 42%, transparent), transparent); animation: fx-aurora-a 24s ease-in-out infinite alternate; }
+.cta::after { bottom: -46%; right: -10%; background: radial-gradient(closest-side, color-mix(in srgb, var(--cg-info) 34%, transparent), transparent); animation: fx-aurora-b 30s ease-in-out infinite alternate; }
+@keyframes fx-aurora-a { to { transform: translate(34vw, 22%) scale(1.18); } }
+@keyframes fx-aurora-b { to { transform: translate(-36vw, -26%) scale(.88); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-grid, .fx-cables { display: none; }
+  .hero-title.visible .fx-w { animation: none; }
+  .fx-orbit:hover::before, .fx-orbit:focus-visible::before { animation: none; }
+  .fx-mag { transform: none !important; transition: none; }
+  .fx-slide::before, .fx-spot-fill, .fx-spot-ring { transition: none; }
+  .cta::before, .cta::after { animation: none; }
+}
+@media (max-width: 620px) {
+  .cta::before, .cta::after { filter: blur(48px); }
+}
