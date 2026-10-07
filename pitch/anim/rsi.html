@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Cogmenta · on-prem recursive self-improvement</title>
+<link rel="stylesheet" href="../../assets/cogmenta/cogmenta-tokens.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+  svg { position: absolute; inset: 0; width: 1600px; height: 900px; }
+  .frame { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 10 10; }
+  .k { font-family: var(--cg-font-mono); font-weight: 500; font-size: 18px; letter-spacing: 0.12em; fill: var(--muted); }
+  .k-accent { fill: var(--accent-text); }
+  .big { font-family: var(--cg-font-display); font-weight: 600; letter-spacing: -0.02em; fill: var(--outer); }
+  .body { font-size: 20px; fill: var(--muted); }
+  .model-box { fill: var(--surface); stroke: var(--outer); stroke-width: 3; }
+  .gauge-track { fill: none; stroke: var(--subtle); stroke-width: 14; }
+  .gauge { fill: none; stroke: var(--inner); stroke-width: 14; stroke-linecap: round; }
+  .depth { fill: none; stroke: var(--inner); stroke-width: 3; }
+  .dim { stroke: var(--muted); stroke-width: 2; }
+  .pile rect { fill: var(--subtle); stroke: none; }
+  .pile rect.on { fill: var(--inner); }
+  .chip { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+  .chip-ico { stroke: var(--outer); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .chip-t { font-size: 17px; fill: var(--cg-fg); }
+  .avatar { fill: none; stroke: var(--outer); stroke-width: 3; stroke-linecap: round; }
+  .ring-track { fill: none; stroke: var(--subtle); stroke-width: 10; }
+  .ring { fill: none; stroke: var(--outer); stroke-width: 10; stroke-linecap: round; }
+  .flow-in { fill: none; stroke: var(--outer); stroke-width: 3; stroke-dasharray: 10 12; }
+  .flow-out { fill: none; stroke: var(--inner); stroke-width: 3; stroke-dasharray: 10 12; }
+  .arrow-outer { fill: var(--outer); } .arrow-inner { fill: var(--inner); }
+  .tl { stroke: var(--line); stroke-width: 2; }
+  .tl-fill { stroke: var(--outer); stroke-width: 4; stroke-linecap: round; }
+  .tl-tick { stroke: var(--line); stroke-width: 2; }
+  .tl-marker { fill: var(--surface); stroke: var(--outer); stroke-width: 4; }
+</style>
+</head>
+<body>
+<div class="stage">
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" id="svg">
+  <defs>
+    <marker id="mo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrow-outer"/></marker>
+    <marker id="mi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrow-inner"/></marker>
+  </defs>
+
+  <!-- on-prem boundary -->
+  <rect class="frame" x="80" y="100" width="1440" height="650" rx="22"/>
+  <g transform="translate(112 128)">
+    <rect x="0" y="0" width="22" height="16" rx="3" transform="translate(0 7)" fill="none" stroke="var(--muted)" stroke-width="2"/>
+    <path d="M4 7 V4.5 a7 7 0 0 1 14 0 V7" fill="none" stroke="var(--muted)" stroke-width="2"/>
+    <text class="k" x="36" y="18">On-prem · your hardware · nothing leaves the building</text>
+  </g>
+
+  <!-- process data (left) -->
+  <text class="k" x="140" y="236">Process data</text>
+  <text class="big" id="traces" x="140" y="296" font-size="56">0</text>
+  <text class="body" x="140" y="330">task traces, recorded with consent</text>
+  <g class="pile" id="pile" transform="translate(140 372)"></g>
+  <g id="chips"></g>
+
+  <!-- the model (center) -->
+  <text class="k" x="800" y="262" text-anchor="middle">Local model</text>
+  <rect class="model-box" x="670" y="290" width="260" height="260" rx="18"/>
+  <g transform="translate(800 420)">
+    <circle class="gauge-track" r="82"/>
+    <circle class="gauge" id="gauge" r="82" transform="rotate(-90)" pathLength="100" stroke-dasharray="6 94"/>
+    <circle class="depth" id="d1" r="98" opacity="0"/>
+    <circle class="depth" id="d2" r="106" opacity="0"/>
+    <circle class="depth" id="d3" r="114" opacity="0"/>
+    <text class="big" id="cap" y="12" text-anchor="middle" font-size="54">6%</text>
+    <text class="k" y="38" text-anchor="middle" font-size="10">on your work</text>
+  </g>
+  <!-- dimension line: the box never grows -->
+  <line class="dim" x1="670" y1="584" x2="930" y2="584"/>
+  <line class="dim" x1="670" y1="576" x2="670" y2="592"/>
+  <line class="dim" x1="930" y1="576" x2="930" y2="592"/>
+  <text class="k" x="800" y="618" text-anchor="middle" font-size="16">Same size, month 1 → 12</text>
+
+  <!-- experts (right) -->
+  <text class="k" x="1460" y="236" text-anchor="end">Your experts</text>
+  <g id="experts"></g>
+
+  <!-- loops between model and experts -->
+  <path class="flow-out" id="fo" d="M 940 360 C 1060 320, 1140 320, 1250 340" marker-end="url(#mi)"/>
+  <path class="flow-in"  id="fi" d="M 1250 510 C 1140 540, 1060 540, 940 490" marker-end="url(#mo)"/>
+  <text class="k k-accent" x="1095" y="276" text-anchor="middle" font-size="15">Suggestions</text>
+  <text class="body" x="1095" y="300" text-anchor="middle" font-size="17">the model coaches the experts</text>
+  <text class="k" x="1125" y="584" text-anchor="middle" font-size="15">Corrections</text>
+  <text class="body" x="1125" y="608" text-anchor="middle" font-size="17">the experts set the target</text>
+  <!-- data into the model -->
+  <path class="flow-out" id="fd" d="M 560 420 C 600 420, 620 420, 660 420" marker-end="url(#mi)"/>
+
+  <!-- timeline -->
+  <line class="tl" x1="140" y1="820" x2="1460" y2="820"/>
+  <line class="tl-fill" id="tlf" x1="140" y1="820" x2="140" y2="820"/>
+  <g id="ticks"></g>
+  <circle class="tl-marker" id="tlm" cx="140" cy="820" r="10"/>
+  <text class="k" x="140" y="862">Month 1</text>
+  <text class="k" x="1460" y="862" text-anchor="end">Month 12</text>
+  <text class="big" id="tlk" x="140" y="790" font-size="22" text-anchor="middle">Month 1</text>
+</svg>
+</div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (q.get('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); (parent || $('svg')).appendChild(e); return e; }
+  function smooth(t) { return t * t * (3 - 2 * t); }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  var K = 3.4, E = Math.exp(K) - 1; function f(x) { return (Math.exp(K * x) - 1) / E; }
+
+  var RUN = 10000, HOLD = 1500; window.__duration = RUN + HOLD;
+
+  // pile: 12 bars, filled as traces accumulate
+  var bars = []; for (var i = 0; i < 12; i++) bars.push(el('rect', { x: 0, y: 11 * (11 - i), width: 260, height: 8, rx: 3 }, $('pile')));
+  // timeline ticks
+  for (var m = 0; m <= 11; m++) el('line', { class: 'tl-tick', x1: 140 + m * 120, y1: 812, x2: 140 + m * 120, y2: 828 }, $('ticks'));
+  // experts: three people, rings = expertise
+  var EXP = [{ y: 320, a: .30, b: .78 }, { y: 440, a: .48, b: .88 }, { y: 560, a: .64, b: .96 }], rings = [], ringT = [];
+  EXP.forEach(function (e) {
+    var g = el('g', { transform: 'translate(1360 ' + e.y + ')' }, $('experts'));
+    el('circle', { class: 'ring-track', r: 44 }, g);
+    rings.push(el('circle', { class: 'ring', r: 44, transform: 'rotate(-90)', pathLength: 100, 'stroke-dasharray': '30 70' }, g));
+    el('circle', { class: 'avatar', cy: -8, r: 11 }, g);
+    el('path', { class: 'avatar', d: 'M -19 22 a 19 19 0 0 1 38 0' }, g);
+    ringT.push(el('text', { class: 'k', x: 64, y: 6, 'font-size': 16 }, g));
+  });
+  // chips: process-data items flying into the model
+  var KINDS = [
+    ['Client meeting', 'M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7'],
+    ['Document redline', 'M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4zM4 21h9'],
+    ['Procedure recording', 'M3 12h3.5l1.8-4 3 8 2-5 1.5 3H21M5 19h14'],
+    ['Desk work', 'M2.5 5h19v11h-19zM6 20h12M6.5 9h2M11 9h2M15.5 9h2M6.5 12.5h11'],
+    ['Call transcript', 'M4 12h2l1.5-4 3 9 2.5-7 1.5 4H20M6.5 3.5 5 5M17.5 3.5 19 5'],
+    ['Search and screening', 'M16.5 10.5a6 6 0 1 1-12 0 6 6 0 0 1 12 0zM15 15l5 5M8 10.5h5']
+  ];
+  var N_CHIPS = 18, chips = [];
+  for (var c = 0; c < N_CHIPS; c++) {
+    var g = el('g', { opacity: 0 }, $('chips'));
+    var kind = KINDS[c % KINDS.length];
+    var w = 46 + kind[0].length * 9.6;
+    el('rect', { class: 'chip', x: 0, y: -18, width: w, height: 36, rx: 18 }, g);
+    el('path', { class: 'chip-ico', d: kind[1], transform: 'translate(10 -9) scale(0.75)' }, g);
+    el('text', { class: 'chip-t', x: 32, y: 6 }, g).textContent = kind[0];
+    chips.push(g);
+  }
+
+  function render(ms) {
+    var t = clamp(ms / RUN, 0, 1), s = smooth(t), fx = f(t);
+    // traces & pile
+    var traces = Math.round(18400 * fx);
+    $('traces').textContent = traces.toLocaleString('en-US');
+    bars.forEach(function (b, i) { b.setAttribute('class', fx * 12 > i + 0.5 ? 'on' : ''); });
+    // the model: capability ring, depth layers
+    var cap = 6 + 85 * s;
+    $('gauge').setAttribute('stroke-dasharray', cap.toFixed(1) + ' ' + (100 - cap).toFixed(1));
+    $('cap').textContent = Math.round(cap) + '%';
+    [['d1', .35], ['d2', .55], ['d3', .75]].forEach(function (d) { $(d[0]).setAttribute('opacity', (0.25 + 0.65 * clamp((t - d[1]) / 0.12, 0, 1)) * clamp((t - d[1]) / 0.12, 0, 1)); });
+    // experts grow too
+    EXP.forEach(function (e, i) { var v = e.a + (e.b - e.a) * s; rings[i].setAttribute('stroke-dasharray', (v * 100).toFixed(1) + ' ' + (100 - v * 100).toFixed(1)); ringT[i].textContent = Math.round(v * 100) + '%'; });
+    // flows: dashes travel
+    var off = -(ms / 1000) * 40;
+    ['fo', 'fi', 'fd'].forEach(function (id) { $(id).style.strokeDashoffset = off; });
+    // chips: emitted every 520ms from the pile, fly to the model over 1500ms
+    chips.forEach(function (g, i) {
+      var t0 = 300 + i * 540, u = (ms - t0) / 1400;
+      if (u < 0 || u > 1) { g.setAttribute('opacity', 0); return; }
+      var e = smooth(u), x0 = 160 + (i % 3) * 40, y0 = 392 + (i % 5) * 22, x = x0 + (560 - x0) * e, y = y0 + (420 - y0) * e;
+      g.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + (1 - 0.3 * e).toFixed(3) + ')');
+      g.setAttribute('opacity', clamp(u / 0.12, 0, 1) * clamp((1 - u) / 0.18, 0, 1));
+    });
+    // timeline
+    var x = 140 + 1320 * t, month = 1 + Math.min(11, Math.floor(t * 11.999));
+    $('tlf').setAttribute('x2', x); $('tlm').setAttribute('cx', x);
+    $('tlk').setAttribute('x', clamp(x, 190, 1410)); $('tlk').textContent = 'Month ' + month;
+  }
+  window.__seek = render;
+  if (q.get('seek')) { document.fonts.ready.then(function () { render(0); window.__ready = true; }); }
+  else { var start = null; (function loop(now) { if (start === null) start = now; render((now - start) % window.__duration); requestAnimationFrame(loop); })(performance.now()); window.__ready = true; }
+})();
+</script>
+</body>
+</html>

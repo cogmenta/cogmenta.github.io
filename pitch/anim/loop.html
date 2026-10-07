@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Cogmenta · dual loop</title>
+<link rel="stylesheet" href="../../assets/cogmenta/cogmenta-tokens.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+  .stage { display: flex; align-items: center; justify-content: center; gap: 96px; }
+  .mark { width: 760px; height: 760px; color: var(--outer); flex: 0 0 auto; }
+  .mark-inner { stroke: var(--inner); }
+  .mark-guide { stroke: var(--line); }
+  .svg-mono { font-family: var(--cg-font-mono); font-size: 13.5px; font-weight: 500; letter-spacing: 0.14em; fill: var(--muted); }
+  .svg-display { font-family: var(--cg-font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.02em; }
+  .draw-outer { stroke-dasharray: 100; stroke-dashoffset: 100; animation: draw 1.8s cubic-bezier(.2,.7,.2,1) .15s forwards; }
+  .arrow-tip { opacity: 0; animation: fade .4s ease 1.8s forwards; }
+  .signal { fill: var(--cg-bg); opacity: 0; animation: fade .5s ease 2.1s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fade { to { opacity: 1; } }
+  .legend { display: none; flex-direction: column; gap: 40px; max-width: 560px; }
+  .stage.has-legend .legend { display: flex; }
+  .stage.has-legend .mark { width: 640px; height: 640px; }
+  .legend-item { display: grid; grid-template-columns: 28px 1fr; gap: 0 20px; align-items: start; }
+  .dot { width: 28px; height: 28px; border-radius: 50%; margin-top: 10px; }
+  .dot-outer { border: 6px solid var(--outer); }
+  .dot-inner { border: 6px solid var(--inner); }
+  .legend b { display: block; font-family: var(--cg-font-display); font-weight: 600; font-size: 44px; letter-spacing: -0.02em; line-height: 1.1; color: var(--outer); }
+  .legend span { display: block; margin-top: 10px; font-size: 28px; line-height: 1.4; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <svg class="mark" id="mark" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-label="The Cogmenta mark as a dual loop">
+    <defs>
+      <path id="innerPath" d="M 315.3 308.0 m -66.0 0 a 66.0 66.0 0 1 0 132.0 0 a 66.0 66.0 0 1 0 -132.0 0"/>
+      <path id="outerPath" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1"/>
+    </defs>
+    <circle class="mark-guide" cx="220" cy="220" r="214" fill="none" stroke-width="1" stroke-dasharray="2 6"/>
+    <path class="draw-outer" d="M 319.9 373.8 A 183.3 183.3 0 1 1 360.4 102.1" fill="none" stroke="currentColor" stroke-width="25.7" pathLength="100"/>
+    <polygon class="arrow-tip" points="377.7,82.9 338.4,115.9 384.1,130.2" fill="currentColor"/>
+    <circle class="signal" r="6" stroke="currentColor" stroke-width="3">
+      <animateMotion dur="4.8s" begin="2.1s" repeatCount="indefinite"><mpath href="#outerPath"/></animateMotion>
+    </circle>
+    <circle class="mark-inner" cx="315.3" cy="308.0" r="66.0" fill="none" stroke-width="25.7"/>
+    <circle class="signal mark-inner" r="6" stroke-width="3">
+      <animateMotion dur="2.4s" begin="2.1s" repeatCount="indefinite"><mpath href="#innerPath"/></animateMotion>
+    </circle>
+    <text x="198" y="172" text-anchor="middle" class="svg-mono">INSIDE YOUR FIRM</text>
+    <text x="198" y="212" text-anchor="middle" class="svg-display" fill="currentColor">Company AI</text>
+  </svg>
+  <div class="legend">
+    <div class="legend-item"><i class="dot dot-outer"></i><div><b>Outer loop</b><span>Your experts correct what comes out. Those corrections become the target, and a human signs off.</span></div></div>
+    <div class="legend-item"><i class="dot dot-inner"></i><div><b>Inner loop</b><span>Between corrections, the local model keeps improving itself on your traces.</span></div></div>
+  </div>
+</div>
+<script>
+  // ?theme=dark  ?legend=1  ?seek=1 (pause everything; the renderer drives time through window.__seek)
+  var q = new URLSearchParams(location.search);
+  if (q.get('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  if (q.get('legend')) document.getElementById('stage').classList.add('has-legend');
+  var svg = document.getElementById('mark');
+  window.__duration = 6900;            // 2.1s draw-in + one 4.8s outer orbit (= two inner orbits)
+  window.__seek = function (ms) {
+    document.getAnimations().forEach(function (a) { a.pause(); a.currentTime = ms; });
+    svg.pauseAnimations(); svg.setCurrentTime(ms / 1000);
+  };
+  if (q.get('seek')) { document.fonts.ready.then(function () { window.__seek(0); window.__ready = true; }); }
+  else { window.__ready = true; }
+</script>
+</body>
+</html>

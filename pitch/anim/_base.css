@@ -1,0 +1,12 @@
+/* Pitch animation canvas: 1600x900, kit tokens, no page chrome. Shared by the three anim pages. */
+:root { --outer: var(--cg-navy); --inner: var(--cg-teal); --soft: var(--cg-teal-100); --accent-text: var(--cg-teal-600); --surface: #fff; --muted: var(--cg-slate); --line: var(--cg-line); --subtle: var(--cg-ice); }
+[data-theme="dark"] { --outer: #fff; --inner: var(--cg-teal); --soft: rgba(31,168,154,.22); --accent-text: var(--cg-teal); --surface: var(--cg-navy-700); --muted: #9FB0BF; --line: #24405F; --subtle: var(--cg-navy-700); }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1600px; height: 900px; overflow: hidden; }
+body { background: var(--cg-bg); color: var(--cg-fg); font-family: var(--cg-font-body); -webkit-font-smoothing: antialiased; }
+.stage { position: relative; width: 1600px; height: 900px; }
+.mono { font-family: var(--cg-font-mono); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.display { font-family: var(--cg-font-display); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; color: var(--outer); }
+svg text { font-family: var(--cg-font-body); }
+svg .mono { fill: var(--muted); }
+svg .display { fill: var(--outer); }
