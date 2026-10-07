@@ -1,0 +1,101 @@
+[
+  {
+    "id": "loop-light",
+    "page": "loop.html?theme=light",
+    "fps": 25,
+    "title": "Dual loop — light",
+    "note": "Hero mark: outer loop draws in, then the two signals orbit (one outer orbit = two inner).",
+    "duration": 6900,
+    "frames": 173,
+    "gifMB": "0.3",
+    "mp4MB": "0.1"
+  },
+  {
+    "id": "loop-dark",
+    "page": "loop.html?theme=dark",
+    "fps": 25,
+    "title": "Dual loop — dark",
+    "note": "Same mark on the navy band.",
+    "duration": 6900,
+    "frames": 173,
+    "gifMB": "0.2",
+    "mp4MB": "0.1"
+  },
+  {
+    "id": "loop-legend-light",
+    "page": "loop.html?theme=light&legend=1",
+    "fps": 25,
+    "title": "Dual loop with legend — light",
+    "note": "Mark plus the outer/inner loop legend in large type.",
+    "duration": 6900,
+    "frames": 173,
+    "gifMB": "0.2",
+    "mp4MB": "0.1"
+  },
+  {
+    "id": "loop-legend-dark",
+    "page": "loop.html?theme=dark&legend=1",
+    "fps": 25,
+    "title": "Dual loop with legend — dark",
+    "note": "Legend variant on navy.",
+    "duration": 6900,
+    "frames": 173,
+    "gifMB": "0.2",
+    "mp4MB": "0.1"
+  },
+  {
+    "id": "rsi-light",
+    "page": "rsi.html?theme=light",
+    "fps": 20,
+    "title": "On-prem recursive self-improvement — light",
+    "note": "The local model stays the same size while its capability, the process data, and the experts all grow — inside the on-prem boundary.",
+    "duration": 11500,
+    "frames": 230,
+    "gifMB": "2.5",
+    "mp4MB": "0.8"
+  },
+  {
+    "id": "rsi-dark",
+    "page": "rsi.html?theme=dark",
+    "fps": 20,
+    "title": "On-prem recursive self-improvement — dark",
+    "note": "Same scene on navy.",
+    "duration": 11500,
+    "frames": 230,
+    "gifMB": "2.5",
+    "mp4MB": "0.8"
+  },
+  {
+    "id": "scaling-ip",
+    "page": "scaling.html?domain=ip",
+    "fps": 20,
+    "title": "On-prem scaling law — Patent & IP",
+    "note": "Capability compounds as channels, people and process data connect; Discover → Optimize → Coach cards for IP consulting.",
+    "duration": 15000,
+    "frames": 300,
+    "gifMB": "3.8",
+    "mp4MB": "0.9"
+  },
+  {
+    "id": "scaling-ma",
+    "page": "scaling.html?domain=ma",
+    "fps": 20,
+    "title": "On-prem scaling law — Sell-side M&A",
+    "note": "Same chart with the M&A advisory cards.",
+    "duration": 15000,
+    "frames": 300,
+    "gifMB": "3.7",
+    "mp4MB": "0.9"
+  },
+  {
+    "id": "scaling-med",
+    "page": "scaling.html?domain=med",
+    "fps": 20,
+    "title": "On-prem scaling law — MedTech regulatory",
+    "note": "Same chart with the medical-device regulatory cards.",
+    "duration": 15000,
+    "frames": 300,
+    "gifMB": "3.7",
+    "mp4MB": "0.9"
+  }
+]

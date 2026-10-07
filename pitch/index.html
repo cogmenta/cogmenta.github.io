@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-product="cogmenta" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cogmenta · pitch animations</title>
+<link rel="icon" type="image/svg+xml" href="../assets/brand/cogmenta-icon.svg">
+<link rel="stylesheet" href="../assets/cogmenta/cogmenta-tokens.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cg-ice); color: var(--cg-fg); padding: 48px 32px 96px; }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  .eyebrow { font-family: var(--cg-font-mono); font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--cg-teal-600); }
+  h1 { font-size: 40px; margin: 8px 0 12px; }
+  .lead { color: var(--cg-slate); max-width: 62em; }
+  .lead a { color: var(--cg-navy); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; margin-top: 40px; }
+  .card { display: flex; flex-direction: column; border: 1px solid var(--cg-line); border-radius: 10px; background: #fff; overflow: hidden; box-shadow: var(--cg-shadow-sm); }
+  .card img { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--cg-ice); }
+  .card.dark img { background: var(--cg-navy); }
+  .body { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px 18px; flex: 1; }
+  h2 { font-size: 18px; }
+  .note { font-size: 14px; color: var(--cg-slate); flex: 1; }
+  .meta { font-family: var(--cg-font-mono); font-size: 11px; letter-spacing: .06em; color: var(--cg-slate); }
+  .dl { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .cg-btn { font-size: 13px; padding: 8px 14px; }
+  .cg-btn.alt { background: #fff; color: var(--cg-navy); }
+  .cg-btn.alt:hover { background: var(--cg-ice); }
+  .src { font-size: 13px; color: var(--cg-slate); align-self: center; margin-left: auto; }
+  .src a { color: var(--cg-slate); }
+  .how { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--cg-line); color: var(--cg-slate); font-size: 14px; max-width: 62em; }
+  .how code { font-family: var(--cg-font-mono); font-size: 12.5px; background: #fff; border: 1px solid var(--cg-line); border-radius: 4px; padding: 1px 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Cogmenta · internal</p>
+  <h1>Pitch animations</h1>
+  <p class="lead">The homepage motion, rendered as 1600×900 loops for the deck. GIF for Google Slides, MP4 (H.264) for Keynote and PowerPoint — same frames, much smaller and sharper. Each card also links to the live animation page it was rendered from. Source: <a href="https://cogmenta.tech/">cogmenta.tech</a>.</p>
+  <div class="grid" id="grid"></div>
+  <p class="how">Re-render after a change with <code>node pitch/render.mjs</code> (all) or <code>node pitch/render.mjs rsi-light</code> (one). Needs Chrome and ffmpeg. The pages under <code>pitch/anim/</code> take <code>?theme=dark</code>, <code>?legend=1</code> and <code>?domain=ip|ma|med</code>; without <code>?seek=1</code> they play on their own.</p>
+</div>
+<script>
+  fetch('gifs/manifest.json').then(function (r) { return r.json(); }).then(function (jobs) {
+    document.getElementById('grid').innerHTML = jobs.map(function (j) {
+      var dark = /dark/.test(j.id);
+      return '<article class="card' + (dark ? ' dark' : '') + '">' +
+        '<a href="gifs/' + j.id + '.gif" target="_blank" rel="noopener"><img src="gifs/' + j.id + '.gif" alt="" loading="lazy"></a>' +
+        '<div class="body"><h2>' + j.title + '</h2><p class="note">' + j.note + '</p>' +
+        '<p class="meta">1600×900 · ' + (j.duration / 1000).toFixed(1) + 's · ' + j.fps + ' fps · GIF ' + j.gifMB + ' MB · MP4 ' + j.mp4MB + ' MB</p>' +
+        '<div class="dl"><a class="cg-btn" href="gifs/' + j.id + '.gif" download>Download GIF</a><a class="cg-btn alt" href="gifs/' + j.id + '.mp4" download>Download MP4</a>' +
+        '<span class="src"><a href="anim/' + j.page + '" target="_blank" rel="noopener">live page ↗</a></span></div></div></article>';
+    }).join('');
+  });
+</script>
+</body>
+</html>
