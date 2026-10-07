@@ -454,6 +454,13 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
 .hiring > div > p { color: var(--cg-fg-muted); max-width: 60em; }
 .hiring-meta { list-style: none; display: flex; flex-wrap: wrap; gap: var(--cg-space-2); margin-top: var(--cg-space-4); }
 
+/* ---- TEAM: supported by ---- */
+.backers { display: flex; align-items: center; flex-wrap: wrap; gap: var(--cg-space-3) var(--cg-space-8); margin-top: var(--cg-space-8); padding-top: var(--cg-space-6); border-top: 1px solid var(--cg-border); }
+.backers-k { font-family: var(--cg-font-mono); font-size: var(--cg-text-2xs); font-weight: 500; letter-spacing: var(--cg-tracking-label); text-transform: uppercase; color: var(--cg-fg-muted); }
+.backers-logos { list-style: none; display: flex; align-items: center; flex-wrap: wrap; gap: var(--cg-space-6); }
+.backers-logos a { display: block; }
+.backers-logos img { display: block; height: 44px; width: auto; }
+
 /* ---- CTA ---- */
 .cta { position: relative; text-align: center; padding: var(--section-y) 0; background: var(--cg-bg); color: var(--cg-fg-muted); overflow: hidden; }
 /* the aurora behind the CTA is the kit's data-fx="aurora" (cogmenta-fx.css), drawn on .cta::before / ::after */
