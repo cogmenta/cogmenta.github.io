@@ -6,98 +6,110 @@
 <link rel="stylesheet" href="../../assets/cogmenta/cogmenta-tokens.css">
 <link rel="stylesheet" href="_base.css">
 <style>
-  svg { position: absolute; inset: 0; width: 1600px; height: 900px; }
-  .frame { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 10 10; }
-  .k { font-family: var(--cg-font-mono); font-weight: 500; font-size: 18px; letter-spacing: 0.12em; fill: var(--muted); }
+  svg.scene { position: absolute; inset: 0; width: 1600px; height: 900px; z-index: 2; pointer-events: none; } /* above the HTML chips, so flights pass over them */
+  .frame { fill: none; stroke: var(--line); stroke-width: 3; stroke-dasharray: 14 12; }
+  .k { font-family: var(--cg-font-mono); font-weight: 500; font-size: 22px; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--ink); }
   .k-accent { fill: var(--accent-text); }
   .big { font-family: var(--cg-font-display); font-weight: 600; letter-spacing: -0.02em; fill: var(--outer); }
-  .body { font-size: 20px; fill: var(--muted); }
-  .model-box { fill: var(--surface); stroke: var(--outer); stroke-width: 3; }
-  .gauge-track { fill: none; stroke: var(--subtle); stroke-width: 14; }
-  .gauge { fill: none; stroke: var(--inner); stroke-width: 14; stroke-linecap: round; }
-  .depth { fill: none; stroke: var(--inner); stroke-width: 3; }
-  .dim { stroke: var(--muted); stroke-width: 2; }
-  .pile rect { fill: var(--subtle); stroke: none; }
-  .pile rect.on { fill: var(--inner); }
-  .chip { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
-  .chip-ico { stroke: var(--outer); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .chip-t { font-size: 17px; fill: var(--cg-fg); }
-  .avatar { fill: none; stroke: var(--outer); stroke-width: 3; stroke-linecap: round; }
-  .ring-track { fill: none; stroke: var(--subtle); stroke-width: 10; }
-  .ring { fill: none; stroke: var(--outer); stroke-width: 10; stroke-linecap: round; }
-  .flow-in { fill: none; stroke: var(--outer); stroke-width: 3; stroke-dasharray: 10 12; }
-  .flow-out { fill: none; stroke: var(--inner); stroke-width: 3; stroke-dasharray: 10 12; }
+  .body { font-size: 22px; fill: var(--ink); }
+  .ico { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .model-box { fill: var(--surface); stroke: var(--outer); stroke-width: 4; }
+  .gauge-track { fill: none; stroke: var(--track); stroke-width: 18; }
+  .gauge { fill: none; stroke: var(--inner); stroke-width: 18; stroke-linecap: round; }
+  .depth { fill: none; stroke: var(--inner); stroke-width: 4; }
+  .dim { stroke: var(--ink); stroke-width: 2.5; }
+  .avatar { fill: none; stroke: var(--outer); stroke-width: 4; stroke-linecap: round; }
+  .ring-track { fill: none; stroke: var(--track); stroke-width: 14; }
+  .ring { fill: none; stroke: var(--outer); stroke-width: 14; stroke-linecap: round; }
+  .flow-in { fill: none; stroke: var(--outer); stroke-width: 5; stroke-dasharray: 14 14; }
+  .flow-out { fill: none; stroke: var(--inner); stroke-width: 5; stroke-dasharray: 14 14; }
   .arrow-outer { fill: var(--outer); } .arrow-inner { fill: var(--inner); }
-  .tl { stroke: var(--line); stroke-width: 2; }
-  .tl-fill { stroke: var(--outer); stroke-width: 4; stroke-linecap: round; }
-  .tl-tick { stroke: var(--line); stroke-width: 2; }
-  .tl-marker { fill: var(--surface); stroke: var(--outer); stroke-width: 4; }
+  .tl { stroke: var(--line); stroke-width: 3; }
+  .tl-fill { stroke: var(--outer); stroke-width: 6; stroke-linecap: round; }
+  .tl-tick { stroke: var(--line); stroke-width: 3; }
+  .tl-marker { fill: var(--surface); stroke: var(--outer); stroke-width: 5; }
+  .db { color: var(--track); transform-origin: 50% 100%; }
+  .db.full { color: var(--inner); }
+  /* flying copies of a chip (SVG) */
+  .fly rect { fill: var(--surface); stroke: var(--outer); stroke-width: 2; }
+  .fly path { fill: none; stroke: var(--outer); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .fly text { font-size: 20px; font-weight: 500; fill: var(--ink); }
+  /* process-data chips (HTML, same grammar as the scaling chart) */
+  .pd { position: absolute; z-index: 1; left: 140px; top: 336px; width: 470px; display: flex; flex-wrap: wrap; gap: 12px; align-content: flex-start; }
+  .pdc { display: inline-flex; align-items: center; gap: 10px; padding: 5px 18px 5px 5px; border-radius: 999px; border: 2px dashed var(--line); background: var(--surface); font-size: 20px; font-weight: 500; color: var(--muted); opacity: .55; }
+  .pdc i { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--subtle); color: var(--muted); }
+  .pdc i svg { width: 22px; height: 22px; }
+  .pdc.on { opacity: 1; border-style: solid; border-color: var(--outer); color: var(--ink); }
+  .pdc.on i { background: var(--soft); color: var(--outer); }
+  .count { position: absolute; z-index: 1; left: 140px; top: 228px; display: flex; align-items: flex-end; gap: 16px; }
+  .count .db { width: 64px; height: 64px; margin-bottom: 6px; }
+  .count .db svg { width: 100%; height: 100%; }
+  .count b { font: 600 72px var(--cg-font-display); letter-spacing: -0.02em; line-height: 1; color: var(--outer); font-variant-numeric: tabular-nums; }
+  .count span { font-size: 22px; color: var(--ink); margin-bottom: 10px; }
 </style>
 </head>
 <body>
-<div class="stage">
-<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" id="svg">
+<div class="stage" id="stage">
+<svg class="scene" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" id="svg">
   <defs>
-    <marker id="mo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrow-outer"/></marker>
-    <marker id="mi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrow-inner"/></marker>
+    <marker id="mo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrow-outer"/></marker>
+    <marker id="mi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="arrow-inner"/></marker>
   </defs>
 
   <!-- on-prem boundary -->
-  <rect class="frame" x="80" y="100" width="1440" height="650" rx="22"/>
-  <g transform="translate(112 128)">
-    <rect x="0" y="0" width="22" height="16" rx="3" transform="translate(0 7)" fill="none" stroke="var(--muted)" stroke-width="2"/>
-    <path d="M4 7 V4.5 a7 7 0 0 1 14 0 V7" fill="none" stroke="var(--muted)" stroke-width="2"/>
-    <text class="k" x="36" y="18">On-prem · your hardware · nothing leaves the building</text>
+  <rect class="frame" x="80" y="96" width="1440" height="664" rx="24"/>
+  <g transform="translate(112 122)">
+    <rect class="ico" x="2" y="12" width="26" height="19" rx="4"/>
+    <path class="ico" d="M7 12 V9 a8 8 0 0 1 16 0 V12"/>
+    <text class="k" x="46" y="26">On-prem · your hardware · nothing leaves the building</text>
   </g>
 
-  <!-- process data (left) -->
-  <text class="k" x="140" y="236">Process data</text>
-  <text class="big" id="traces" x="140" y="296" font-size="56">0</text>
-  <text class="body" x="140" y="330">task traces, recorded with consent</text>
-  <g class="pile" id="pile" transform="translate(140 372)"></g>
-  <g id="chips"></g>
+  <!-- process data (left): label + counter are SVG/HTML, the chips are HTML below -->
+  <text class="k" x="140" y="206">Process data</text>
 
   <!-- the model (center) -->
-  <text class="k" x="800" y="262" text-anchor="middle">Local model</text>
-  <rect class="model-box" x="670" y="290" width="260" height="260" rx="18"/>
-  <g transform="translate(800 420)">
-    <circle class="gauge-track" r="82"/>
-    <circle class="gauge" id="gauge" r="82" transform="rotate(-90)" pathLength="100" stroke-dasharray="6 94"/>
-    <circle class="depth" id="d1" r="98" opacity="0"/>
-    <circle class="depth" id="d2" r="106" opacity="0"/>
-    <circle class="depth" id="d3" r="114" opacity="0"/>
-    <text class="big" id="cap" y="12" text-anchor="middle" font-size="54">6%</text>
-    <text class="k" y="38" text-anchor="middle" font-size="10">on your work</text>
+  <text class="k" x="800" y="250" text-anchor="middle">Local model</text>
+  <rect class="model-box" x="650" y="280" width="300" height="300" rx="22"/>
+  <g transform="translate(800 430)">
+    <circle class="gauge-track" r="98"/>
+    <circle class="gauge" id="gauge" r="98" transform="rotate(-90)" pathLength="100" stroke-dasharray="6 94"/>
+    <circle class="depth" id="d1" r="116" opacity="0"/>
+    <circle class="depth" id="d2" r="126" opacity="0"/>
+    <circle class="depth" id="d3" r="136" opacity="0"/>
+    <text class="big" id="cap" y="16" text-anchor="middle" font-size="68">6%</text>
+    <text class="k" y="48" text-anchor="middle" font-size="13">on your work</text>
   </g>
-  <!-- dimension line: the box never grows -->
-  <line class="dim" x1="670" y1="584" x2="930" y2="584"/>
-  <line class="dim" x1="670" y1="576" x2="670" y2="592"/>
-  <line class="dim" x1="930" y1="576" x2="930" y2="592"/>
-  <text class="k" x="800" y="618" text-anchor="middle" font-size="16">Same size, month 1 → 12</text>
+  <line class="dim" x1="650" y1="614" x2="950" y2="614"/>
+  <line class="dim" x1="650" y1="604" x2="650" y2="624"/>
+  <line class="dim" x1="950" y1="604" x2="950" y2="624"/>
+  <text class="k" x="800" y="652" text-anchor="middle" font-size="20">Same size, month 1 → 12</text>
 
   <!-- experts (right) -->
-  <text class="k" x="1460" y="236" text-anchor="end">Your experts</text>
+  <text class="k" x="1460" y="206" text-anchor="end">Your experts</text>
   <g id="experts"></g>
 
   <!-- loops between model and experts -->
-  <path class="flow-out" id="fo" d="M 940 360 C 1060 320, 1140 320, 1250 340" marker-end="url(#mi)"/>
-  <path class="flow-in"  id="fi" d="M 1250 510 C 1140 540, 1060 540, 940 490" marker-end="url(#mo)"/>
-  <text class="k k-accent" x="1095" y="276" text-anchor="middle" font-size="15">Suggestions</text>
-  <text class="body" x="1095" y="300" text-anchor="middle" font-size="17">the model coaches the experts</text>
-  <text class="k" x="1125" y="584" text-anchor="middle" font-size="15">Corrections</text>
-  <text class="body" x="1125" y="608" text-anchor="middle" font-size="17">the experts set the target</text>
+  <path class="flow-out" id="fo" d="M 958 372 C 1070 338, 1150 338, 1232 352" marker-end="url(#mi)"/>
+  <path class="flow-in"  id="fi" d="M 1232 528 C 1150 560, 1070 560, 958 500" marker-end="url(#mo)"/>
+  <text class="k k-accent" x="1095" y="292" text-anchor="middle">Suggestions</text>
+  <text class="body" x="1095" y="322" text-anchor="middle">the model coaches the experts</text>
+  <text class="k" x="1125" y="606" text-anchor="middle">Corrections</text>
+  <text class="body" x="1125" y="636" text-anchor="middle">the experts set the target</text>
   <!-- data into the model -->
-  <path class="flow-out" id="fd" d="M 560 420 C 600 420, 620 420, 660 420" marker-end="url(#mi)"/>
+  <path class="flow-out" id="fd" d="M 598 430 C 614 430, 626 430, 642 430" marker-end="url(#mi)"/>
+  <g id="flights"></g>
 
   <!-- timeline -->
   <line class="tl" x1="140" y1="820" x2="1460" y2="820"/>
   <line class="tl-fill" id="tlf" x1="140" y1="820" x2="140" y2="820"/>
   <g id="ticks"></g>
-  <circle class="tl-marker" id="tlm" cx="140" cy="820" r="10"/>
-  <text class="k" x="140" y="862">Month 1</text>
-  <text class="k" x="1460" y="862" text-anchor="end">Month 12</text>
-  <text class="big" id="tlk" x="140" y="790" font-size="22" text-anchor="middle">Month 1</text>
+  <circle class="tl-marker" id="tlm" cx="140" cy="820" r="12"/>
+  <text class="k" x="140" y="866">Month 1</text>
+  <text class="k" x="1460" y="866" text-anchor="end">Month 12</text>
+  <text class="big" id="tlk" x="140" y="786" font-size="30" text-anchor="middle">Month 1</text>
 </svg>
+<div class="count"><i class="db" id="db"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/></svg></i><b id="traces">0</b><span>task traces</span></div>
+<div class="pd" id="pd"></div>
 </div>
 <script>
 (function () {
@@ -109,71 +121,60 @@
   function smooth(t) { return t * t * (3 - 2 * t); }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   var K = 3.4, E = Math.exp(K) - 1; function f(x) { return (Math.exp(K * x) - 1) / E; }
-
   var RUN = 10000, HOLD = 1500; window.__duration = RUN + HOLD;
+  var ICO = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
 
-  // pile: 12 bars, filled as traces accumulate
-  var bars = []; for (var i = 0; i < 12; i++) bars.push(el('rect', { x: 0, y: 11 * (11 - i), width: 260, height: 8, rx: 3 }, $('pile')));
-  // timeline ticks
-  for (var m = 0; m <= 11; m++) el('line', { class: 'tl-tick', x1: 140 + m * 120, y1: 812, x2: 140 + m * 120, y2: 828 }, $('ticks'));
-  // experts: three people, rings = expertise
-  var EXP = [{ y: 320, a: .30, b: .78 }, { y: 440, a: .48, b: .88 }, { y: 560, a: .64, b: .96 }], rings = [], ringT = [];
-  EXP.forEach(function (e) {
-    var g = el('g', { transform: 'translate(1360 ' + e.y + ')' }, $('experts'));
-    el('circle', { class: 'ring-track', r: 44 }, g);
-    rings.push(el('circle', { class: 'ring', r: 44, transform: 'rotate(-90)', pathLength: 100, 'stroke-dasharray': '30 70' }, g));
-    el('circle', { class: 'avatar', cy: -8, r: 11 }, g);
-    el('path', { class: 'avatar', d: 'M -19 22 a 19 19 0 0 1 38 0' }, g);
-    ringT.push(el('text', { class: 'k', x: 64, y: 6, 'font-size': 16 }, g));
+  // the same ten process-data items as the scaling chart, lighting up in the same order
+  var PD = [['Client meeting', '<path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/>'], ['Slide build', '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/><path d="M7 12l3-3 2.5 2.5L17 7"/>'], ['Procedure recording', '<path d="M3 12h3.5l1.8-4 3 8 2-5 1.5 3H21"/><path d="M5 19h14"/>'], ['Desk work', '<rect x="2.5" y="5" width="19" height="11" rx="1.5"/><path d="M6 20h12"/><path d="M6.5 9h2M11 9h2M15.5 9h2M6.5 12.5h11"/>'], ['Document redline', '<path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4z"/><path d="M4 21h9"/>'], ['Search and screening', '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/><path d="M8 10.5h5"/>'], ['Chart sign-off', '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8.5 12 2.5 2.5L16 9.5"/>'], ['Claim entry', '<path d="M5 3h14v18l-2.3-1.6L14.4 21l-2.4-1.6L9.6 21l-2.3-1.6L5 21z"/><path d="M9 8h6M9 12h6"/>'], ['Hand-over', '<path d="M7 7h10l-2.5-2.5M17 13H7l2.5 2.5"/><path d="M3.5 20.5h17"/>'], ['Call transcript', '<path d="M4 12h2l1.5-4 3 9 2.5-7 1.5 4H20"/><path d="M6.5 3.5 5 5M17.5 3.5 19 5"/>']];
+  var AT = [0.04, 0.14, 0.24, 0.34, 0.44, 0.54, 0.64, 0.74, 0.84, 0.94];
+  $('pd').innerHTML = PD.map(function (p) { return '<span class="pdc"><i>' + ICO(p[1]) + '</i>' + p[0] + '</span>'; }).join('');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.pdc'));
+
+  // a flying copy per chip: leaves the chip the moment it lights up, lands in the model 1.4s later
+  var stageBox = $('stage').getBoundingClientRect();
+  var flights = chips.map(function (c, i) {
+    var r = c.getBoundingClientRect(), g = el('g', { class: 'fly', opacity: 0 }, $('flights'));
+    var w = r.width;
+    el('rect', { x: 0, y: -24, width: w, height: 48, rx: 24 }, g);
+    el('circle', { cx: 24, cy: 0, r: 19, fill: 'var(--soft)', stroke: 'none' }, g);
+    el('path', { d: PD[i][1].replace(/<[^>]+>/g, function (tag) { var m = tag.match(/d="([^"]+)"/); return m ? m[1] + ' ' : ''; }).trim(), transform: 'translate(13 -11) scale(0.92)' }, g);
+    el('text', { x: 52, y: 7 }, g).textContent = PD[i][0];
+    return { g: g, x0: r.left - stageBox.left, y0: r.top - stageBox.top + r.height / 2, t0: AT[i] * RUN };
   });
-  // chips: process-data items flying into the model
-  var KINDS = [
-    ['Client meeting', 'M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3zM5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7'],
-    ['Document redline', 'M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4zM4 21h9'],
-    ['Procedure recording', 'M3 12h3.5l1.8-4 3 8 2-5 1.5 3H21M5 19h14'],
-    ['Desk work', 'M2.5 5h19v11h-19zM6 20h12M6.5 9h2M11 9h2M15.5 9h2M6.5 12.5h11'],
-    ['Call transcript', 'M4 12h2l1.5-4 3 9 2.5-7 1.5 4H20M6.5 3.5 5 5M17.5 3.5 19 5'],
-    ['Search and screening', 'M16.5 10.5a6 6 0 1 1-12 0 6 6 0 0 1 12 0zM15 15l5 5M8 10.5h5']
-  ];
-  var N_CHIPS = 18, chips = [];
-  for (var c = 0; c < N_CHIPS; c++) {
-    var g = el('g', { opacity: 0 }, $('chips'));
-    var kind = KINDS[c % KINDS.length];
-    var w = 46 + kind[0].length * 9.6;
-    el('rect', { class: 'chip', x: 0, y: -18, width: w, height: 36, rx: 18 }, g);
-    el('path', { class: 'chip-ico', d: kind[1], transform: 'translate(10 -9) scale(0.75)' }, g);
-    el('text', { class: 'chip-t', x: 32, y: 6 }, g).textContent = kind[0];
-    chips.push(g);
-  }
+
+  var bars = null;
+  for (var m = 0; m <= 11; m++) el('line', { class: 'tl-tick', x1: 140 + m * 120, y1: 810, x2: 140 + m * 120, y2: 830 }, $('ticks'));
+  var EXP = [{ y: 316, a: .30, b: .78 }, { y: 452, a: .48, b: .88 }, { y: 588, a: .64, b: .96 }], rings = [], ringT = [];
+  EXP.forEach(function (e) {
+    var g = el('g', { transform: 'translate(1340 ' + e.y + ')' }, $('experts'));
+    el('circle', { class: 'ring-track', r: 54 }, g);
+    rings.push(el('circle', { class: 'ring', r: 54, transform: 'rotate(-90)', pathLength: 100, 'stroke-dasharray': '30 70' }, g));
+    el('circle', { class: 'avatar', cy: -10, r: 14 }, g);
+    el('path', { class: 'avatar', d: 'M -24 28 a 24 24 0 0 1 48 0' }, g);
+    ringT.push(el('text', { class: 'k', x: 74, y: 9, 'font-size': 24 }, g));
+  });
 
   function render(ms) {
     var t = clamp(ms / RUN, 0, 1), s = smooth(t), fx = f(t);
-    // traces & pile
-    var traces = Math.round(18400 * fx);
-    $('traces').textContent = traces.toLocaleString('en-US');
-    bars.forEach(function (b, i) { b.setAttribute('class', fx * 12 > i + 0.5 ? 'on' : ''); });
-    // the model: capability ring, depth layers
+    $('traces').textContent = Math.round(18400 * fx).toLocaleString('en-US');
+    $('db').style.transform = 'scale(' + (0.6 + 0.65 * fx).toFixed(3) + ')'; $('db').classList.toggle('full', t >= 0.64);
+    chips.forEach(function (c, i) { c.classList.toggle('on', t >= AT[i]); });
+    flights.forEach(function (fl) {
+      var u = (ms - fl.t0) / 1400;
+      if (u < 0 || u > 1) { fl.g.setAttribute('opacity', 0); return; }
+      var e = smooth(u), x = fl.x0 + (600 - fl.x0) * e, y = fl.y0 + (430 - fl.y0) * e;
+      fl.g.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + (1 - 0.45 * e).toFixed(3) + ')');
+      fl.g.setAttribute('opacity', clamp(u / 0.1, 0, 1) * clamp((1 - u) / 0.15, 0, 1));
+    });
     var cap = 6 + 85 * s;
     $('gauge').setAttribute('stroke-dasharray', cap.toFixed(1) + ' ' + (100 - cap).toFixed(1));
     $('cap').textContent = Math.round(cap) + '%';
-    [['d1', .35], ['d2', .55], ['d3', .75]].forEach(function (d) { $(d[0]).setAttribute('opacity', (0.25 + 0.65 * clamp((t - d[1]) / 0.12, 0, 1)) * clamp((t - d[1]) / 0.12, 0, 1)); });
-    // experts grow too
+    [['d1', .35], ['d2', .55], ['d3', .75]].forEach(function (d) { var o = clamp((t - d[1]) / 0.12, 0, 1); $(d[0]).setAttribute('opacity', o * (0.3 + 0.7 * o)); });
     EXP.forEach(function (e, i) { var v = e.a + (e.b - e.a) * s; rings[i].setAttribute('stroke-dasharray', (v * 100).toFixed(1) + ' ' + (100 - v * 100).toFixed(1)); ringT[i].textContent = Math.round(v * 100) + '%'; });
-    // flows: dashes travel
-    var off = -(ms / 1000) * 40;
-    ['fo', 'fi', 'fd'].forEach(function (id) { $(id).style.strokeDashoffset = off; });
-    // chips: emitted every 520ms from the pile, fly to the model over 1500ms
-    chips.forEach(function (g, i) {
-      var t0 = 300 + i * 540, u = (ms - t0) / 1400;
-      if (u < 0 || u > 1) { g.setAttribute('opacity', 0); return; }
-      var e = smooth(u), x0 = 160 + (i % 3) * 40, y0 = 392 + (i % 5) * 22, x = x0 + (560 - x0) * e, y = y0 + (420 - y0) * e;
-      g.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + (1 - 0.3 * e).toFixed(3) + ')');
-      g.setAttribute('opacity', clamp(u / 0.12, 0, 1) * clamp((1 - u) / 0.18, 0, 1));
-    });
-    // timeline
+    var off = -(ms / 1000) * 56; ['fo', 'fi', 'fd'].forEach(function (id) { $(id).style.strokeDashoffset = off; });
     var x = 140 + 1320 * t, month = 1 + Math.min(11, Math.floor(t * 11.999));
     $('tlf').setAttribute('x2', x); $('tlm').setAttribute('cx', x);
-    $('tlk').setAttribute('x', clamp(x, 190, 1410)); $('tlk').textContent = 'Month ' + month;
+    $('tlk').setAttribute('x', clamp(x, 200, 1400)); $('tlk').textContent = 'Month ' + month;
   }
   window.__seek = render;
   if (q.get('seek')) { document.fonts.ready.then(function () { render(0); window.__ready = true; }); }

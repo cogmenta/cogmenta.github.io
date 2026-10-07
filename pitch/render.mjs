@@ -4,7 +4,7 @@
 // Needs: Google Chrome in /Applications, ffmpeg on PATH, Node 22+ (global fetch + WebSocket).
 // Serves the repo root itself on a local port, so the pages can load the kit tokens and fonts.
 import { spawn } from 'node:child_process';
-import { mkdirSync, writeFileSync, rmSync, statSync, readdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { join, dirname, extname } from 'node:path';
@@ -76,6 +76,9 @@ for (const j of jobs) {
   manifest.push({ ...j, duration, frames, gifMB: mb(gif), mp4MB: mb(mp4) });
   console.log(`${j.id}: ${frames} frames @${j.fps}fps, ${(duration / 1000).toFixed(1)}s → gif ${mb(gif)} MB, mp4 ${mb(mp4)} MB (${((Date.now() - t0) / 1000).toFixed(0)}s)`);
 }
-writeFileSync(join(OUT, 'manifest.json'), JSON.stringify(manifest, null, 2));
+// merge into the existing manifest so a partial run keeps the other entries, in JOBS order
+let previous = []; try { previous = JSON.parse(readFileSync(join(OUT, 'manifest.json'), 'utf8')); } catch {}
+const merged = JOBS.map(j => manifest.find(m => m.id === j.id) || previous.find(m => m.id === j.id)).filter(Boolean);
+writeFileSync(join(OUT, 'manifest.json'), JSON.stringify(merged, null, 2));
 ws.close(); chrome.kill(); srv.close();
 await sleep(500); try { rmSync(`/tmp/cdp-pitch-${process.pid}`, { recursive: true, force: true }); } catch { /* Chrome may still be flushing its profile; /tmp is cleaned by the OS */ }

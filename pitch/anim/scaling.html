@@ -6,78 +6,98 @@
 <link rel="stylesheet" href="../../assets/cogmenta/cogmenta-tokens.css">
 <link rel="stylesheet" href="_base.css">
 <style>
-  .head { position: absolute; left: 80px; top: 56px; display: flex; align-items: center; gap: 18px; }
-  .dom { display: inline-flex; align-items: center; gap: 14px; padding: 10px 22px 10px 12px; border-radius: 12px; background: var(--soft); border: 1.5px solid var(--accent-text); font: 600 26px var(--cg-font-display); color: var(--cg-fg); }
-  .dom i { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; background: var(--surface); color: var(--outer); }
-  .dom svg { width: 24px; height: 24px; }
-  .head .mono { font-size: 20px; }
-  .plot { position: absolute; left: 150px; top: 150px; width: 1370px; height: 460px; border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); }
-  .plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .sc-grid line { stroke: var(--subtle); stroke-width: 1.5; }
-  .sc-base { fill: none; stroke: var(--muted); stroke-width: 3; stroke-dasharray: 10 10; }
-  .sc-line { fill: none; stroke: var(--outer); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-  .sc-pts circle { fill: var(--surface); stroke: var(--inner); stroke-width: 5; }
-  .sc-pts circle:last-child { fill: var(--inner); }
-  .sc-tip { fill: var(--outer); stroke: var(--surface); stroke-width: 3; }
-  .sc-leader { stroke: var(--accent-text); stroke-width: 2.5; stroke-dasharray: 7 7; }
-  .ylab { position: absolute; left: -70px; bottom: 0; transform-origin: 0 0; transform: rotate(-90deg); font-size: 18px; white-space: nowrap; }
-  .baselab { position: absolute; left: 16px; font-size: 20px; color: var(--muted); white-space: nowrap; }
-  .pin { position: absolute; transform: translate(-50%, -170%); font: 500 22px var(--cg-font-body); color: var(--muted); white-space: nowrap; padding: 6px 18px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--surface); }
-  .pin.live { background: var(--soft); border-color: var(--accent-text); color: var(--cg-fg); }
-  .card { position: absolute; left: 2%; top: 3%; width: 46%; padding: 20px 24px; border: 1.5px solid var(--line); border-left: 6px solid var(--inner); border-radius: 14px; background: var(--surface); box-shadow: 0 10px 30px rgba(11,31,58,.12); }
-  .card-k { display: flex; align-items: center; gap: 12px; font: 600 24px var(--cg-font-display); color: var(--outer); margin-bottom: 10px; }
-  .card-k::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--inner); }
-  .card p { font-size: 20px; line-height: 1.35; color: var(--muted); }
-  .card p + p { margin-top: 10px; color: var(--cg-fg); }
-  .card .t { display: block; font-family: var(--cg-font-mono); font-size: 14px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-  .card .t-act { color: var(--accent-text); }
-  .card .foot { margin-top: 12px; padding-top: 10px; border-top: 1.5px solid var(--line); font-family: var(--cg-font-mono); font-size: 15px; color: var(--muted); }
-  .emerge { position: absolute; right: 8px; font-family: var(--cg-font-mono); font-size: 16px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); background: var(--soft); border-radius: 999px; padding: 8px 18px; white-space: nowrap; transform: translateY(-50%); }
-  .axis { position: absolute; left: 150px; top: 648px; width: 1370px; display: flex; flex-direction: column; gap: 16px; }
-  .row { display: flex; align-items: flex-start; gap: 18px; }
-  .row.pd { padding-top: 16px; border-top: 2px dashed var(--line); }
-  .k { flex: 0 0 auto; padding-top: 12px; font-size: 16px; }
-  .x { flex: 0 0 auto; padding-top: 10px; color: var(--line); font-size: 22px; }
-  .items { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .chip { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; border: 1.5px dashed var(--line); color: var(--line); background: var(--surface); transform: scale(.82); opacity: .45; }
-  .chip svg { width: 24px; height: 24px; }
-  .chip.on { border-style: solid; border-color: var(--soft); background: var(--soft); color: var(--outer); transform: none; opacity: 1; }
-  .chip.p { border-radius: 50%; }
-  .chip.p.on { background: var(--outer); border-color: var(--outer); color: var(--cg-bg); }
-  .pdc { display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px 4px 4px; border-radius: 999px; border: 1.5px dashed var(--line); background: var(--surface); font-size: 17px; color: var(--muted); opacity: .4; transform: translateY(-4px) scale(.96); }
-  .pdc i { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--subtle); color: var(--muted); }
-  .pdc i svg { width: 18px; height: 18px; }
-  .pdc.on { opacity: 1; transform: none; border-style: solid; border-color: var(--line); color: var(--outer); }
-  .pdc.on i { background: var(--soft); color: var(--outer); }
-  .count { margin-left: auto; flex: 0 0 auto; display: flex; align-items: center; gap: 16px; white-space: nowrap; }
-  .count .db { width: 52px; height: 52px; color: var(--line); transform-origin: 50% 100%; }
+  /* header: domain + title left, trace counter right */
+  .head { position: absolute; left: 80px; top: 44px; display: flex; align-items: center; gap: 22px; }
+  .dom { display: inline-flex; align-items: center; gap: 16px; padding: 10px 26px 10px 12px; border-radius: 14px; background: var(--soft); border: 2px solid var(--outer); font: 600 32px var(--cg-font-display); color: var(--ink); }
+  .dom i { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 10px; background: var(--surface); color: var(--outer); }
+  .dom svg { width: 32px; height: 32px; }
+  .head .mono { font-size: 24px; }
+  .count { position: absolute; right: 80px; top: 44px; display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+  .count .db { width: 72px; height: 72px; color: var(--track); transform-origin: 50% 100%; }
   .count .db.full { color: var(--inner); }
   .count .db svg { width: 100%; height: 100%; }
-  .count b { font: 600 40px var(--cg-font-display); letter-spacing: -0.02em; color: var(--outer); font-variant-numeric: tabular-nums; }
-  .count span { font-size: 18px; color: var(--muted); }
-  .note { position: absolute; right: 80px; bottom: 28px; font-size: 16px; color: var(--muted); }
+  .count b { font: 600 56px var(--cg-font-display); letter-spacing: -0.02em; color: var(--outer); font-variant-numeric: tabular-nums; }
+  .count span { font-size: 22px; color: var(--ink); }
+  /* left panel: stage rail + the live suggestion */
+  .panel { position: absolute; left: 80px; top: 150px; width: 540px; height: 440px; display: flex; flex-direction: column; gap: 18px; }
+  .rail { display: flex; gap: 10px; }
+  .rail span { flex: 1; text-align: center; padding: 10px 0; border-radius: 999px; border: 2px solid var(--line); font: 600 22px var(--cg-font-display); color: var(--muted); background: var(--surface); }
+  .rail span.done { border-color: var(--outer); color: var(--outer); }
+  .rail span.live { border-color: var(--outer); background: var(--outer); color: #fff; }
+  .card { flex: 1; padding: 24px 26px; border: 2px solid var(--line); border-left: 8px solid var(--inner); border-radius: 16px; background: var(--surface); box-shadow: 0 10px 30px rgba(11,31,58,.10); display: flex; flex-direction: column; }
+  .card-k { display: flex; align-items: center; gap: 12px; font: 600 30px var(--cg-font-display); color: var(--outer); margin-bottom: 12px; }
+  .card-k::before { content: ''; width: 14px; height: 14px; border-radius: 50%; background: var(--inner); }
+  .card p { font-size: 23px; line-height: 1.3; color: var(--muted); }
+  .card p + p { margin-top: 12px; color: var(--ink); }
+  .card .t { display: block; font-family: var(--cg-font-mono); font-size: 16px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .card .t-act { color: var(--accent-text); }
+  .card .foot { margin-top: auto; padding-top: 12px; border-top: 2px solid var(--line); font-family: var(--cg-font-mono); font-size: 16px; color: var(--ink); white-space: nowrap; }
+  .card .wait { font-size: 24px; color: var(--muted); line-height: 1.35; }
+  /* plot */
+  .plot { position: absolute; left: 710px; top: 150px; width: 810px; height: 440px; border-left: 3px solid var(--line); border-bottom: 3px solid var(--line); }
+  .plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .sc-grid line { stroke: var(--track); stroke-width: 1.5; }
+  .sc-base { fill: none; stroke: var(--muted); stroke-width: 3; stroke-dasharray: 12 10; }
+  .sc-line { fill: none; stroke: var(--outer); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+  .sc-pts circle { fill: var(--surface); stroke: var(--inner); stroke-width: 6; }
+  .sc-pts circle:last-child { fill: var(--inner); }
+  .sc-tip { fill: var(--outer); stroke: var(--surface); stroke-width: 3; }
+  .sc-leader { stroke: var(--accent-text); stroke-width: 3; stroke-dasharray: 8 8; }
+  .ylab { position: absolute; left: -76px; bottom: 0; transform-origin: 0 0; transform: rotate(-90deg); font-size: 20px; white-space: nowrap; }
+  .baselab { position: absolute; right: 16px; font-size: 22px; font-weight: 500; color: var(--muted); white-space: nowrap; }
+  .pin { position: absolute; transform: translate(-50%, -165%); font: 600 26px var(--cg-font-display); color: var(--outer); white-space: nowrap; padding: 8px 22px; border: 2px solid var(--outer); border-radius: 999px; background: var(--surface); }
+  .pin.live { background: var(--outer); color: #fff; }
+  .emerge { position: absolute; right: 8px; font-family: var(--cg-font-mono); font-size: 18px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--outer); background: var(--soft); border: 2px solid var(--inner); border-radius: 999px; padding: 8px 20px; white-space: nowrap; transform: translateY(-50%); }
+  /* axis */
+  .axis { position: absolute; left: 80px; top: 626px; width: 1440px; display: flex; flex-direction: column; gap: 16px; }
+  .row { display: flex; align-items: flex-start; gap: 18px; }
+  .row.pd { padding-top: 16px; border-top: 2px dashed var(--line); }
+  .k { flex: 0 0 auto; padding-top: 16px; font-size: 20px; }
+  .x { flex: 0 0 auto; padding-top: 12px; color: var(--muted); font-size: 28px; }
+  .items { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .chip { width: 60px; height: 60px; display: grid; place-items: center; border-radius: 12px; border: 2px dashed var(--line); color: var(--line); background: var(--surface); transform: scale(.86); opacity: .6; }
+  .chip svg { width: 34px; height: 34px; }
+  .chip.on { border-style: solid; border-color: var(--outer); background: var(--soft); color: var(--outer); transform: none; opacity: 1; }
+  .chip.p { border-radius: 50%; }
+  .chip.p.on { background: var(--outer); color: var(--cg-bg); }
+  .pdc { display: inline-flex; align-items: center; gap: 10px; padding: 5px 18px 5px 5px; border-radius: 999px; border: 2px dashed var(--line); background: var(--surface); font-size: 21px; font-weight: 500; color: var(--muted); opacity: .55; transform: translateY(-3px) scale(.97); }
+  .pdc i { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--subtle); color: var(--muted); }
+  .pdc i svg { width: 24px; height: 24px; }
+  .pdc.on { opacity: 1; transform: none; border-style: solid; border-color: var(--outer); color: var(--ink); }
+  .pdc.on i { background: var(--soft); color: var(--outer); }
+  .note { position: absolute; right: 80px; bottom: 22px; font-size: 17px; color: var(--muted); }
 </style>
 </head>
 <body>
 <div class="stage">
   <div class="head"><span class="dom" id="dom"></span><span class="mono">On-prem scaling law</span></div>
+  <span class="count"><i class="db" id="db"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/></svg></i><b id="count">0</b><span>task traces</span></span>
+
+  <div class="panel">
+    <div class="rail"><span data-stage="discover">Discover</span><span data-stage="optimize">Optimize</span><span data-stage="coach">Coach</span></div>
+    <div class="card" id="card">
+      <div id="wait" class="wait">Connecting the firm’s channels, people and process data on-prem. The first suggestion arrives when the system has seen enough of the work.</div>
+      <div id="live" hidden><p class="card-k" id="ck"></p><p><span class="t">Observed</span><span id="obs"></span></p><p><span class="t t-act">Suggests</span><span id="act"></span></p></div>
+      <p class="foot" id="foot" hidden></p>
+    </div>
+  </div>
+
   <div class="plot" id="plot">
     <svg id="svg">
-      <defs><linearGradient id="scFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1FA89A" stop-opacity="0.22"/><stop offset="100%" stop-color="#1FA89A" stop-opacity="0"/></linearGradient></defs>
+      <defs><linearGradient id="scFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1FA89A" stop-opacity="0.28"/><stop offset="100%" stop-color="#1FA89A" stop-opacity="0.02"/></linearGradient></defs>
       <g class="sc-grid" id="grid"></g>
       <path class="sc-base" id="base"/>
       <path id="area" fill="url(#scFill)"/>
       <path class="sc-line" id="line"/>
-      <line class="sc-leader" id="leader"/>
-      <g class="sc-pts" id="pts"><circle r="11"/><circle r="11"/><circle r="14"/></g>
-      <circle class="sc-tip" id="tip" r="8"/>
+      <g class="sc-pts" id="pts"><circle r="13"/><circle r="13"/><circle r="17"/></g>
+      <circle class="sc-tip" id="tip" r="10"/>
     </svg>
     <span class="ylab mono">Capability on your own work →</span>
     <span class="baselab" id="baselab">General model, no context</span>
     <span class="pin" data-stage="discover">Discover</span><span class="pin" data-stage="optimize">Optimize</span><span class="pin" data-stage="coach">Coach</span>
     <span class="emerge" id="emerge">Emergent behavior</span>
-    <div class="card" id="card"><p class="card-k" id="ck"></p><p><span class="t">Observed</span><span id="obs"></span></p><p><span class="t t-act">Suggests</span><span id="act"></span></p><p class="foot" id="foot"></p></div>
   </div>
+
   <div class="axis">
     <div class="row">
       <span class="k mono">Channels</span><div class="items" id="ch"></div>
@@ -86,7 +106,6 @@
     </div>
     <div class="row pd">
       <span class="k mono">Process data</span><div class="items" id="pd"></div>
-      <span class="count"><i class="db" id="db"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/></svg></i><span><b id="count">0</b> <span>task traces</span></span></span>
     </div>
   </div>
   <p class="note">Illustrative. Firms anonymized, figures illustrative.</p>
@@ -96,7 +115,7 @@
   var q = new URLSearchParams(location.search);
   if (q.get('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
   var DOMAIN = q.get('domain') || 'ip';
-  var ICO = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+  var ICO = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
   var DOMS = {
     ip:  { name: 'Patent & IP',        ico: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/><circle cx="12" cy="13" r="2.5"/><path d="M10.6 15.2 10 19l2-1 2 1-.6-3.8"/>' },
     ma:  { name: 'Sell-side M&A',      ico: '<path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 20h18"/>' },
@@ -129,7 +148,7 @@
   $('pd').innerHTML = PD.map(function (p, i) { return '<span class="pdc" data-at="' + PD_AT[i] + '"><i>' + ICO(p[1]) + '</i>' + p[0] + '</span>'; }).join('');
   var marks = Array.prototype.slice.call(document.querySelectorAll('[data-at]'));
 
-  var plot = $('plot'), svg = $('svg'), W = 1370, H = 460, NS = 'http://www.w3.org/2000/svg';
+  var plot = $('plot'), svg = $('svg'), W = 810, H = 440, NS = 'http://www.w3.org/2000/svg';
   svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
   var K = 3.4, E = Math.exp(K) - 1, BASE = 0.06, Y0 = 0.1, HEAD = 1.12, RUN = 12000, HOLD = 3000;
   var GRID = [0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8], MS = [0.36, 0.64, 0.88], STAGES = ['discover', 'optimize', 'coach'], NAMES = ['Discover', 'Optimize', 'Coach'], TRACES = 18400;
@@ -138,7 +157,7 @@
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   function smooth(t) { return t * t * (3 - 2 * t); }
   var gridLines = GRID.map(function () { var l = document.createElementNS(NS, 'line'); $('grid').appendChild(l); return l; });
-  var pts = $('pts').querySelectorAll('circle'), pins = plot.querySelectorAll('.pin'), card = $('card'), yv = 1;
+  var pts = $('pts').querySelectorAll('circle'), pins = plot.querySelectorAll('.pin'), rail = document.querySelectorAll('.rail span'), yv = 1;
   function X(x) { return x * W; } function Y(y) { return H - (y / yv) * H; }
   window.__duration = RUN + HOLD;
 
@@ -147,16 +166,15 @@
     yv = view(p);
     marks.forEach(function (m) { m.classList.toggle('on', p >= +m.getAttribute('data-at')); });
     $('count').textContent = Math.round(f(p) * TRACES).toLocaleString('en-US');
-    $('db').style.transform = 'scale(' + (0.5 + 0.75 * f(p)).toFixed(3) + ')'; $('db').classList.toggle('full', p >= 0.64);
+    $('db').style.transform = 'scale(' + (0.6 + 0.6 * f(p)).toFixed(3) + ')'; $('db').classList.toggle('full', p >= 0.64);
     GRID.forEach(function (g, i) { var y = Y(g), l = gridLines[i]; l.setAttribute('x1', 0); l.setAttribute('x2', W); l.setAttribute('y1', y); l.setAttribute('y2', y); l.style.opacity = clamp((H - y) / 60, 0, 1) * clamp(y / 20, 0, 1); });
-    var yb = Y(BASE); $('base').setAttribute('d', 'M0 ' + yb + ' L' + W + ' ' + yb); $('baselab').style.top = clamp(yb - 34, 0, H - 30) + 'px';
+    var yb = Y(BASE); $('base').setAttribute('d', 'M0 ' + yb + ' L' + W + ' ' + yb); $('baselab').style.top = clamp(yb - 36, 0, H - 32) + 'px';
     var n = Math.max(2, Math.round(240 * p)), d = 'M0 ' + Y(0);
     for (var i = 1; i <= n; i++) { var x = p * i / n; d += ' L' + X(x).toFixed(1) + ' ' + Y(f(x)).toFixed(1); }
     $('line').setAttribute('d', d); $('area').setAttribute('d', d + ' L' + X(p).toFixed(1) + ' ' + H + ' L0 ' + H + ' Z');
     $('tip').setAttribute('cx', X(p)); $('tip').setAttribute('cy', Y(f(p)));
     var em = $('emerge'), exl = Math.max(0, (W - em.offsetWidth - 16) / W);
-    em.style.top = clamp(Y(f(Math.min(exl, p))) + 10, 0, H - 40) + 'px'; em.style.opacity = clamp((p - 0.9) / 0.05, 0, 1);
-    // milestones, and which card is live
+    em.style.top = clamp(Y(f(Math.min(exl, p))) + 12, 0, H - 44) + 'px'; em.style.opacity = clamp((p - 0.9) / 0.05, 0, 1);
     var live = -1;
     MS.forEach(function (mx, k) {
       var on = p >= mx, px = X(mx), py = Y(f(mx)), o = clamp((p - mx) / 0.025, 0, 1);
@@ -165,13 +183,13 @@
       if (on) live = k;
     });
     pins.forEach(function (pn, k) { pn.classList.toggle('live', k === live); });
+    rail.forEach(function (r, k) { r.classList.toggle('live', k === live); r.classList.toggle('done', k < live); });
     if (live >= 0) {
       var c = CARDS[DOMAIN][STAGES[live]], o = clamp((p - MS[live]) / 0.03, 0, 1);
+      $('wait').hidden = true; $('live').hidden = false; $('foot').hidden = false;
       $('ck').textContent = NAMES[live]; $('obs').textContent = c[0]; $('act').textContent = c[1]; $('foot').textContent = c[2];
-      card.style.opacity = o; card.style.transform = 'translateY(' + (8 * (1 - o)) + 'px)';
-      var px = X(MS[live]), py = Y(f(MS[live])), bx = card.offsetLeft, by = card.offsetTop, bw = card.offsetWidth, bh = card.offsetHeight, l = $('leader');
-      l.setAttribute('x1', px); l.setAttribute('y1', py); l.setAttribute('x2', clamp(px, bx + 24, bx + bw - 24)); l.setAttribute('y2', by + bh); l.style.opacity = o;
-    } else { card.style.opacity = 0; $('leader').style.opacity = 0; }
+      $('live').style.opacity = o; $('foot').style.opacity = o; $('live').style.transform = 'translateY(' + (8 * (1 - o)) + 'px)';
+    } else { $('wait').hidden = false; $('live').hidden = true; $('foot').hidden = true; }
   }
   window.__seek = render;
   if (q.get('seek')) { document.fonts.ready.then(function () { render(0); window.__ready = true; }); }

@@ -51,8 +51,8 @@
     "note": "The local model stays the same size while its capability, the process data, and the experts all grow — inside the on-prem boundary.",
     "duration": 11500,
     "frames": 230,
-    "gifMB": "2.5",
-    "mp4MB": "0.8"
+    "gifMB": "3.0",
+    "mp4MB": "1.0"
   },
   {
     "id": "rsi-dark",
@@ -62,8 +62,8 @@
     "note": "Same scene on navy.",
     "duration": 11500,
     "frames": 230,
-    "gifMB": "2.5",
-    "mp4MB": "0.8"
+    "gifMB": "3.0",
+    "mp4MB": "0.9"
   },
   {
     "id": "scaling-ip",
@@ -73,8 +73,8 @@
     "note": "Capability compounds as channels, people and process data connect; Discover → Optimize → Coach cards for IP consulting.",
     "duration": 15000,
     "frames": 300,
-    "gifMB": "3.8",
-    "mp4MB": "0.9"
+    "gifMB": "3.4",
+    "mp4MB": "1.0"
   },
   {
     "id": "scaling-ma",
@@ -84,8 +84,8 @@
     "note": "Same chart with the M&A advisory cards.",
     "duration": 15000,
     "frames": 300,
-    "gifMB": "3.7",
-    "mp4MB": "0.9"
+    "gifMB": "3.4",
+    "mp4MB": "1.0"
   },
   {
     "id": "scaling-med",
@@ -95,7 +95,7 @@
     "note": "Same chart with the medical-device regulatory cards.",
     "duration": 15000,
     "frames": 300,
-    "gifMB": "3.7",
-    "mp4MB": "0.9"
+    "gifMB": "3.4",
+    "mp4MB": "1.0"
   }
 ]
