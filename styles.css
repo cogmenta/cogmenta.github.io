@@ -238,18 +238,29 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
 .step h3 { font-size: var(--cg-text-lg); margin: var(--cg-space-3) 0 var(--cg-space-2); }
 .step p { font-size: var(--cg-text-sm); color: var(--cg-fg-muted); }
 
-/* ---- PILOT: firms in the field (a static list) ---- */
+/* ---- PILOT: firms in the field (a looping marquee; pauses on hover, via the button, and under reduced motion) ---- */
 .field { margin-top: var(--cg-space-12); }
 .field-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--cg-space-2) var(--cg-space-6); flex-wrap: wrap; padding: 0 0 var(--cg-space-4); }
 .field-k { font-family: var(--cg-font-mono); font-size: var(--cg-text-2xs); font-weight: 500; letter-spacing: var(--cg-tracking-label); text-transform: uppercase; color: var(--cg-fg-muted); }
 .field-sub { font-size: var(--cg-text-sm); color: var(--cg-fg-muted); margin-left: auto; }
-.firms { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--cg-space-3); }
-.firm { display: flex; align-items: center; gap: var(--cg-space-3); padding: var(--cg-space-2) var(--cg-space-4) var(--cg-space-2) var(--cg-space-2); border: 1px solid var(--cg-border); border-radius: var(--cg-radius-lg); background: var(--cg-surface); }
+.marquee-toggle { font: 500 var(--cg-text-xs) var(--cg-font-body); color: var(--cg-fg); background: var(--cg-surface); border: 1px solid var(--cg-border); border-radius: var(--cg-radius-pill, 999px); padding: 2px var(--cg-space-3); cursor: pointer; transition: border-color var(--cg-dur-fast) var(--cg-ease); }
+.marquee-toggle:hover { border-color: var(--cg-fg); }
+.field--bleed .marquee {
+  --bleed: min(10%, max(0px, calc((100vw - 100%) / 2 - 10px)));
+  width: calc(100% + var(--bleed) * 2);
+  margin-inline: calc(var(--bleed) * -1);
+}
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: marquee 46s linear infinite; }
+.marquee:hover .marquee-track, .marquee.is-paused .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.firms { list-style: none; display: flex; }
+.firm { flex: 0 0 auto; display: flex; align-items: center; gap: var(--cg-space-3); margin-right: var(--cg-space-3); padding: var(--cg-space-2) var(--cg-space-4) var(--cg-space-2) var(--cg-space-2); border: 1px solid var(--cg-border); border-radius: var(--cg-radius-lg); background: var(--cg-surface); }
 .firm-logo { width: 44px; height: 44px; flex: 0 0 auto; border-radius: var(--cg-radius-md); display: grid; place-items: center; background: var(--cg-bg-subtle); color: var(--cg-loop-outer); }
 .firm-logo svg { width: 22px; height: 22px; }
 .firm:nth-child(3n+2) .firm-logo { background: var(--cg-loop-outer); color: var(--cg-bg); }
 .firm:nth-child(3n) .firm-logo { background: var(--cg-accent-soft); color: var(--cg-loop-outer); }
-.firm-text { display: flex; flex-direction: column; min-width: 0; }
+.firm-text { display: flex; flex-direction: column; white-space: nowrap; }
 .firm-text b { font-family: var(--cg-font-display); font-weight: 600; font-size: var(--cg-text-md); color: var(--cg-loop-outer); }
 .firm-text span { font-size: var(--cg-text-sm); color: var(--cg-fg-muted); }
 
@@ -506,6 +517,14 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
   .signal { display: none; }
   .sc-pts circle, .sc-leader, .sc-pin, .sc-card, .sc-emerge, .sc-chip, .sc-pd { transition: none; }
   .sc-replay { display: none; }
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .field--bleed .marquee { width: 100%; margin-inline: 0; }
+  .marquee-track { animation: none; width: auto; }
+  .marquee-toggle { display: none; }
+  .firms { flex-wrap: wrap; row-gap: var(--cg-space-3); }
+  .firms[aria-hidden="true"] { display: none; }
+  .firm { flex-shrink: 1; max-width: 100%; }
+  .firm-text { white-space: normal; min-width: 0; }
   html { scroll-behavior: auto; }
 }
 
