@@ -306,43 +306,20 @@
         <p data-animate class="panel-k">Research behind it</p>
         <p data-animate class="papers-sub">Five peer-reviewed papers at COLM, ACL and NeurIPS, plus one open-source platform, from the founding team's lab.</p>
       </div>
-      <div data-animate data-stagger data-fx="spotlight" class="papers">
-        <a class="paper" href="https://arxiv.org/abs/2504.18942" target="_blank" rel="noopener">
-          <span class="paper-venue">COLM 2025</span>
-          <h3>LawFlow</h3>
-          <p>End-to-end legal workflows from trained law students on business-formation matters, compared with LLM agents: humans plan modularly and adapt; LLMs run sequential, exhaustive plans.</p>
-          <span class="paper-link">arXiv ↗</span>
-        </a>
-        <a class="paper" href="https://aclanthology.org/2026.acl-long.1606/" target="_blank" rel="noopener">
-          <span class="paper-venue">ACL 2026</span>
-          <h3>ScholaWrite</h3>
-          <p>About 62K keystroke-level edits of researchers writing papers, each labeled with the writer's intention. A ~0.1B model trained on it beats GPT-5 at predicting the next intention (0.64 vs. 0.41 F1).</p>
-          <span class="paper-link">ACL Anthology ↗</span>
-        </a>
-        <a class="paper" href="https://arxiv.org/abs/2607.29181" target="_blank" rel="noopener">
-          <span class="paper-venue">COLM 2026</span>
-          <h3>SERUM</h3>
-          <p>Turns raw video of people working into action- and intent-state models. Label normalization cuts the vocabulary 46% and lifts next-state top-1 accuracy by 18.2 points.</p>
-          <span class="paper-link">arXiv ↗</span>
-        </a>
-        <a class="paper" href="https://arxiv.org/abs/2606.29082" target="_blank" rel="noopener">
-          <span class="paper-venue">NeurIPS 2026</span>
-          <h3>Evolution Fine-Tuning (EFT)</h3>
-          <p>Turns 156K evolutionary-search trajectories across 371 optimization tasks into training data, so 2B–9B open models learn to discover.</p>
-          <span class="paper-link">arXiv ↗</span>
-        </a>
-        <a class="paper" href="https://arxiv.org/abs/2608.24735" target="_blank" rel="noopener">
-          <span class="paper-venue">NeurIPS 2026</span>
-          <h3>Meta<sup>n</sup></h3>
-          <p>Recursive self-improvement through emergent depth: one meta-operation, applied to its own traces and code, keeps adding layers until improvement stops.</p>
-          <span class="paper-link">arXiv ↗</span>
-        </a>
-        <a class="paper" href="https://open-galapagos.com/" target="_blank" rel="noopener">
-          <span class="paper-venue">Open source · Apache-2.0</span>
-          <h3>Open Galapagos</h3>
-          <p>An open platform for LLM-driven evolutionary search: compose population, selection, prompt, proposer, evaluator, and memory into your own scaffold.</p>
-          <span class="paper-link">open-galapagos.com ↗</span>
-        </a>
+      <div data-animate class="research">
+        <div class="research-prose">
+          <p>On-prem recursive self-improvement starts with the work itself, not a benchmark. We recorded how trained lawyers plan modularly and adapt through a business-formation matter, where LLM agents run sequential, exhaustive plans<a class="cite" href="#ref-1">1</a>; captured about 62K keystroke-level edits of researchers writing papers, each labeled with its intention, on which a ~0.1B model beats GPT-5 at predicting the writer&rsquo;s next intention<a class="cite" href="#ref-2">2</a>; and turned raw video of people working into action- and intent-state models<a class="cite" href="#ref-3">3</a>. This is the trace layer: the firm&rsquo;s own work, as a record a model can learn from.</p>
+          <p>Between expert corrections, the local model has to improve itself. Evolution Fine-Tuning turns 156K evolutionary-search trajectories across 371 optimization tasks into training data, so 2B&ndash;9B open models learn to discover rather than only answer<a class="cite" href="#ref-4">4</a>, and Open Galapagos is the open platform that search runs on<a class="cite" href="#ref-5">5</a>. Meta<sup>n</sup> shows the recursion itself: one meta-operation, applied to its own traces and code, keeps adding layers until improvement stops<a class="cite" href="#ref-6">6</a>. That is the inner loop.</p>
+          <p>The outer loop is human. Your experts correct what comes out, the corrections become the target, and a person signs off. All of it runs on your hardware, so the traces that make the model better never leave the building.</p>
+        </div>
+        <ol class="refs">
+          <li id="ref-1"><div><a href="https://arxiv.org/abs/2504.18942" target="_blank" rel="noopener">LawFlow: Collecting and Simulating Lawyers&rsquo; Thought Processes on Business Formation Case Studies</a><span class="ref-venue">COLM 2025</span></div></li>
+          <li id="ref-2"><div><a href="https://aclanthology.org/2026.acl-long.1606/" target="_blank" rel="noopener">ScholaWrite: A Dataset of End-to-End Scholarly Writing</a><span class="ref-venue">ACL 2026</span></div></li>
+          <li id="ref-3"><div><a href="https://arxiv.org/abs/2607.29181" target="_blank" rel="noopener">SERUM: State Extraction and Refinement for User Modeling</a><span class="ref-venue">COLM 2026</span></div></li>
+          <li id="ref-4"><div><a href="https://arxiv.org/abs/2606.29082" target="_blank" rel="noopener">Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks</a><span class="ref-venue">NeurIPS 2026</span></div></li>
+          <li id="ref-5"><div><a href="https://open-galapagos.com/" target="_blank" rel="noopener">Open Galapagos: an open platform for LLM-driven evolutionary search</a><span class="ref-venue">Open source &middot; Apache-2.0</span></div></li>
+          <li id="ref-6"><div><a href="https://arxiv.org/abs/2608.24735" target="_blank" rel="noopener">Meta<sup>n</sup>: Recursive Self-Improvement through Emergent Depth</a><span class="ref-venue">NeurIPS 2026</span></div></li>
+        </ol>
       </div>
     </div>
   </section>
