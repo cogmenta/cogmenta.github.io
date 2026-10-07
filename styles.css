@@ -459,7 +459,8 @@ a.paper:hover { border-color: var(--cg-accent); background: var(--cg-bg-subtle);
 .backers-k { font-family: var(--cg-font-mono); font-size: var(--cg-text-2xs); font-weight: 500; letter-spacing: var(--cg-tracking-label); text-transform: uppercase; color: var(--cg-fg-muted); }
 .backers-logos { list-style: none; display: flex; align-items: center; flex-wrap: wrap; gap: var(--cg-space-6); }
 .backers-logos a { display: block; }
-.backers-logos img { display: block; height: 44px; width: auto; }
+.backers-logos img { display: block; height: 56px; width: auto; filter: grayscale(1); opacity: .7; transition: filter var(--cg-dur-fast) var(--cg-ease), opacity var(--cg-dur-fast) var(--cg-ease); }
+.backers-logos a:hover img, .backers-logos a:focus-visible img { filter: none; opacity: 1; }
 
 /* ---- CTA ---- */
 .cta { position: relative; text-align: center; padding: var(--section-y) 0; background: var(--cg-bg); color: var(--cg-fg-muted); overflow: hidden; }
