@@ -25,6 +25,8 @@ export const JOBS = [
   { id: 'scaling-ip',        page: 'scaling.html?domain=ip',       fps: 20, title: 'On-prem scaling law — Patent & IP',        note: 'Capability compounds as channels, people and process data connect; Discover → Optimize → Coach cards for IP consulting.' },
   { id: 'scaling-ma',        page: 'scaling.html?domain=ma',       fps: 20, title: 'On-prem scaling law — Sell-side M&A',      note: 'Same chart with the M&A advisory cards.' },
   { id: 'scaling-med',       page: 'scaling.html?domain=med',      fps: 20, title: 'On-prem scaling law — MedTech regulatory', note: 'Same chart with the medical-device regulatory cards.' },
+  { id: 'hierarchy-light',   page: 'hierarchy.html?theme=light',   fps: 20, title: 'Expert Decision Model — per company → vertical → general (light)', note: 'Bottom-up: company models learn on-prem, their patterns roll up into vertical models and one general model while the data grows; dashed nodes are new customers cold-started from above.' },
+  { id: 'hierarchy-dark',    page: 'hierarchy.html?theme=dark',    fps: 20, title: 'Expert Decision Model — per company → vertical → general (dark)', note: 'Same scene on navy.' },
 ];
 
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.gif': 'image/gif', '.woff2': 'font/woff2' };
