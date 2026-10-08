@@ -127,14 +127,14 @@
     var area = svg.querySelector('.sc-area');
     var line = svg.querySelector('.sc-line');
     var tip = svg.querySelector('.sc-tip');
-    var leader = svg.querySelector('.sc-leader');
     var pts = svg.querySelectorAll('.sc-pts circle');
     var pins = plot.querySelectorAll('.sc-pin');
     var baseLab = plot.querySelector('.sc-baselab');
     var replay = plot.querySelector('.sc-replay');
     var emerge = plot.querySelector('.sc-emerge');
-    var stageBox = plot.parentNode;
-    var card = stageBox.querySelector('.sc-card');
+    var card = document.querySelector('.sc-card');
+    var rail = document.querySelectorAll('.sc-rail-btn');
+    var ORDER = ['discover', 'optimize', 'coach'];
     var names = card.querySelectorAll('.sc-c-name');
     var bodies = card.querySelectorAll('.sc-body');
     var NS = 'http://www.w3.org/2000/svg';
@@ -168,8 +168,12 @@
         b.hidden = !(b.getAttribute('data-stage') === stage && b.getAttribute('data-domain') === domain);
       });
       pins.forEach(function (pn) { pn.classList.toggle('is-live', pn.getAttribute('data-stage') === stage); });
+      rail.forEach(function (b) {
+        var k = b.getAttribute('data-stage');
+        b.classList.toggle('is-live', k === stage);
+        b.classList.toggle('is-done', !!stage && ORDER.indexOf(k) < ORDER.indexOf(stage));
+      });
       card.classList.toggle('on', !!stage);
-      leader.classList.toggle('on', !!stage);
     }
     function setStage(s, byUser) {
       if (byUser) pinned = true;
@@ -178,7 +182,10 @@
       paint();
     }
     pins.forEach(function (pn) {
-      pn.addEventListener('click', function () { setStage(pn.getAttribute('data-stage'), true); place(); });
+      pn.addEventListener('click', function () { setStage(pn.getAttribute('data-stage'), true); });
+    });
+    rail.forEach(function (b) {
+      b.addEventListener('click', function () { setStage(b.getAttribute('data-stage'), true); });
     });
     document.querySelectorAll('.dom-btn').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -190,15 +197,14 @@
         domain = b.getAttribute('data-domain');
         if (!stage) stage = 'discover';
         paint();
-        place();
       });
     });
 
     /* ---- the x-axis ---- */
     var axis = document.querySelector('.sc-axis');
     var marks = axis ? Array.prototype.slice.call(axis.querySelectorAll('[data-at]')) : [];
-    var counter = axis ? axis.querySelector('[data-count]') : null;
-    var db = axis ? axis.querySelector('[data-grow]') : null;   // the data icon grows with the count
+    var counter = document.querySelector('.sc-count [data-count]');
+    var db = document.querySelector('.sc-count [data-grow]');   // the data icon grows with the count
     function axisAt(p) {
       if (!axis) return;
       marks.forEach(function (m) { m.classList.toggle('on', p >= +m.getAttribute('data-at')); });
@@ -213,15 +219,6 @@
     var current = 0, W = 0, H = 0, yv = 1;
     function X(x) { return x * W; }
     function Y(y) { return H - (y / yv) * H; }
-
-    function place() {
-      if (!stage || !W) { return; }
-      var k = ['discover', 'optimize', 'coach'].indexOf(stage);
-      var px = X(MS[k]), py = Y(f(MS[k]));
-      var bx = card.offsetLeft, by = card.offsetTop, bw = card.offsetWidth, bh = card.offsetHeight;
-      leader.setAttribute('x1', px); leader.setAttribute('y1', py);
-      leader.setAttribute('x2', clamp(px, bx + 16, bx + bw - 16)); leader.setAttribute('y2', by + bh);
-    }
 
     function render(p) {
       current = p;
@@ -267,7 +264,6 @@
         pins[k].style.top = py + 'px';
         if (on && !pinned) setStage(pins[k].getAttribute('data-stage'));
       });
-      place();
     }
 
     var raf = null;
@@ -293,7 +289,7 @@
       if (r.top < vh * 0.8 && r.bottom > 0) {
         started = true;
         window.removeEventListener('scroll', check);
-        if (reduce) { render(1); setStage('coach'); place(); } else play();
+        if (reduce) { render(1); setStage('coach'); } else play();
       }
     }
 
