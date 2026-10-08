@@ -97,5 +97,27 @@
     "frames": 300,
     "gifMB": "3.4",
     "mp4MB": "1.0"
+  },
+  {
+    "id": "hierarchy-light",
+    "page": "hierarchy.html?theme=light",
+    "fps": 20,
+    "title": "Expert Decision Model — per company → vertical → general (light)",
+    "note": "Bottom-up: company models learn on-prem, their patterns roll up into vertical models and one general model while the data grows; dashed nodes are new customers cold-started from above.",
+    "duration": 14000,
+    "frames": 280,
+    "gifMB": "1.1",
+    "mp4MB": "0.4"
+  },
+  {
+    "id": "hierarchy-dark",
+    "page": "hierarchy.html?theme=dark",
+    "fps": 20,
+    "title": "Expert Decision Model — per company → vertical → general (dark)",
+    "note": "Same scene on navy.",
+    "duration": 14000,
+    "frames": 280,
+    "gifMB": "1.1",
+    "mp4MB": "0.4"
   }
 ]

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Cogmenta · Expert Decision Model, per company → vertical → general</title>
+<link rel="stylesheet" href="../../assets/cogmenta/cogmenta-tokens.css">
+<link rel="stylesheet" href="_base.css">
+<style>
+  svg.scene { position: absolute; inset: 0; width: 1600px; height: 900px; }
+  .row-k { font-family: var(--cg-font-display); font-weight: 600; font-size: 28px; letter-spacing: -0.02em; fill: var(--accent-text); }
+  .title { font-family: var(--cg-font-display); font-weight: 600; font-size: 36px; letter-spacing: -0.02em; fill: var(--outer); }
+  .sub { font-size: 22px; fill: var(--muted); }
+  .node rect { fill: var(--outer); }
+  .node text { font-family: var(--cg-font-display); font-weight: 700; fill: var(--cg-bg); text-anchor: middle; }
+  .node.ghost rect { fill: var(--surface); stroke: var(--line); stroke-width: 2.5; stroke-dasharray: 9 7; }
+  .node.ghost text { fill: var(--muted); font-weight: 600; }
+  .node.ghost.warm rect { fill: var(--soft); stroke: var(--inner); stroke-dasharray: none; }
+  .node.ghost.warm text { fill: var(--outer); }
+  .name { font-size: 22px; font-weight: 600; fill: var(--ink); text-anchor: middle; }
+  .name.v { font-family: var(--cg-font-display); font-size: 26px; fill: var(--outer); }
+  .name.ghost { fill: var(--muted); font-weight: 500; }
+  .edge { fill: none; stroke: var(--muted); stroke-width: 2.5; }
+  .edge.ghost { stroke: var(--line); stroke-dasharray: 8 8; }
+  .dot-up { fill: var(--outer); } .dot-down { fill: var(--inner); }
+  .db { fill: none; stroke: var(--ink); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .legend { font-size: 22px; fill: var(--muted); }
+  .legend tspan.up { fill: var(--outer); font-weight: 700; } .legend tspan.down { fill: var(--inner); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="stage">
+<svg class="scene" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" id="svg">
+  <text class="title" x="80" y="78">Expert Decision Model (X)</text>
+  <text class="sub" x="80" y="112">One model per company, learning on-prem. Patterns roll up into a vertical model, then a general one; raw data never leaves the firm.</text>
+  <text class="row-k" x="80" y="200" id="k-general">general</text>
+  <text class="row-k" x="80" y="450" id="k-vertical">vertical</text>
+  <text class="row-k" x="80" y="700" id="k-company">per company</text>
+  <text class="row-k" x="1520" y="134" text-anchor="end" font-size="22" id="k-data">data</text>
+  <g id="edges"></g>
+  <g id="nodes"></g>
+  <g id="dots"></g>
+  <g id="data"></g>
+  <text class="legend" x="800" y="848" text-anchor="middle" id="legend"><tspan class="up">▲</tspan> up — trajectory · method patterns (MOU scope, no raw data)<tspan dx="40" class="down">▼</tspan> down — new-customer cold-start</text>
+</svg>
+</div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (q.get('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  var NS = 'http://www.w3.org/2000/svg', $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); (parent || $('svg')).appendChild(e); return e; }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function ease(u) { return 1 - Math.pow(1 - u, 3); }
+  function pop(ms, t0, dur) { return ease(clamp((ms - t0) / (dur || 500), 0, 1)); }
+  var RUN = 12000, HOLD = 2000; window.__duration = RUN + HOLD;
+  var DB = 'M12 3a8 3 0 0 1 8 3v12a8 3 0 0 1-16 0V6a8 3 0 0 1 8-3zM4 6a8 3 0 0 0 16 0M4 12a8 3 0 0 0 16 0';
+
+  // geometry: rows at y=190 / 440 / 690 (centres); the data column sits at the right
+  var G = { x: 770, y: 190, w: 220, h: 120, fs: 56, t: 7500 };
+  var V = [
+    { x: 400,  y: 440, w: 150, h: 96, fs: 44, name: 'Finance X',        t: 4000 },
+    { x: 770,  y: 440, w: 150, h: 96, fs: 44, name: 'Legal · Patent X', t: 4800 },
+    { x: 1140, y: 440, w: 150, h: 96, fs: 44, name: 'Healthcare X',     t: 5600 }
+  ];
+  var C = [
+    { x: 330,  v: 0, name: 'Vermillion',    t: 300 },  { x: 470,  v: 0, name: 'Finance B',  ghost: true },
+    { x: 660,  v: 1, name: 'Jipyong',       t: 1000 }, { x: 770,  v: 1, name: 'Treez',      t: 1700 }, { x: 880, v: 1, name: 'Law firm C', ghost: true },
+    { x: 1070, v: 2, name: 'Gumdan Dental', t: 2400 }, { x: 1210, v: 2, name: 'Clinic D',   ghost: true }
+  ];
+  var CW = 96, CH = 72, CY = 690, T_GHOST = 9000, T_WARM = 10800;
+
+  function node(n, w, h, fs, cls) {
+    var g = el('g', { class: 'node ' + (cls || ''), transform: 'translate(' + n.x + ' ' + n.y + ')' }, $('nodes'));
+    el('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: 10 }, g);
+    el('text', { y: fs * 0.36, 'font-size': fs }, g).textContent = 'X';
+    return g;
+  }
+  function edge(ax, ay, bx, by, cls) {
+    var e = el('path', { class: 'edge ' + (cls || ''), d: 'M' + ax + ' ' + ay + ' L' + bx + ' ' + by }, $('edges'));
+    var len = Math.hypot(bx - ax, by - ay); e.__len = len; e.__a = [ax, ay]; e.__b = [bx, by];
+    if (!/ghost/.test(cls || '')) { e.setAttribute('stroke-dasharray', len); e.setAttribute('stroke-dashoffset', len); }
+    return e;
+  }
+  // build
+  var gNode = node(G, G.w, G.h, G.fs); var gName = el('text', { class: 'name v', x: G.x + G.w / 2 + 28, y: G.y + 10, style: 'text-anchor:start', 'font-size': 30 }); gName.textContent = 'General X';
+  var vNodes = V.map(function (v) { var g = node(v, v.w, v.h, v.fs); v.label = el('text', { class: 'name v', x: v.x, y: v.y + v.h / 2 + 40 }); v.label.textContent = v.name; v.edgeUp = edge(v.x, v.y - v.h / 2, G.x, G.y + G.h / 2); return g; });
+  var cNodes = C.map(function (c, i) {
+    var v = V[c.v]; c.y = CY;
+    var g = node(c, CW, CH, 34, c.ghost ? 'ghost' : '');
+    c.label = el('text', { class: 'name' + (c.ghost ? ' ghost' : ''), x: c.x, y: CY + CH / 2 + 34, 'font-size': 20 }); c.label.textContent = c.name;
+    c.edge = edge(c.x, CY - CH / 2, v.x, v.y + v.h / 2, c.ghost ? 'ghost' : '');
+    return g;
+  });
+  // the data column: company row 2x4 small, vertical row 2 medium, general 1 large — all appear as data accumulates
+  var dbs = [];
+  function db(x, y, s, t) { var g = el('g', { transform: 'translate(' + x + ' ' + y + ') scale(' + s + ')', opacity: 0 }, $('data')); el('path', { class: 'db', d: DB, transform: 'translate(-12 -12)' }, g); dbs.push({ g: g, t: t, s: s, x: x, y: y }); }
+  for (var i = 0; i < 8; i++) db(1420 + (i % 4) * 36, 672 + Math.floor(i / 4) * 40, 1.25, 500 + i * 380);
+  db(1455, 440, 2.0, 4600); db(1515, 440, 2.0, 5800);
+  db(1485, 190, 2.9, 8400);
+  // dots: up along solid edges, down along ghost edges
+  var dots = [];
+  C.forEach(function (c, i) { if (!c.ghost) dots.push({ e: c.edge, dir: 1, t0: 3600 + i * 300, period: 1500, cls: 'dot-up' }); else dots.push({ e: c.edge, dir: -1, t0: 9400 + i * 200, period: 1400, cls: 'dot-down' }); });
+  V.forEach(function (v, i) { dots.push({ e: v.edgeUp, dir: 1, t0: 7600 + i * 350, period: 1700, cls: 'dot-up' }); });
+  dots.forEach(function (d) { d.el = el('circle', { class: d.cls, r: 7, opacity: 0 }, $('dots')); });
+
+  function show(g, o, scale) { g.setAttribute('opacity', o); if (scale !== undefined) { var t = g.getAttribute('transform').replace(/ scale\([^)]*\)/, ''); g.setAttribute('transform', t + ' scale(' + (0.6 + 0.4 * o) + ')'); } }
+  function render(ms) {
+    // companies pop in
+    C.forEach(function (c, i) {
+      var o = c.ghost ? pop(ms, T_GHOST + i * 150, 600) : pop(ms, c.t, 600);
+      show(cNodes[i], o, true); c.label.setAttribute('opacity', o);
+      if (c.ghost) { cNodes[i].classList.toggle('warm', ms >= T_WARM + i * 200); c.edge.setAttribute('opacity', o); }
+      else { var len = c.edge.__len, d = pop(ms, 3000 + i * 250, 900); c.edge.setAttribute('stroke-dashoffset', len * (1 - d)); }
+    });
+    V.forEach(function (v, i) {
+      var o = pop(ms, v.t, 600); show(vNodes[i], o, true); v.label.setAttribute('opacity', o);
+      var d = pop(ms, 6500 + i * 250, 900); v.edgeUp.setAttribute('stroke-dashoffset', v.edgeUp.__len * (1 - d));
+    });
+    var og = pop(ms, G.t, 700); show(gNode, og, true); gName.setAttribute('opacity', pop(ms, G.t + 300, 600));
+    $('k-company').setAttribute('opacity', pop(ms, 0, 400)); $('k-vertical').setAttribute('opacity', pop(ms, 3600, 500)); $('k-general').setAttribute('opacity', pop(ms, 7000, 500)); $('k-data').setAttribute('opacity', pop(ms, 300, 400));
+    $('legend').setAttribute('opacity', pop(ms, 3400, 800));
+    dbs.forEach(function (d) { var o = pop(ms, d.t, 500); d.g.setAttribute('opacity', o); d.g.setAttribute('transform', 'translate(' + d.x + ' ' + d.y + ') scale(' + (d.s * (0.6 + 0.4 * o)).toFixed(3) + ')'); });
+    dots.forEach(function (d) {
+      if (ms < d.t0) { d.el.setAttribute('opacity', 0); return; }
+      var u = ((ms - d.t0) / d.period) % 1, a = d.e.__a, b = d.e.__b, p = d.dir > 0 ? u : 1 - u;   // up: company→vertical (a→b); down: vertical→ghost (b→a)
+      d.el.setAttribute('cx', a[0] + (b[0] - a[0]) * p); d.el.setAttribute('cy', a[1] + (b[1] - a[1]) * p);
+      d.el.setAttribute('opacity', Math.sin(Math.PI * u));
+    });
+  }
+  window.__seek = render;
+  if (q.get('seek')) { document.fonts.ready.then(function () { render(0); window.__ready = true; }); }
+  else { var start = null; (function loop(now) { if (start === null) start = now; render((now - start) % window.__duration); requestAnimationFrame(loop); })(performance.now()); window.__ready = true; }
+})();
+</script>
+</body>
+</html>
