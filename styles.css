@@ -410,9 +410,12 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
 .sectors { display: flex; flex-wrap: wrap; gap: var(--cg-space-2); margin-top: var(--cg-space-6); }
 
 /* ---- TEAM ---- */
-.people { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: var(--cg-space-6); }
+.people { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 1fr; gap: var(--cg-space-6); }
+/* every card spans two of six tracks, so the two-card second row sits centered */
+.people > * { grid-column: span 2; }
+.people > :nth-child(4) { grid-column: 2 / span 2; }
 .person { display: flex; flex-direction: column; gap: var(--cg-space-4); padding: var(--cg-space-6); border: 1px solid var(--cg-border); border-radius: var(--cg-radius-lg); background: var(--cg-surface); }
-.person--lead { grid-row: span 2; background: var(--cg-bg-subtle); border-color: var(--cg-bg-subtle); }
+.person--lead { background: var(--cg-bg-subtle); border-color: var(--cg-bg-subtle); }
 /* an undisclosed hire at full card size: dashed outline, silhouette in place of the photo */
 .person--stealth { position: relative; border-style: dashed; }
 .person-photo--stealth { background: radial-gradient(circle at 50% 38%, var(--cg-border) 0 13px, transparent 14px), radial-gradient(circle at 50% 100%, var(--cg-border) 0 25px, transparent 26px), var(--cg-bg-subtle); }
@@ -424,6 +427,7 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
 .person-role { font-family: var(--cg-font-mono); font-size: var(--cg-text-2xs); font-weight: 500; letter-spacing: var(--cg-tracking-label); text-transform: uppercase; color: var(--cg-fg-muted); margin-top: var(--cg-space-1); }
 .person-cv { list-style: none; display: flex; flex-direction: column; gap: var(--cg-space-2); }
 .person-cv li { position: relative; padding-left: var(--cg-space-4); font-size: var(--cg-text-sm); color: var(--cg-fg-muted); }
+.person-cv strong { color: var(--cg-loop-outer); font-weight: 600; }
 .person-cv li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--cg-accent); }
 .person-links { display: flex; gap: var(--cg-space-2); }
 .icon-link { width: var(--cg-control-h); height: var(--cg-control-h); display: grid; place-items: center; border-radius: var(--cg-radius-md); border: 1px solid var(--cg-border); background: var(--cg-surface); color: var(--cg-loop-outer); transition: background var(--cg-dur-fast) var(--cg-ease), color var(--cg-dur-fast) var(--cg-ease), border-color var(--cg-dur-fast) var(--cg-ease); }
@@ -528,8 +532,9 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1080px) {
-  .people { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .person--lead { grid-column: 1 / -1; grid-row: auto; }
+  .people { grid-template-columns: repeat(4, 1fr); }
+  .people > :nth-child(4) { grid-column: span 2; }
+  .people > :last-child { grid-column: 2 / span 2; }
   .steps { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 920px) {
@@ -581,6 +586,7 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
   .hero-actions .cg-btn { width: 100%; }
   .compare, .steps, .people, .stealth { grid-template-columns: 1fr; }
   .people { grid-auto-rows: auto; }
+  .people > :nth-child(n) { grid-column: auto; }
   .hiring { grid-template-columns: 1fr; }
   .phases { grid-template-columns: 1fr; }
   .phase { border-right: none; border-bottom: 1px solid var(--cg-border); }
