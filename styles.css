@@ -410,9 +410,12 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
 .sectors { display: flex; flex-wrap: wrap; gap: var(--cg-space-2); margin-top: var(--cg-space-6); }
 
 /* ---- TEAM ---- */
-.people { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--cg-space-6); }
+.people { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: var(--cg-space-6); }
 .person { display: flex; flex-direction: column; gap: var(--cg-space-4); padding: var(--cg-space-6); border: 1px solid var(--cg-border); border-radius: var(--cg-radius-lg); background: var(--cg-surface); }
-.person--lead { background: var(--cg-bg-subtle); border-color: var(--cg-bg-subtle); }
+.person--lead { grid-row: span 2; background: var(--cg-bg-subtle); border-color: var(--cg-bg-subtle); }
+/* an undisclosed hire at full card size: dashed outline, silhouette in place of the photo */
+.person--stealth { position: relative; border-style: dashed; }
+.person-photo--stealth { background: radial-gradient(circle at 50% 38%, var(--cg-border) 0 13px, transparent 14px), radial-gradient(circle at 50% 100%, var(--cg-border) 0 25px, transparent 26px), var(--cg-bg-subtle); }
 .person-head { display: flex; align-items: center; gap: var(--cg-space-4); }
 .person-photo { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; border: 3px solid var(--cg-surface); box-shadow: 0 0 0 1px var(--cg-border); }
 .person-body { display: flex; flex-direction: column; flex: 1; }
@@ -428,7 +431,7 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
 .icon-link:hover { background: var(--cg-loop-outer); border-color: var(--cg-loop-outer); color: var(--cg-bg); }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-.stealth { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--cg-space-4); margin-top: var(--cg-space-6); }
+.stealth { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--cg-space-6); margin-top: var(--cg-space-6); }
 .stealth-card { position: relative; display: flex; flex-direction: column; gap: var(--cg-space-3); padding: var(--cg-space-6) var(--cg-space-4); border: 1px dashed var(--cg-border); border-radius: var(--cg-radius-lg); background: var(--cg-surface); }
 .stealth-avatar {
   width: var(--cg-space-12); height: var(--cg-space-12); border-radius: 50%;
@@ -525,9 +528,8 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1080px) {
-  .people { grid-template-columns: 1fr 1fr; }
-  .person--lead { grid-column: 1 / -1; }
-  .stealth { grid-template-columns: repeat(3, 1fr); }
+  .people { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .person--lead { grid-column: 1 / -1; grid-row: auto; }
   .steps { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 920px) {
@@ -578,6 +580,7 @@ h1, h2, h3 { color: var(--cg-loop-outer); }
   .section-head { margin-bottom: var(--cg-space-8); }
   .hero-actions .cg-btn { width: 100%; }
   .compare, .steps, .people, .stealth { grid-template-columns: 1fr; }
+  .people { grid-auto-rows: auto; }
   .hiring { grid-template-columns: 1fr; }
   .phases { grid-template-columns: 1fr; }
   .phase { border-right: none; border-bottom: 1px solid var(--cg-border); }
